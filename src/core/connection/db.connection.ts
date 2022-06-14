@@ -17,6 +17,7 @@ export default class Database {
       })
       .catch((e) => {
         console.log("Database connection with error: ", e);
+        process.exit(1);
       });
   }
 }
