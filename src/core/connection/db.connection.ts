@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import config from "config";
-import color from "../enum/color";
+import color from "../enum/color.enum";
 
 export default class Database {
   url = config.get<string>("URL");

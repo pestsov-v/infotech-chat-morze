@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import http from "http";
 import config from "config";
-import color from "../enum/color";
+import color from "../enum/color.enum";
 
 export default class App {
   private app: Express;

@@ -1,5 +1,6 @@
 {
     "HTTP_PORT": 3001,
     "HTTPS_PORT": 3002,
-    "URL": "mongodb://localhost:27017/infotech-chat-morze"
-}
+    "URL": "mongodb://localhost:27017/infotech-chat-morze",
+    "SALT": 10
+} 

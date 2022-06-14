@@ -4,7 +4,7 @@ import https from "https";
 import config from "config";
 
 import httpsOptions from "./http.connection";
-import color from "../enum/color";
+import color from "../enum/color.enum";
 
 import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
@@ -18,8 +18,8 @@ export default class Server {
     this.httpPort = config.get<number>("HTTP_PORT");
     this.httpsPort = config.get<number>("HTTPS_PORT");
     this.app = express();
-    this.app.use(apiRouterPath.global, apiRouter);
     this.app.use(express.json());
+    this.app.use(apiRouterPath.global, apiRouter);
     this.httpServer();
     this.httpsServer();
   }
