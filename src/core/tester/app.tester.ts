@@ -2,8 +2,10 @@ import express, { Express } from "express";
 import http from "http";
 import config from "config";
 import color from "../enum/color.enum";
+import apiRouterPath from "../../api/api.router.path";
+import apiRouter from "../../api/api.router";
 
-export default class App {
+export default class AppTester {
   private app: Express;
   private httpPort: number;
 
@@ -21,6 +23,8 @@ export default class App {
     this.httpPort = config.get<number>("HTTP_PORT");
     this.app = express();
     this.app.use(express.json());
+    this.app.use(apiRouterPath.global, apiRouter);
     this.httpServer();
+    return this.app;
   }
 }
