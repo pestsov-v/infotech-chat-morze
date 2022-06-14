@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
 export default class dbTester {
