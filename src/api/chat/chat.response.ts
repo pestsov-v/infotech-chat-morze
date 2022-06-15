@@ -7,4 +7,12 @@ export default class ChatResponse {
       data: data,
     };
   }
+
+  createObjs(data: any) {
+    return {
+      status: status.success,
+      amount: data.length,
+      data: data,
+    };
+  }
 }

@@ -5,8 +5,8 @@ import ChatController from "./chat.controller";
 const chatController = new ChatController();
 const chatRouter = Router();
 
-chatRouter.use(chatPath.chats, chatController.createChat);
-chatRouter.use(chatPath.chats, chatController.getChats);
-chatRouter.use(chatPath.chat, chatController.getChat);
+chatRouter.post(chatPath.chats, chatController.createChat);
+chatRouter.get(chatPath.chats, chatController.getUserChats);
+chatRouter.get(chatPath.chat, chatController.getChat);
 
 export default chatRouter;

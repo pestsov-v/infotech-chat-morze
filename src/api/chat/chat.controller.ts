@@ -25,7 +25,19 @@ export default class ChatController {
     return res.status(statusCode.CREATED).json(data);
   }
 
-  async getChats() {}
+  async getUserChats(req: Request, res: Response) {
+    const chats = await chatService.getUserChats(req.session.user._id);
 
-  async getChat() {}
+    const data = chatResponse.createObjs(chats);
+    res.status(statusCode.OK).json(data);
+  }
+
+  async getChat(req: Request, res: Response) {
+    const { chatId } = req.params;
+    const { _id } = req.session.user;
+
+    const chat = await chatService.getChat(chatId, _id);
+    const data = chatResponse.createObj(chat);
+    res.status(statusCode.OK).json(data);
+  }
 }
