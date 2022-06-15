@@ -5,5 +5,5 @@
     "JWT_SECRET": "testSecret",
     "JWT_EXPRESS_IN": "90d",
     "JWT_COOKIE_EXPIRES_IN": 60,
-    "MONGO_SESSION_SECRET": "mongo_secret"
+    "MONGO_SESSION_SECRET": "mongo"
 } 

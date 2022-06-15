@@ -37,6 +37,8 @@ export default class AuthController {
     if (!correctPassword) return "incorrect password";
 
     const token = authTokenizer.signToken(user._id);
+    req.session.user = user;
+    req.session.isAuthentificated = true;
 
     authCookier.createCookie(token, req, res);
 
@@ -47,6 +49,9 @@ export default class AuthController {
   async logout(req: Request, res: Response) {
     authCookier.removeCookie(res);
     const data = authResponse.logoutObj();
+
+    console.log(req.session);
+    req.session.destroy();
     res.status(statusCode.OK).json(data);
   }
 }
