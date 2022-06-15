@@ -99,8 +99,8 @@ describe("GET ONE USER ROUTE: /api/user/:id", () => {
     });
 
     it(`should return user keys of body`, async () => {
-      const user = await db.createUser();
-      const response = await supertest(server).get(`/api/user/${user._id}`);
+      const userId = await db.getNonExistentUser();
+      const response = await supertest(server).get(`/api/user/${userId}`);
       expect(Object.keys(response.body)).toEqual(["status", "message"]);
     });
   });
