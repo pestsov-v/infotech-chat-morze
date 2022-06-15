@@ -1,12 +1,7 @@
 import supertest from "supertest";
+import statusCode from "../../../core/enum/statusCode.enum";
 
-import dbTester from "../../../core/tester/db.tester";
-import AppTester from "../../../core/tester/app.tester";
-
-const app = new AppTester();
-const db = new dbTester();
-
-const server = app.connect();
+import { db, server } from "../../../core/tester/init.tester";
 
 beforeAll(async () => {
   await db.connect();
@@ -17,7 +12,8 @@ afterAll(async () => {
 });
 
 describe("GET ALL USERS ROUTE: /api/user", () => {
-  it("", async () => {
+  it(`should return statusCode: ${statusCode.OK}`, async () => {
     const response = await supertest(server).get("/api/user");
+    expect(response.statusCode).toBe(statusCode.OK);
   });
 });
