@@ -50,7 +50,6 @@ export default class AuthController {
     authCookier.removeCookie(res);
     const data = authResponse.logoutObj();
 
-    console.log(req.session);
     req.session.destroy();
     res.status(statusCode.OK).json(data);
   }
