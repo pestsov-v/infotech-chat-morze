@@ -1,11 +1,6 @@
 import UserModel from "./user.model";
 
 export default class UserService {
-  async createUser(body: any) {
-    const user = await UserModel.create(body);
-    return user;
-  }
-
   async getUsers() {
     const users = await UserModel.find();
     if (!users) return null;

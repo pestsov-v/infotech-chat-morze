@@ -16,13 +16,6 @@ const userResponse = new UserResponse();
 const userException = new UserException();
 
 export default class UserController {
-  async createUser(req: Request, res: Response) {
-    const user = await userService.createUser(req.body);
-    const data = userResponse.createObj(user);
-
-    return res.status(statusCode.CREATED).json(data);
-  }
-
   async getUsers(req: Request, res: Response) {
     const users = await userService.getUsers();
 
