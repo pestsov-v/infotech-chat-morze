@@ -4,11 +4,13 @@ import AuthTokenizer from "./auth.tokenizer";
 import AuthResponse from "./auth.response";
 import statusCode from "../../core/enum/statusCode.enum";
 import { AuthHasher } from "./auth.hasher";
+import AuthCookier from "./auth.cookie";
 
 const authService = new AuthService();
 const authTokenizer = new AuthTokenizer();
 const authResponse = new AuthResponse();
 const authHasher = new AuthHasher();
+const authCookier = new AuthCookier();
 
 export default class AuthController {
   async signup(req: Request, res: Response) {
@@ -16,21 +18,35 @@ export default class AuthController {
     const newUser = await authService.createUser(req.body);
 
     const token = authTokenizer.signToken(newUser._id);
-    const cookieExpires = authTokenizer.getCookieExpires();
 
-    res.cookie("jwt", token, {
-      expires: cookieExpires,
-      httpOnly: true,
-      secure: req.headers["x-forwarded-proto"] === "https",
-    });
-
+    authCookier.createCookie(token, req, res);
     newUser.password = undefined;
 
-    const data = authResponse.createObj(newUser, token);
+    const data = authResponse.signupObj(newUser, token);
     res.status(statusCode.CREATED).json(data);
   }
 
-  async login(req: Request, res: Response) {}
+  async login(req: Request, res: Response) {
+    const user = await authService.findEmail(req.body.email);
+    if (!user) return "incorrect user";
 
-  async logout(req: Request, res: Response) {}
+    const correctPassword = await authHasher.confirmPassword(
+      req.body.password,
+      user.password
+    );
+    if (!correctPassword) return "incorrect password";
+
+    const token = authTokenizer.signToken(user._id);
+
+    authCookier.createCookie(token, req, res);
+
+    const data = authResponse.loginObj(token);
+    res.status(statusCode.OK).json(data);
+  }
+
+  async logout(req: Request, res: Response) {
+    authCookier.removeCookie(res);
+    const data = authResponse.logoutObj();
+    res.status(statusCode.OK).json(data);
+  }
 }
