@@ -3,7 +3,7 @@ import config from "config";
 import color from "../enum/color.enum";
 
 export default class Database {
-  url = config.get<string>("URL");
+  private readonly url = config.get<string>("URL");
 
   constructor() {
     this.connect();
