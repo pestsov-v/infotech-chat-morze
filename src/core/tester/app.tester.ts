@@ -20,11 +20,9 @@ export default class AppTester {
   }
 
   connect() {
-    this.httpPort = config.get<number>("HTTP_PORT");
     this.app = express();
     this.app.use(express.json());
     this.app.use(apiRouterPath.global, apiRouter);
-    this.httpServer();
     return this.app;
   }
 }

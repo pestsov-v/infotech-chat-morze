@@ -7,4 +7,11 @@ export default class UserException {
       message: message,
     };
   }
+
+  userListEmpty(message: string) {
+    return {
+      status: status.fail,
+      message: message,
+    };
+  }
 }

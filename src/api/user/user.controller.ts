@@ -7,6 +7,7 @@ import UserService from "./user.service";
 import {
   DELETE_SUCCES_MESSAGE,
   UPDATE_SUCCES_MESSAGE,
+  USER_LIST_EMPTY_MESSAGE,
   USER_NOT_FOUND_MESSAGE,
 } from "./user.constants";
 
@@ -24,6 +25,12 @@ export default class UserController {
 
   async getUsers(req: Request, res: Response) {
     const users = await userService.getUsers();
+
+    if (users === null) {
+      const data = userException.userListEmpty(USER_LIST_EMPTY_MESSAGE);
+      return res.status(statusCode.NOT_FOUND).json(data);
+    }
+
     const data = userResponse.createObjs(users);
 
     return res.status(statusCode.OK).json(data);
@@ -33,9 +40,9 @@ export default class UserController {
     const { id } = req.params;
 
     const user = await userService.getUser(id);
-    if (!user) {
+    if (user === null) {
       const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
-      res.status(statusCode.NOT_FOUND).json(data);
+      return res.status(statusCode.NOT_FOUND).json(data);
     }
 
     const data = userResponse.createObj(user);
@@ -47,7 +54,7 @@ export default class UserController {
     const { body } = req;
 
     const user = await userService.updateUser(id, body);
-    if (!user) {
+    if (user === null) {
       const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
       res.status(statusCode.NOT_FOUND).json(data);
     }
@@ -61,7 +68,7 @@ export default class UserController {
     const { id } = req.params;
 
     const user = await userService.deleteUser(id);
-    if (!user) {
+    if (user === null) {
       const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
       res.status(statusCode.NOT_FOUND).json(data);
     }
