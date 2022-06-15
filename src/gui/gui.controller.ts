@@ -8,8 +8,9 @@ export default class GUIController extends GUIBase {
 
   getHomePage = super.renderPage(page.home);
   getLoginPage = super.renderPage(page.login);
-  getLogoutPage = super.renderPage(page.logout);
   getSignupPage = super.renderPage(page.signup);
   getChatPage = super.renderPage(page.chat);
   getUsersPage = super.renderPage(page.users);
+
+  logout() {}
 }
