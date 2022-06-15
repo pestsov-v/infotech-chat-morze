@@ -23,7 +23,7 @@ export default class Server {
     this.app = express();
     this.app.use(express.json());
     this.createSession();
-    this.app.use(apiRouterPath.global, apiRouter);
+    this.app.use(apiRouterPath.api, apiRouter);
     this.httpServer();
     this.httpsServer();
   }

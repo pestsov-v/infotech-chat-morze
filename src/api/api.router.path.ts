@@ -1,7 +1,8 @@
 enum apiRouterPath {
-  global = "/api",
+  api = "/api",
   user = "/user",
   auth = "/auth",
+  chat = "/chat",
 }
 
 export default apiRouterPath;
