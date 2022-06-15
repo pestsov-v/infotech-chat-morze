@@ -1,3 +1,4 @@
+import MessageModel from "../message/message.model";
 import ChatModel from "./chat.model";
 
 export default class ChatService {
@@ -24,5 +25,9 @@ export default class ChatService {
 
     if (!chat) return null;
     return chat;
+  }
+
+  async getChatMessages(chatId: string) {
+    return await MessageModel.find({ chat: chatId }).populate("sender");
   }
 }

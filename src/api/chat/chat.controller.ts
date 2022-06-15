@@ -40,4 +40,9 @@ export default class ChatController {
     const data = chatResponse.createObj(chat);
     res.status(statusCode.OK).json(data);
   }
+
+  async getChatsMessages(req: Request, res: Response) {
+    const message = await chatService.getChatMessages(req.params.chatId);
+    res.status(statusCode.OK).json(message);
+  }
 }
