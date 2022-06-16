@@ -13,6 +13,9 @@ export default class CLIMatcher {
       if (str.toLowerCase().indexOf(input) > -1) {
         matchFound = true;
         e.emit(input, str);
+
+        console.log("input", input);
+        console.log("str", str);
         return true;
       }
     });
