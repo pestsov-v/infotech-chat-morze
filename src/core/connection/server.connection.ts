@@ -40,7 +40,7 @@ export default class Server {
     httpServer.listen(this.httpPort, () => {
       console.log(
         color.green,
-        `Server is running on http://localhost:${this.httpPort}`
+        `Server success connection on http://localhost:${this.httpPort}`
       );
     });
   }
@@ -50,7 +50,7 @@ export default class Server {
     httpsServer.listen(this.httpsPort, () => {
       console.log(
         color.green,
-        `Server is running on https://localhost:${this.httpsPort}`
+        `Server success connection on https://localhost:${this.httpsPort}`
       );
     });
   }
