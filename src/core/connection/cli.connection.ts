@@ -1,5 +1,8 @@
 import readline from "readline";
 import color from "../enum/color.enum";
+import CLIMatcher from "../../cli/cli.matcher";
+
+const cliMatcher = new CLIMatcher();
 
 export default class CLI {
   constructor() {
@@ -16,6 +19,7 @@ export default class CLI {
 
     _interface.prompt();
     _interface.on("line", function (str) {
+      cliMatcher.inputCommandMatched(str);
       _interface.prompt();
     });
 
