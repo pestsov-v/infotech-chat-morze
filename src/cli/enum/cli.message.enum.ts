@@ -4,7 +4,7 @@ enum message {
   moreUserInfo = "Show details for a specific user",
   listMessages = "Show a list of all messages of a specific user",
   moreMessageInfo = "Show details for a specific message",
-  updateUserInfo = "Update details for a specific user",
+  updateUserInfo = "Update details for a specific user. Write first userId and then counted updated fields with spaces",
   deleteUser = "Delete a specific user",
   exit = "Exit console mode and stop application",
 }

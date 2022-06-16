@@ -34,4 +34,16 @@ export default class CLIController {
     cliGraphical.middleLine();
     cliService.getMoreUserInfo(str);
   }
+
+  updateUser(str: string) {
+    cliGraphical.edgeLine();
+    cliService.updateUser(str);
+  }
+  deleteUser(str: string) {
+    cliGraphical.edgeLine();
+    cliService.deleteUser(str);
+  }
+
+  listMessages() {}
+  moreMsgInfo(str: string) {}
 }

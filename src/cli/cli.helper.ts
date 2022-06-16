@@ -9,7 +9,7 @@ export default class CLIHelper {
       "More user info --{userId}": message.moreUserInfo,
       "List messages --{userId}": message.listMessages,
       "More message info --{messageId}": message.moreMessageInfo,
-      "Update user info --{userId} -field:{newLine}": message.updateUserInfo,
+      "Update user --{userId} -{field}:{new value}": message.updateUserInfo,
       "Delete user --{userId}": message.deleteUser,
       exit: message.exit,
     };

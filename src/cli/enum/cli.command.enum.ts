@@ -4,8 +4,8 @@ enum command {
   moreUserInfo = "more user info",
   listMessages = "list messages",
   moreMessageInfo = "more message info",
-  updateUserInfo = "update user info",
-  deleteUserInfo = "delete user info",
+  updateUserInfo = "update user",
+  deleteUserInfo = "delete user",
   exit = "exit",
 }
 
