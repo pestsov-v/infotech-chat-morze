@@ -1,4 +1,5 @@
 import color from "../core/enum/color.enum";
+import { COMMAND_NOT_MATCH_MESSAGE } from "./cli.constants";
 import e from "./cli.events";
 import CLIHelper from "./cli.helper";
 
@@ -13,18 +14,10 @@ export default class CLIMatcher {
       if (str.toLowerCase().indexOf(input) > -1) {
         matchFound = true;
         e.emit(input, str);
-
-        console.log("input", input);
-        console.log("str", str);
         return true;
       }
     });
 
-    if (!matchFound) {
-      console.log(
-        color.red,
-        `Command not found. To get all available commans input "help" to command line`
-      );
-    }
+    if (!matchFound) console.log(color.red, COMMAND_NOT_MATCH_MESSAGE);
   }
 }
