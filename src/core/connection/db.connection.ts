@@ -13,7 +13,7 @@ export default class Database {
     await mongoose
       .connect(this.url)
       .then(() => {
-        console.log(color.green, `Database success connection`);
+        console.log(color.yellow, `Database success connection`);
       })
       .catch((e) => {
         console.log("Database connection with error: ", e);
