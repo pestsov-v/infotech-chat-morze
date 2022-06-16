@@ -10,6 +10,7 @@ guiRouter.get(guiPath.login, guiController.getLoginPage);
 guiRouter.get(guiPath.logout, guiController.logout);
 guiRouter.get(guiPath.signup, guiController.getSignupPage);
 guiRouter.get(guiPath.users, guiController.getUsersPage);
-guiRouter.get(guiPath.chat, guiController.getChatPage);
+guiRouter.get(guiPath.message, guiController.getMessagePage);
+guiRouter.get(guiPath.messages, guiController.getMessagesPage);
 
 export default guiRouter;

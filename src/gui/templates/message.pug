@@ -3,10 +3,13 @@ extends partials/_base
 block content 
 	main.main
 		.chat-form 
-			h2.heading-secondary.ma-ba-lg Chats 
+			h2.heading-secondary.ma-ba-lg Send Message 
 			form.form.form--chat
 				form__group 
 					label.form__label(for='userSearch') User: 
 					input#search.form__input(type="text", placeholder='Input suer first name, last name or username')
+				form__group 
+					label.form__label(for='sendMessage') Message: 
+					input#message.form__input(type="text", placeholder='Message...')
 				.form__group 
-					button.btn.btn--green Create chat
+					button.btn.btn--green Send Message

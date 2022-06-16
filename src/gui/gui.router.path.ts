@@ -4,7 +4,8 @@ enum guiPath {
   logout = "/logout",
   signup = "/signup",
   users = "/users",
-  chat = "/chat",
+  message = "/message",
+  messages = "/messages",
 }
 
 export default guiPath;
