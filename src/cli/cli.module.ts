@@ -3,7 +3,10 @@ import readline from "readline";
 import AuthController from "../api/auth/auth.controller";
 import CLIForm from "./cli.form";
 import CLIMatcher from "./cli.matcher";
-import { USER_SIGNUP_SUCCESS } from "./constants/cli.constants";
+import {
+  USER_LOGIN_SUCCESS,
+  USER_SIGNUP_SUCCESS,
+} from "./constants/cli.constants";
 import types from "./enum/form.types.enum";
 
 const authController = new AuthController();
@@ -19,6 +22,7 @@ export default class CLIModule {
     inquirer.prompt(cliForm.loginForm()).then(async (anws) => {
       const login = await authController.loginCLI(anws);
       if (!login) return this.inccorrectLogin();
+      USER_LOGIN_SUCCESS();
       this.getInterface();
     });
   }

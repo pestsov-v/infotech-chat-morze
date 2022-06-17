@@ -5,16 +5,14 @@ import message from "./enum/cli.message.enum";
 export default class CLIHelper {
   getCommandsDescription() {
     return {
-      help: message.help,
-      "$Signup user": message.signupUser,
-      "Login user": message.loginUser,
+      Help: message.help,
       "List users": message.listUser,
       "More user info --{userId}": message.moreUserInfo,
       "List messages --{userId}": message.listMessages,
       "More message info --{messageId}": message.moreMessageInfo,
       "Update user --{userId} -{field}:{new value}": message.updateUserInfo,
       "Delete user --{userId}": message.deleteUser,
-      exit: message.exit,
+      Exit: message.exit,
     };
   }
 

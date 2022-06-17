@@ -21,3 +21,12 @@ export const USER_SIGNUP_SUCCESS = () => {
     `${emodji.checkMark} You have successfully registered. Login to your account! ${emodji.pointingDown}`
   );
 };
+
+export const USER_LOGIN_SUCCESS = () => {
+  console.log(
+    color.green,
+    `${emodji.checkMark} You have successfully login! 
+  
+${emodji.pageFacingUp} Get all app features - Enter "help" command`
+  );
+};
