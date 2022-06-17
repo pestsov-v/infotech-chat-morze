@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import config from "config";
 
-export class AuthHasher {
+export default class AuthHasher {
   saltNumber: number;
 
   constructor() {

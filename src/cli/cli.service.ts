@@ -9,7 +9,7 @@ import {
   INVALID_USER_UPDATE_MESSAGE,
   MORE_USER_INFO_PROPOSE_MESSAGE,
   USER_NOT_FOUND_MESSAGE,
-} from "./cli.constants";
+} from "./constants/cli.constants";
 
 const userService = new UserService();
 const cliResponser = new CLIResponser();
