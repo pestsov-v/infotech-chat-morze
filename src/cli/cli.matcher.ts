@@ -1,8 +1,7 @@
 import CLIHelper from "./cli.helper";
 import e from "./cli.events";
 import color from "../core/enum/color.enum";
-import { COMMAND_NOT_MATCH_MESSAGE } from "./cli.constants";
-import readline from "readline";
+import { COMMAND_NOT_MATCH_MESSAGE } from "./constants/cli.constants";
 
 const cliHelper = new CLIHelper();
 

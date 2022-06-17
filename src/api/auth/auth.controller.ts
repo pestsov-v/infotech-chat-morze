@@ -1,16 +1,25 @@
 import { Request, Response } from "express";
+import statusCode from "../../core/enum/statusCode.enum";
+
 import AuthService from "./auth.service";
 import AuthTokenizer from "./auth.tokenizer";
 import AuthResponse from "./auth.response";
-import statusCode from "../../core/enum/statusCode.enum";
-import { AuthHasher } from "./auth.hasher";
+import AuthHasher from "./auth.hasher";
 import AuthCookier from "./auth.cookie";
+import AuthValidator from "./auth.validator";
+
+import {
+  USER_IS_NOT_EXISTS_MESSAGE,
+  USER_NOT_REGISTER_MESSAGE,
+  USER_PASSWORD_NOT_MATCH_MESSAGE,
+} from "./constants/cli.constants";
 
 const authService = new AuthService();
 const authTokenizer = new AuthTokenizer();
 const authResponse = new AuthResponse();
 const authHasher = new AuthHasher();
 const authCookier = new AuthCookier();
+const authValidator = new AuthValidator();
 
 export default class AuthController {
   async signup(req: Request, res: Response) {
@@ -48,27 +57,31 @@ export default class AuthController {
   }
 
   async signupCLI(answers: any) {
-    answers.password = await authHasher.hashedPassword(answers.password);
-    const newUser = await authService.createUser(answers);
+    const userData = authValidator.signupCLIDataValidate(answers);
+
+    if (Object.keys(userData).length == 0) return USER_NOT_REGISTER_MESSAGE();
+    
+    userData.password = await authHasher.hashedPassword(userData.password);
+    const newUser = await authService.createUser(userData);
 
     const token = authTokenizer.signToken(newUser._id);
 
     newUser.password = undefined;
 
     const data = authResponse.signupObj(newUser, token);
-    console.log(data);
+    return data;
   }
 
   async loginCLI(answers: any) {
     const user = await authService.findEmail(answers.email);
-    if (!user) return console.log("incorrect user");
+    if (!user) return USER_IS_NOT_EXISTS_MESSAGE();
 
     const correctPassword = await authHasher.confirmPassword(
       answers.password,
       user.password
     );
 
-    if (!correctPassword) return "incorrect password";
+    if (!correctPassword) return USER_PASSWORD_NOT_MATCH_MESSAGE();
 
     const token = authTokenizer.signToken(user._id);
 

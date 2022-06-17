@@ -1,3 +1,4 @@
+import emodji from "../core/enum/emodji.enum";
 import command from "./enum/cli.command.enum";
 import message from "./enum/cli.message.enum";
 
@@ -5,7 +6,7 @@ export default class CLIHelper {
   getCommandsDescription() {
     return {
       help: message.help,
-      "Signup user": message.signupUser,
+      "$Signup user": message.signupUser,
       "Login user": message.loginUser,
       "List users": message.listUser,
       "More user info --{userId}": message.moreUserInfo,

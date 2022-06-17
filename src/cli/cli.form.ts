@@ -1,15 +1,27 @@
+import types from "./enum/form.types.enum";
+
+import {
+  AUTHORIZATION_MESSAGE,
+  INCORRECT_LOGIN_MESSAGE,
+  INCORRECT_SIGNUP_MESSAGE,
+  USER_EMAIL_MESSAGE,
+  USER_FIRST_NAME_MESSAGE,
+  USER_LAST_NAME_MESSAGE,
+  USER_PASSWORD_MESSAGE,
+} from "./constants/cli.form.constants";
+
 export default class CLIForm {
   loginForm() {
     return [
       {
         type: "input",
-        name: "email",
-        message: "What`s your email?",
+        name: types.email,
+        message: USER_EMAIL_MESSAGE,
       },
       {
         type: "password",
-        name: "password",
-        message: "What`s your password?",
+        name: types.password,
+        message: USER_PASSWORD_MESSAGE,
       },
     ];
   }
@@ -18,23 +30,23 @@ export default class CLIForm {
     return [
       {
         type: "input",
-        name: "firstName",
-        message: "What`s your first name?",
+        name: types.firstName,
+        message: USER_FIRST_NAME_MESSAGE,
       },
       {
         type: "input",
-        name: "lastName",
-        message: "What`s your last name?",
+        name: types.lastName,
+        message: USER_LAST_NAME_MESSAGE,
       },
       {
         type: "input",
-        name: "email",
-        message: "What`s your email?",
+        name: types.email,
+        message: USER_EMAIL_MESSAGE,
       },
       {
         type: "password",
-        name: "password",
-        message: "What`s your password?",
+        name: types.password,
+        message: USER_PASSWORD_MESSAGE,
       },
     ];
   }
@@ -43,16 +55,56 @@ export default class CLIForm {
     return [
       {
         type: "list",
-        message: "Do you have an account on not?",
-        name: "authorization",
+        message: AUTHORIZATION_MESSAGE,
+        name: types.authorization,
         choices: [
           {
             type: "choice",
-            name: "Signup",
+            name: types.signup,
           },
           {
             type: "choice",
-            name: "Login",
+            name: types.login,
+          },
+        ],
+      },
+    ];
+  }
+
+  incorrectLogin() {
+    return [
+      {
+        type: "list",
+        message: INCORRECT_LOGIN_MESSAGE,
+        name: types.incorrectLogin,
+        choices: [
+          {
+            type: "choice",
+            name: types.signupNow,
+          },
+          {
+            type: "choice",
+            name: types.loginAgain,
+          },
+        ],
+      },
+    ];
+  }
+
+  incorrectSignup() {
+    return [
+      {
+        type: "list",
+        message: INCORRECT_SIGNUP_MESSAGE,
+        name: types.incorrectSignup,
+        choices: [
+          {
+            type: "choice",
+            name: types.signupAgain,
+          },
+          {
+            type: "choice",
+            name: types.loginNow,
           },
         ],
       },
