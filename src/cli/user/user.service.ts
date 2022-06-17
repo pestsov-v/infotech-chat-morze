@@ -1,22 +1,23 @@
-import color from "../core/enum/color.enum";
+import color from "../../core/enum/color.enum";
 
-import UserService from "../api/user/user.service";
-import CLIResponser from "./cli.responser";
-import CLIGraphical from "./cli.graphical";
-import CLIValidator from "./cli.validator";
+import UserService from "../../api/user/user.service";
+
+import CLIResponser from "./user.responser";
+import CLIGraphical from "../cli.graphical";
+import CLIUserValidator from "./user.validator";
 
 import {
   INVALID_USER_UPDATE_MESSAGE,
   MORE_USER_INFO_PROPOSE_MESSAGE,
   USER_NOT_FOUND_MESSAGE,
-} from "./constants/cli.constants";
+} from "../cli.constants";
 
 const userService = new UserService();
 const cliResponser = new CLIResponser();
 const cliGraphical = new CLIGraphical();
-const cliValidator = new CLIValidator();
+const cliUserValidator = new CLIUserValidator();
 
-export default class CLIService {
+export default class CLIUserService {
   async getListUsers() {
     const users = await userService.getUsers();
     if (!users) return null;
@@ -38,7 +39,7 @@ export default class CLIService {
   }
 
   async getMoreUserInfo(str: string) {
-    const id = cliValidator.idValidate(str);
+    const id = cliUserValidator.idValidate(str);
     const user = await userService.getUser(id);
     if (!user) return console.log(USER_NOT_FOUND_MESSAGE);
 
@@ -50,13 +51,13 @@ export default class CLIService {
   }
 
   async updateUser(str: string) {
-    const id = cliValidator.updateUserIdValidate(str);
+    const id = cliUserValidator.updateUserIdValidate(str);
 
-    const userFields = cliValidator.updateUserDataValidate(str);
+    const userFields = cliUserValidator.updateUserDataValidate(str);
     if (userFields.length == 0) {
       return console.log(color.red, INVALID_USER_UPDATE_MESSAGE);
     }
-    const userData = cliValidator.createUpdateObj(userFields);
+    const userData = cliUserValidator.createUpdateObj(userFields);
 
     const oldUser = await userService.getUser(id);
     const updatedUser = await userService.updateUser(id, userData);
@@ -77,7 +78,7 @@ export default class CLIService {
   }
 
   async deleteUser(str: string) {
-    const id = cliValidator.idValidate(str);
+    const id = cliUserValidator.idValidate(str);
 
     const user = await userService.deleteUser(id);
     if (!user) return console.log(USER_NOT_FOUND_MESSAGE);

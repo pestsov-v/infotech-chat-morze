@@ -1,4 +1,4 @@
-export default class CLIValidator {
+export default class CLIUserValidator {
   idValidate(str: string) {
     const arr = str.split("--");
     return arr[1];

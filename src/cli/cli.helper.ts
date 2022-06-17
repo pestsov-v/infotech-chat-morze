@@ -1,6 +1,5 @@
-import emodji from "../core/enum/emodji.enum";
-import command from "./enum/cli.command.enum";
-import message from "./enum/cli.message.enum";
+import command from "./cli.command";
+import message from "./cli.message";
 
 export default class CLIHelper {
   getCommandsDescription() {
@@ -43,6 +42,7 @@ export default class CLIHelper {
       command.listMessages,
       command.moreMessageInfo,
       command.exit,
+      command.sendMessage,
     ];
 
     return array;

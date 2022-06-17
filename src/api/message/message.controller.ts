@@ -4,7 +4,7 @@ import MessageService from "./message.service";
 
 const messageService = new MessageService();
 
-export default class MessageController {
+export default class MessageAPIController {
   async sendMessage(req: Request, res: Response) {
     if (!req.session.user) return console.log("ss");
 

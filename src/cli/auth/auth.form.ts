@@ -1,4 +1,4 @@
-import types from "./enum/form.types.enum";
+import types from "./auth.types.enum";
 
 import {
   AUTHORIZATION_MESSAGE,
@@ -8,7 +8,7 @@ import {
   USER_FIRST_NAME_MESSAGE,
   USER_LAST_NAME_MESSAGE,
   USER_PASSWORD_MESSAGE,
-} from "./constants/cli.form.constants";
+} from "./auth.form.constants";
 
 export default class CLIForm {
   loginForm() {

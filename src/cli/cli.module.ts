@@ -1,13 +1,11 @@
 import inquirer from "inquirer";
 import readline from "readline";
-import AuthController from "../api/auth/auth.controller";
-import CLIForm from "./cli.form";
+import { USER_LOGIN_SUCCESS, USER_SIGNUP_SUCCESS } from "./auth/auth.constants";
+import AuthController from "./auth/auth.controller";
+
+import CLIForm from "./auth/auth.form";
 import CLIMatcher from "./cli.matcher";
-import {
-  USER_LOGIN_SUCCESS,
-  USER_SIGNUP_SUCCESS,
-} from "./constants/cli.constants";
-import types from "./enum/form.types.enum";
+import types from "./auth/auth.types.enum";
 
 const authController = new AuthController();
 const cliForm = new CLIForm();
@@ -20,7 +18,7 @@ export default class CLIModule {
 
   loginUser() {
     inquirer.prompt(cliForm.loginForm()).then(async (anws) => {
-      const login = await authController.loginCLI(anws);
+      const login = await authController.login(anws);
       if (!login) return this.inccorrectLogin();
       USER_LOGIN_SUCCESS();
       this.getInterface();
@@ -29,7 +27,7 @@ export default class CLIModule {
 
   signupUser() {
     inquirer.prompt(cliForm.signupForm()).then(async (anws) => {
-      const signup = await authController.signupCLI(anws);
+      const signup = await authController.signup(anws);
       if (!signup) return this.incorrectSignup();
       USER_SIGNUP_SUCCESS();
       this.loginUser();
