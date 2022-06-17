@@ -5,6 +5,8 @@ export default class CLIHelper {
   getCommandsDescription() {
     return {
       help: message.help,
+      "Signup user": message.signupUser,
+      "Login user": message.loginUser,
       "List users": message.listUser,
       "More user info --{userId}": message.moreUserInfo,
       "List messages --{userId}": message.listMessages,
