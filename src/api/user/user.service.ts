@@ -29,4 +29,10 @@ export default class UserService {
     if (!deletedUser) return null;
     return deletedUser;
   }
+
+  async findUser(username: string) {
+    const user = await UserModel.findOne({ username: username });
+    if (!user) return null;
+    return user;
+  }
 }

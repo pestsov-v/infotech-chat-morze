@@ -1,12 +1,13 @@
-export default class CLIResponser {
+export default class UserResponser {
   createObjs(data: any) {
     const { id, firstName, lastName, role } = data;
     const name = `${firstName} ${lastName}`;
     return `userId: ${id}, User: ${name}, role: ${role}`;
   }
 
-  createUserInfo(data: any) {
-    const response = `UserId: ${data.id}.
+  createUserDetails(data: any) {
+    const response = `
+UserId: ${data.id}.
 Username: ${data.firstName} ${data.lastName}.
 User email: ${data.email}.
 User role: ${data.role}.

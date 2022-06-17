@@ -1,15 +1,14 @@
 import inquirer from "inquirer";
-import readline from "readline";
 import { USER_LOGIN_SUCCESS, USER_SIGNUP_SUCCESS } from "./auth/auth.constants";
 import AuthController from "./auth/auth.controller";
 
 import CLIForm from "./auth/auth.form";
-import CLIMatcher from "./cli.matcher";
 import types from "./auth/auth.types.enum";
+import CLIMessageForm from "./message/messages.form";
 
 const authController = new AuthController();
 const cliForm = new CLIForm();
-const cliMatcher = new CLIMatcher();
+const cliMessageForm = new CLIMessageForm();
 
 export default class CLIModule {
   constructor() {
@@ -21,7 +20,7 @@ export default class CLIModule {
       const login = await authController.login(anws);
       if (!login) return this.inccorrectLogin();
       USER_LOGIN_SUCCESS();
-      this.getInterface();
+      cliMessageForm.interface();
     });
   }
 
@@ -52,24 +51,6 @@ export default class CLIModule {
     inquirer.prompt(cliForm.incorrectSignup()).then((anws) => {
       if (anws.incorrectSignup === types.signupAgain) return this.signupUser();
       if (anws.incorrectSignup === types.loginNow) return this.loginUser();
-    });
-  }
-
-  getInterface() {
-    const _interface = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-      prompt: "",
-    });
-
-    _interface.prompt();
-    _interface.on("line", function (str) {
-      cliMatcher.inputCommandMatched(str);
-      _interface.prompt();
-    });
-
-    _interface.on("close", function () {
-      process.exit(0);
     });
   }
 }
