@@ -2,7 +2,7 @@ import MessageDictionary from "./message.dictionary";
 
 const messageDictionary = new MessageDictionary();
 
-export default class CLIDecoder {
+export default class MessageDecoder {
   encode(text: any) {
     const dictionary = messageDictionary.encode();
 

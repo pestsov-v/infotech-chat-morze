@@ -45,7 +45,6 @@ export default class AuthController {
     if (!correctPassword) return USER_PASSWORD_NOT_MATCH_MESSAGE();
 
     const token = authTokenizer.signToken(user._id);
-
     const data = authResponse.loginObj(token);
     return data;
   }

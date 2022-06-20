@@ -1,7 +1,7 @@
-enum CLIType {
+enum GlobalInterface {
   IAuth = "IAuth",
   IUser = "IUser",
   IMessage = "IMessage",
 }
 
-export default CLIType;
+export default GlobalInterface;

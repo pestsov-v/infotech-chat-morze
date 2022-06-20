@@ -1,26 +1,27 @@
 import inquirer from "inquirer";
+import mainMenu from "../menu/main/menu.main.interface";
+
 import IMessage from "./interface/IMessage.interface";
-import messageTypes from "./message.types";
+import MessageCommander from "./message.commander";
+import MessageForm from "./message.form";
+
+const messageCommander = new MessageCommander();
+const messageForm = new MessageForm();
 
 export default class MessageModule {
   interface() {
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: messageTypes.IMessage,
-          message: "Select next command",
-          choices: [
-            IMessage.sendMessage,
-            IMessage.moreMessageInfo,
-            IMessage.listMessages,
-          ],
-        },
-      ])
-      .then(async (cmd) => {
-        if (cmd.IMessage === IMessage.sendMessage) return {};
-        if (cmd.IMessage === IMessage.listMessages) return {};
-        if (cmd.IMessage === IMessage.moreMessageInfo) return {};
-      });
+    inquirer.prompt(messageForm.interfaceForm()).then(async (cmd) => {
+      if (cmd.IMessage === IMessage.sendMessage) {
+        return messageCommander.sendMessage();
+      }
+      if (cmd.IMessage === IMessage.listMessages) {
+      }
+      if (cmd.IMessage === IMessage.moreMessageInfo) {
+      }
+
+      if (cmd.IMessage === IMessage.backToMainMenu) {
+        mainMenu();
+      }
+    });
   }
 }

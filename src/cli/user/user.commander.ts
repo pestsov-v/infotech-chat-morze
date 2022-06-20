@@ -1,33 +1,21 @@
+import inquirer from "inquirer";
 import color from "../../core/enum/color.enum";
 
 import UserService from "../../api/user/user.service";
-import CLIResponser from "./user.responser";
-
-import { USER_LIST_EMPTY_MESSAGE } from "../../api/user/user.constants";
 import UserResponser from "./user.responser";
 import UserForm from "./user.form";
-import inquirer from "inquirer";
-const cliResponser = new CLIResponser();
+import UserHelper from "./user.helper";
+import mainMenu from "../menu/main/menu.main.interface";
+
 const userService = new UserService();
-const userResponser = new UserResponser()
-const userForm = new UserForm()
+const userResponser = new UserResponser();
+const userForm = new UserForm();
+const userHelper = new UserHelper();
 
 export default class UserCommander {
   async getUsers() {
     const users = await userService.getUsers();
-    if (!users) return console.log(USER_LIST_EMPTY_MESSAGE);
-
-    users.forEach((user) => {
-      const data = {
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        role: user.role,
-      };
-
-      const result = cliResponser.createObjs(data);
-      return console.log(color.green, result);
-    });
+    return userHelper.formatingData(users);
   }
 
   async getUser(username: string) {
@@ -42,6 +30,10 @@ export default class UserCommander {
       const user = await this.getUser(answers.username);
       const data = userResponser.createUserDetails(user);
       console.log(color.green, data);
+      console.log("");
+      setTimeout(() => {
+        mainMenu();
+      }, 50);
     });
   }
 

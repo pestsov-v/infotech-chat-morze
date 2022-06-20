@@ -10,7 +10,7 @@ import {
   USER_USERNAME_MESSAGE,
 } from "./auth.form.constants";
 
-export default class CLIForm {
+export default class AuthForm {
   loginForm() {
     return [
       {

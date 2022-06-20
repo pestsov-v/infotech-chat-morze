@@ -6,4 +6,10 @@ export default class MessageService {
     if (!message) return null;
     return message;
   }
+
+  async getMessages() {
+    const messages = await MessageModel.find();
+    if (!messages) return null;
+    return messages;
+  }
 }
