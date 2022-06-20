@@ -1,15 +1,15 @@
 export default class AuthValidator {
   signupCLIDataValidate(answers: any) {
-    const { firstName, lastName, email, password } = answers;
+    const { firstName, lastName, username, password } = answers;
     const cliFirstName = this.cliNameValidate(firstName);
     const cliLastName = this.cliNameValidate(lastName);
-    const cliEmail = this.cliEmailValidate(email);
+    const cliUsername = this.cliNameValidate(username);
 
     let data = {};
     if (
       typeof cliFirstName == "boolean" ||
       typeof cliLastName == "boolean" ||
-      typeof cliEmail == "boolean"
+      typeof cliUsername == "boolean"
     ) {
       return (data = {});
     }
@@ -17,9 +17,11 @@ export default class AuthValidator {
     data = {
       firstName: cliFirstName,
       lastName: cliLastName,
-      email: cliEmail,
+      username: cliUsername,
       password,
     };
+
+    console.log(data);
 
     return data;
   }

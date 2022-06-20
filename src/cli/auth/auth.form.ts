@@ -1,22 +1,22 @@
-import types from "./enum/form.types.enum";
+import types from "./auth.types.enum";
 
 import {
   AUTHORIZATION_MESSAGE,
   INCORRECT_LOGIN_MESSAGE,
   INCORRECT_SIGNUP_MESSAGE,
-  USER_EMAIL_MESSAGE,
   USER_FIRST_NAME_MESSAGE,
   USER_LAST_NAME_MESSAGE,
   USER_PASSWORD_MESSAGE,
-} from "./constants/cli.form.constants";
+  USER_USERNAME_MESSAGE,
+} from "./auth.form.constants";
 
-export default class CLIForm {
+export default class AuthForm {
   loginForm() {
     return [
       {
         type: "input",
-        name: types.email,
-        message: USER_EMAIL_MESSAGE,
+        name: types.username,
+        message: USER_USERNAME_MESSAGE,
       },
       {
         type: "password",
@@ -40,8 +40,8 @@ export default class CLIForm {
       },
       {
         type: "input",
-        name: types.email,
-        message: USER_EMAIL_MESSAGE,
+        name: types.username,
+        message: USER_USERNAME_MESSAGE,
       },
       {
         type: "password",

@@ -1,4 +1,4 @@
-export const USER_EMAIL_MESSAGE = "What`s your email?";
+export const USER_USERNAME_MESSAGE = "What`s your username?";
 export const USER_FIRST_NAME_MESSAGE = "What`s your first name?";
 export const USER_LAST_NAME_MESSAGE = "What`s your last name?";
 export const USER_PASSWORD_MESSAGE = "What`s your password?";
