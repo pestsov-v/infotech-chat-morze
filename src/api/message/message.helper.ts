@@ -3,8 +3,15 @@ import MessageDecoder from "./message.decoder";
 const messageDecoder = new MessageDecoder();
 
 export default class MessageHelper {
-  encodeData(content: string) {
-    const encodeMorze = messageDecoder.encode(content);
+  encodeData(sender: string, content: string, recipient: string) {
+    const morzeContent = messageDecoder.encode(content);
+
+    const encodeMorze = {
+      sender: sender,
+      content: morzeContent,
+      recipient: recipient,
+    };
+
     return encodeMorze;
   }
 
