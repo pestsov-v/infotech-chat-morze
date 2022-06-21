@@ -25,7 +25,7 @@ export default class Server {
     this.app = express();
     this.app.set("view engine", "pug");
     this.app.set("views", path.join(__dirname, "../../gui/templates"));
-    this.app.use(express.static(path.join(__dirname, "../../public")));
+    this.app.use(express.static(path.join(__dirname, "../../gui/public")));
     this.app.use(express.json());
     this.createSession();
     this.app.use(apiRouterPath.api, apiRouter);
