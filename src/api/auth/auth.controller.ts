@@ -42,6 +42,7 @@ export default class AuthController {
     req.session.user = user;
     req.session.isAuthentificated = true;
 
+    console.log(req.session.user);
     authCookier.createCookie(token, req, res);
 
     const data = authResponse.loginObj(token);
