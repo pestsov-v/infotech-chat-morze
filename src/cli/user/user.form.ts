@@ -1,10 +1,10 @@
-import GlobalInterface from "../cli.types";
+import CLITypes from "../cli.types";
 import userName from "./user.name";
 
 import IUpdateUser from "./interface/IUpdateUser.interface";
 import IUser from "./interface/IUser.interface";
 
-import { SELECT_COMMAND_MESSAGE } from "../menu/main/menu.constants";
+import { SELECT_COMMAND_MESSAGE } from "../menu/menu/menu.constants";
 import { USER_SEARCH_MESSAGE, USER_UPDATE_MESSAGE } from "./user.constants";
 
 export default class UserForm {
@@ -12,7 +12,7 @@ export default class UserForm {
     return [
       {
         type: "list",
-        name: GlobalInterface.IUser,
+        name: CLITypes.IUser,
         message: SELECT_COMMAND_MESSAGE,
         choices: [
           IUser.listUsers,

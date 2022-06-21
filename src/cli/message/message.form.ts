@@ -1,11 +1,15 @@
-import GlobalInterface from "../cli.types";
-import messageName from "./message.name";
-import IMessage from "./interface/IMessage.interface";
+import CLITypes from "../cli.types";
 
-import { SELECT_COMMAND_MESSAGE } from "../menu/main/menu.constants";
+import messageName from "./interface/message.name";
+import messageCommands from "./interface/message.commands";
+
+import { SELECT_COMMAND_MESSAGE } from "../menu/menu/menu.constants";
+
 import {
   ENTER_MESSAGE_MESSAGE,
+  GET_MESSAGE_BY_ID_MESSAGE,
   USERNAME_RECEIPIENT_MESSAGE,
+  USERNAME_SENDER_MESSAGE,
 } from "./message.constants";
 
 export default class MessageForm {
@@ -13,13 +17,14 @@ export default class MessageForm {
     return [
       {
         type: "list",
-        name: GlobalInterface.IMessage,
+        name: CLITypes.messageCommands,
         message: SELECT_COMMAND_MESSAGE,
         choices: [
-          IMessage.sendMessage,
-          IMessage.moreMessageInfo,
-          IMessage.listMessages,
-          IMessage.backToMainMenu,
+          messageCommands.sendMessage,
+          messageCommands.decodeMessage,
+          messageCommands.listMessages,
+          messageCommands.userMessages,
+          messageCommands.backToMainMenu,
         ],
       },
     ];
@@ -37,6 +42,26 @@ export default class MessageForm {
         name: messageName.content,
         message: ENTER_MESSAGE_MESSAGE,
         default: "Hello",
+      },
+    ];
+  }
+
+  sendDecodeMessageForm() {
+    return [
+      {
+        type: "input",
+        name: messageName.getMessageById,
+        message: GET_MESSAGE_BY_ID_MESSAGE,
+      },
+    ];
+  }
+
+  getUserMessageForm() {
+    return [
+      {
+        type: "input",
+        name: messageName.senderUsername,
+        message: USERNAME_SENDER_MESSAGE,
       },
     ];
   }

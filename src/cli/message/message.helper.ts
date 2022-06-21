@@ -9,9 +9,14 @@ export default class MessageHelper {
     const data = {
       recepient: answers.recepient,
       content: morzeContent,
-      sender: "62a9d60e0640b3e2950bcaa3",
+      sender: "62acb34b13d2ef6d00e590e1",
     };
 
     return data;
+  }
+
+  decodeData(content: string) {
+    const decodeMorze = messageDecoder.decode(content);
+    return decodeMorze;
   }
 }
