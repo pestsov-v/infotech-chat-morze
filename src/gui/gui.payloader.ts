@@ -1,4 +1,4 @@
-export default class GUIPayload {
+export default class GUIPayloader {
   messagesPayload() {
     return {
       title: "Сообщения",

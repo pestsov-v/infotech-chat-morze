@@ -1,8 +1,8 @@
 import GUIBase from "./gui.base";
-import GUIPayload from "./gui.payload";
+import GUIPayloader from "./gui.payloader";
 import page from "./gui.page";
 
-const guiPayload = new GUIPayload();
+const guiPayloader = new GUIPayloader();
 
 export default class GUIController extends GUIBase {
   constructor() {
@@ -13,12 +13,10 @@ export default class GUIController extends GUIBase {
   getLoginPage = super.renderPage(page.login);
   getSignupPage = super.renderPage(page.signup);
   getMessagePage = super.renderPage(page.message);
-  
+
   getMessagesPage = super.renderPage(
     page.messages,
-    guiPayload.messagesPayload()
+    guiPayloader.messagesPayload()
   );
   getUsersPage = super.renderPage(page.users);
-
-  logout() {}
 }
