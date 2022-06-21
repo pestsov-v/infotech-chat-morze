@@ -5,7 +5,7 @@ import UserService from "../../api/user/user.service";
 import UserResponser from "./user.responser";
 import UserForm from "./user.form";
 import UserHelper from "./user.helper";
-import mainMenu from "../menu/main/menu.main.interface";
+import mainMenu from "../menu/menu/main.menu";
 
 const userService = new UserService();
 const userResponser = new UserResponser();

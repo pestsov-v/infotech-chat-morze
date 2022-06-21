@@ -10,17 +10,18 @@ export default class AuthResponse {
     };
   }
 
-  loginObj(token: string) {
+  loginObj(token: string, data: any) {
     return {
       status: status.success,
       token,
+      data: data,
     };
   }
 
   logoutObj() {
     return {
       status: status.success,
-      message: USER_LOGOUT_SUCCESS_MESSAGE
+      message: USER_LOGOUT_SUCCESS_MESSAGE,
     };
   }
 }
