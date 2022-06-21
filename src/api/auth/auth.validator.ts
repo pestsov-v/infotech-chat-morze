@@ -21,8 +21,6 @@ export default class AuthValidator {
       password,
     };
 
-    console.log(data);
-
     return data;
   }
 

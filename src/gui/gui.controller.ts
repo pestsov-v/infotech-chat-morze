@@ -27,5 +27,6 @@ export default class GUIController extends GUIBase {
       messages: messages,
     });
   }
+
   getUsersPage = super.renderPage(page.users);
 }
