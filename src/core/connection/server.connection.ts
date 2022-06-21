@@ -10,6 +10,9 @@ import color from "../enum/color.enum";
 import httpsOptions from "./http.connection";
 import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
+import path from "path";
+import guiPath from "../../gui/gui.router.path";
+import guiRouter from "../../gui/gui.router";
 
 export default class Server {
   private readonly app: Express;
@@ -20,9 +23,13 @@ export default class Server {
     this.httpPort = config.get<number>("HTTP_PORT");
     this.httpsPort = config.get<number>("HTTPS_PORT");
     this.app = express();
+    this.app.set("view engine", "pug");
+    this.app.set("views", path.join(__dirname, "../../gui/templates"));
+    this.app.use(express.static(path.join(__dirname, "../../public")));
     this.app.use(express.json());
     this.createSession();
     this.app.use(apiRouterPath.api, apiRouter);
+    this.app.use(guiPath.home, guiRouter);
     this.httpServer();
     this.httpsServer();
   }
