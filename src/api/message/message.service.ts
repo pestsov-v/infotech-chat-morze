@@ -22,8 +22,9 @@ export default class MessageService {
   }
 
   async getMessage(id: string) {
-    const message = await MessageModel.findById(id);
+    const message = await MessageModel.findById(id).populate("sender");
     if (!message) return null;
+    message.sender.password = undefined;
     return message;
   }
 }

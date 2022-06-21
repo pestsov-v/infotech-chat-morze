@@ -24,7 +24,6 @@ export default class AuthController {
     newUser.password = undefined;
 
     const data = authResponse.signupObj(newUser, token);
-    console.log(newUser);
     res.status(statusCode.CREATED).json(data);
   }
 

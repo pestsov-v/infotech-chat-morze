@@ -12,9 +12,7 @@ const login = async (username, password) => {
     });
 
     if (res.data.status === "success") {
-      window.setTimeout(() => {
-        location.assign("/");
-      }, 1000);
+      console.log("success");
     }
   } catch (e) {
     console.log(e);

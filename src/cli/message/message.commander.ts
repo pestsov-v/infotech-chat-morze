@@ -4,7 +4,7 @@ import MessageService from "../../api/message/message.service";
 
 import MessageForm from "./message.form";
 import MessageLoader from "./message.loader";
-import MessageHelper from "./message.helper";
+import MessageHelper from "../../api/message/message.helper";
 import UserService from "../../api/user/user.service";
 
 import {
@@ -39,7 +39,7 @@ export default class MessageCommander {
 
   async listAllMessages() {
     const messages = await messageService.getAllMessages();
-     messageLoader.getAllMessages(messages);
+    messageLoader.getAllMessages(messages);
   }
 
   async decodeMessage() {

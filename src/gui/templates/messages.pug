@@ -1,4 +1,12 @@
 extends partials/_base
 
 block content
-	h1 #{title}
+	h1 #{header}
+	.card 
+		each message in messages
+			h3.message--sender Sender 
+				span= message.sender.username
+			h3.message--content Message	
+				span= message.content
+			
+			button.btn.btn-green.btn--small Decode message

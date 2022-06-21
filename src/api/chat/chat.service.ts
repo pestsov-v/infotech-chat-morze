@@ -11,7 +11,6 @@ export default class ChatService {
     const chats = await ChatModel.find({ users: { $elemMatch: { $eq: id } } })
       .populate("users")
       .sort({ updatedAt: -1 });
-    console.log(chats);
     if (!chats) return null;
     return chats;
   }
