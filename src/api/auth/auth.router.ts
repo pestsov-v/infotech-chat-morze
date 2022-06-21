@@ -7,6 +7,6 @@ const authContoller = new AuthController();
 
 authRouter.post(authPath.signup, authContoller.signup);
 authRouter.post(authPath.login, authContoller.login);
-authRouter.post(authPath.logout, authContoller.logout);
+authRouter.get(authPath.logout, authContoller.logout);
 
 export default authRouter;
