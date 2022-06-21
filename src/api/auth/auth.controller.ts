@@ -40,11 +40,12 @@ export default class AuthController {
 
     const token = authTokenizer.signToken(user._id);
     req.session.user = user;
+    req.session.jwt = token;
     req.session.isAuthentificated = true;
 
     authCookier.createCookie(token, req, res);
 
-    const data = authResponse.loginObj(token);
+    const data = authResponse.loginObj(token, user);
     res.status(statusCode.OK).json(data);
   }
 
