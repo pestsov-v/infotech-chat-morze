@@ -6,6 +6,7 @@ enum guiPath {
   users = "/users",
   message = "/message",
   messages = "/messages",
+  chat = '/chat'
 }
 
 export default guiPath;

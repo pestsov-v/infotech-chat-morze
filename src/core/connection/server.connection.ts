@@ -3,10 +3,12 @@ import path from "path";
 import http from "http";
 import https from "https";
 import config from "config";
+
 import color from "../enum/color.enum";
 
+import SocketIO from "./io.connection";
 import Session from "./session.connection";
-import httpsOptions from "./http.connection";
+import httpsOptions from "./https.connection";
 
 import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
@@ -14,6 +16,7 @@ import guiPath from "../../gui/gui.router.path";
 import guiRouter from "../../gui/gui.router";
 
 const session = new Session();
+const socketIO = new SocketIO();
 
 export default class Server {
   private readonly app: Express;
@@ -37,6 +40,7 @@ export default class Server {
 
   private httpServer() {
     const httpServer = http.createServer(this.app);
+    socketIO.http(httpServer);
     httpServer.listen(this.httpPort, () => {
       console.log(
         color.green,

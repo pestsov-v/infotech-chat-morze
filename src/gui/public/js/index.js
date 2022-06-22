@@ -1,3 +1,4 @@
+import socket from "./socket";
 import login from "./auth/login";
 import logout from "./auth/logout";
 import signup from "./auth/signup";
@@ -15,6 +16,7 @@ if (loginForm) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     login(username, password);
+    socket.emit("setup", { username });
   });
 }
 
