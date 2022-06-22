@@ -10,19 +10,19 @@ const messageHelper = new MessageHelper();
 const messageResponser = new MessageResponser();
 const messageException = new MessageException();
 
-export default class MessageAPIController {
+export default class MessageController {
   async sendMessage(req: Request, res: Response) {
     const { content, recipient } = req.body;
     const { user } = req.session;
 
-    if (user._id == recipient) {
-      const exception = messageException.dubplicateUser();
-      return res.status(statusCode.CONFLiCT).json(exception);
-    }
-
     if (!user) {
       const exception = messageException.userNotFound();
       return res.status(statusCode.FORBIDDEN).json(exception);
+    }
+
+    if (user._id == recipient) {
+      const exception = messageException.dubplicateUser();
+      return res.status(statusCode.CONFLiCT).json(exception);
     }
 
     const encodeData = messageHelper.encodeData(user._id, content, recipient);
@@ -49,7 +49,24 @@ export default class MessageAPIController {
     res.status(statusCode.OK).json(data);
   }
 
-  getMessages(req: Request, res: Response) {}
+  async deleteMessage(req: Request, res: Response) {
+    if (!req.session.user) {
+      const exception = messageException.userNotFound();
+      return res.status(statusCode.FORBIDDEN).json(exception);
+    }
+
+    const message = await messageService.removeMessage(req.params.messageId);
+
+    if (!message) {
+      const exception = messageException.messageNotFound();
+      return res.status(statusCode.NOT_FOUND).json(exception);
+    }
+    
+    const data = messageResponser.deleteResponse();
+    res.status(statusCode.OK).json(data);
+  }
+
+  getMessages() {}
 
   getMessage(req: Request, res: Response) {}
 }

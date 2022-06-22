@@ -1,13 +1,14 @@
 import { Router } from "express";
-import MessageApiController from "./message.controller";
+import MessageController from "./message.controller";
 import messagePath from "./message.router.path";
 
-const messageApiController = new MessageApiController();
+const messageController = new MessageController();
 const messageRouter = Router();
 
-messageRouter.post(messagePath.messages, messageApiController.sendMessage);
-messageRouter.get(messagePath.messages, messageApiController.getMessages);
-messageRouter.get(messagePath.message, messageApiController.getMessage);
-messageRouter.get(messagePath.decode, messageApiController.decodeMessage);
+messageRouter.post(messagePath.messages, messageController.sendMessage);
+messageRouter.get(messagePath.messages, messageController.getMessages);
+messageRouter.get(messagePath.message, messageController.getMessage);
+messageRouter.delete(messagePath.message, messageController.deleteMessage);
+messageRouter.get(messagePath.decode, messageController.decodeMessage);
 
 export default messageRouter;

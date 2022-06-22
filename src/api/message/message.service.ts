@@ -27,4 +27,10 @@ export default class MessageService {
     message.sender.password = undefined;
     return message;
   }
+
+  async removeMessage(id: string) {
+    const message = await MessageModel.findByIdAndRemove(id);
+    if (!message) return null;
+    return message;
+  }
 }
