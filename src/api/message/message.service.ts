@@ -16,13 +16,17 @@ export default class MessageService {
   }
 
   async getAllMessages() {
-    const messages = await MessageModel.find().populate("sender");
+    const messages = await MessageModel.find()
+      .populate("sender")
+      .sort({ createdAt: -1 });
     if (!messages) return null;
     return messages;
   }
 
   async getMessage(id: string) {
-    const message = await MessageModel.findById(id).populate("sender");
+    const message = await MessageModel.findById(id)
+      .populate("sender")
+      .sort({ createdAt: -1 });
     if (!message) return null;
     message.sender.password = undefined;
     return message;

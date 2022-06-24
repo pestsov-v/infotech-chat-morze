@@ -9,4 +9,4 @@ block content
 			h3.message--content Message	
 				span= message.content
 			
-			button.btn.btn-green.btn--small Decode message
+			button.btn.btn-green.btn--small#message--id(href=`/api/message/${message.id}/decode`) Decode message

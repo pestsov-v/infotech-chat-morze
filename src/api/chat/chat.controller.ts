@@ -32,7 +32,6 @@ export default class ChatController {
 
   async getUserChats(req: Request, res: Response) {
     const chats = await chatService.getUserChats(req.session.user._id);
-
     const data = chatResponse.createObjs(chats);
     res.status(statusCode.OK).json(data);
   }

@@ -30,14 +30,14 @@ export default class GUIController extends GUIBase {
 
   getUsersPage = super.renderPage(page.users);
 
-  async getChatPage(req: Request, res: Response) {
+  async getChatsPage(req: Request, res: Response) {
     const userId = req.session.user._id;
-    const chatId = req.params.chatId;
 
-    const chat = await chatService.getChat(chatId, userId);
-    res.status(statusCode.OK).render("chat", {
+    const chats = await chatService.getUserChats(userId);
+    console.log(chats);
+    res.status(statusCode.OK).render("chats", {
       title: "Чат",
-      chat,
+      chats,
     });
   }
 }
