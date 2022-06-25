@@ -10,6 +10,12 @@ import AuthCookier from "./auth.cookie";
 import UserService from "../user/user.service";
 import AuthException from "./auth.exception";
 
+import IException from "./dto/exception.dto";
+import IUserResponse from "./response/user.response";
+import ISignupObjResponse from "./response/signupObj.response";
+import ILoginObjResponse from "./response/loginObj.response";
+import ILogoutObjResponse from "./response/logoutObj.response";
+
 const authService = new AuthService();
 const authException = new AuthException();
 const authTokenizer = new AuthTokenizer();
@@ -27,59 +33,66 @@ export default class AuthController {
 
     if (dbUser) {
       if (dbUser.username === username) {
-        const exception = authException.dublicateUsername();
+        const exception: IException = authException.dublicateUsername();
         return res.status(statusCode.BAD_REQUEST).json(exception);
       }
     }
 
     if (!username || !firstName || !lastName || !password) {
-      const exception = authException.missRequiredFields();
+      const exception: IException = authException.missRequiredFields();
       return res.status(statusCode.BAD_REQUEST).json(exception);
     }
 
     password = await authHasher.hashedPassword(password);
-    const newUser = await authService.createUser(req.body);
+    const newUser: IUserResponse | null = await authService.createUser(
+      req.body
+    );
 
-    const token = authTokenizer.signToken(newUser._id);
+    if (!newUser) {
+      const exception: IException = authException.dublicateUsername();
+      return res.status(statusCode.BAD_REQUEST).json(exception);
+    }
+
+    const token: string = authTokenizer.signToken(newUser._id);
 
     authCookier.createCookie(token, req, res);
     newUser.password = undefined;
 
-    const data = authResponse.signupObj(newUser, token);
+    const data: ISignupObjResponse = authResponse.signupObj(newUser, token);
     res.status(statusCode.CREATED).json(data);
   }
 
   async login(req: Request, res: Response) {
     const user = await authService.findUser(req.body.username);
     if (!user) {
-      const exception = authException.incorrectUser();
+      const exception: IException = authException.incorrectUser();
       return res.status(statusCode.NOT_FOUND).json(exception);
     }
 
-    const correctPassword = await authHasher.confirmPassword(
+    const correctPassword: boolean = await authHasher.confirmPassword(
       req.body.password,
       user.password
     );
 
     if (!correctPassword) {
-      const exception = authException.incorrectUser();
+      const exception: IException = authException.incorrectUser();
       return res.status(statusCode.NOT_FOUND).json(exception);
     }
 
-    const token = authTokenizer.signToken(user._id);
+    const token: string = authTokenizer.signToken(user._id);
     req.session.user = user;
     req.session.jwt = token;
     req.session.isAuthentificated = true;
 
     authCookier.createCookie(token, req, res);
 
-    const data = authResponse.loginObj(token, user);
+    const data: ILoginObjResponse = authResponse.loginObj(token, user);
     res.status(statusCode.OK).json(data);
   }
 
   async logout(req: Request, res: Response) {
     authCookier.removeCookie(res);
-    const data = authResponse.logoutObj();
+    const data: ILogoutObjResponse = authResponse.logoutObj();
 
     req.session.destroy();
     res.status(statusCode.OK).json(data);

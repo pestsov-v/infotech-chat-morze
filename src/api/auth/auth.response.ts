@@ -1,8 +1,12 @@
 import status from "../../core/enum/status.enum";
+import ILoginObjResponse from "./response/loginObj.response";
+import ISignupObjResponse from "./response/signupObj.response";
+import IUserResponse from "./response/user.response";
+
 import { USER_LOGOUT_SUCCESS_MESSAGE } from "./constants/auth.constants";
 
 export default class AuthResponse {
-  signupObj(data: any, token: string) {
+  signupObj(data: IUserResponse, token: string): ISignupObjResponse {
     return {
       status: status.success,
       token,
@@ -10,7 +14,7 @@ export default class AuthResponse {
     };
   }
 
-  loginObj(token: string, data: any) {
+  loginObj(token: string, data: IUserResponse): ILoginObjResponse {
     return {
       status: status.success,
       token,
