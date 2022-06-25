@@ -10,6 +10,100 @@ servers:
   - url: https://localhost:3002/api
   
 paths: 
+  /signup:
+    post: 
+      summary: Sign up new user
+      tags:
+        - authentification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: 
+                  type: string
+                  example: Ave
+                firstName: 
+                  type: string
+                  example: Vlad
+                lastName: 
+                  type: string
+                  example: Vlad
+                password: 
+                  type: string
+                  example: 1234678
+      responses:
+        201:
+          description: User success created an account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route-signup__response-201'
+        
+        400:
+          description: You not enter one or more required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--signup__response-400'
+        
+        409: 
+          description: Dublicate username
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--signup__response-409'
+  
+  /login:
+    post: 
+      summary: Login user
+      tags:
+        - authentification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: 
+                  type: string
+                  example: Ave
+                password: 
+                  type: string
+                  example: 1234678 
+      responses:
+        200:
+          description: User login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route-login__response-200'
+        
+        400:
+          description: Incorrect username or password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception-login__response-400'
+  
+  /logout:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Logout in account
+      tags:
+        - authentification
+      responses:
+        200:
+          description: User success logout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route--logout__response-200'
+      
   /user:
     get:
       security:
@@ -181,6 +275,126 @@ components:
       bearerFormat: JWT
       
   schemas:
+    route-signup__response-201:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjcxYmUwOGNiZWFhZjc2M2JhNjQ1ZSIsImlhdCI6MTY1NjE2NzM5MiwiZXhwIjoxNjYzOTQzMzkyfQ.j0-QlUIufK3NIESso3Dn6n_YaNUa34ukk8KXfzsCpe4
+        data: 
+          type: object
+          properties:
+            _id: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            firstName:
+              type: string
+              example: Vlad
+            lastName:
+              type: string
+              example: Pestsov
+            username: 
+              type: string
+              example: Ave
+            role: 
+              type: string
+              example: user
+            active: 
+              type: boolean
+              example: true
+            createdAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
+ 
+    exception--signup__response-400:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: One or more required fields are missing
+  
+    exception--signup__response-409:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: A user with the same name already exists. Please select a different username
+  
+    route-login__response-200:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjcxYmUwOGNiZWFhZjc2M2JhNjQ1ZSIsImlhdCI6MTY1NjE2NzM5MiwiZXhwIjoxNjYzOTQzMzkyfQ.j0-QlUIufK3NIESso3Dn6n_YaNUa34ukk8KXfzsCpe4
+        data: 
+          type: object
+          properties:
+            _id: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            firstName:
+              type: string
+              example: Vlad
+            lastName:
+              type: string
+              example: Pestsov
+            username: 
+              type: string
+              example: Ave
+            role: 
+              type: string
+              example: user
+            active: 
+              type: boolean
+              example: true
+            createdAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
+              
+    exception-login__response-400:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: Incorrect username or password
+  
+    route--logout__response-200:
+        type: object
+        properties:
+          status: 
+            type: string
+            example: success
+          message:
+            type: string
+            example: User logout success
+  
     route--get-users__response-200:
       type: array
       items: 
