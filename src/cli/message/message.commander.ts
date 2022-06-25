@@ -34,12 +34,14 @@ export default class MessageCommander {
       if (!messages) return USER_NOT_EXISTS_MESSAGE();
       if (messages.length === 0) return MESSAGE_LIST_EMPTY_MESSAGE();
       messageLoader.getUserMessages(messages);
+      console.log(messages);
     });
   }
 
   async listAllMessages() {
     const messages = await messageService.getAllMessages();
     messageLoader.getAllMessages(messages);
+    console.log(messages);
   }
 
   async decodeMessage() {

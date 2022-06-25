@@ -1,20 +1,25 @@
 import axios from "axios";
 import { showAlert } from "../alert";
 
-const message = async (username, content) => {
-  const res = await axios({
-    method: "POST",
-    url: "api/message/",
-    data: {
-      username,
-      content,
-    },
-  });
+const message = async (recipient, content) => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: "api/message/",
+      data: {
+        recipient,
+        content,
+      },
+    });
 
-  console.log("sss");
-
-  if (res.data) {
-    console.log(res.data);
+    if (res.data.status === "success") {
+      console.log(res.data);
+      showAlert("success", "Message send success");
+    }
+  } catch (e) {
+    if (e.response.data.status === "fail") {
+      showAlert("error", "User not found");
+    }
   }
 };
 
@@ -26,7 +31,6 @@ export const decodeMessage = async (messageId) => {
 
   if (res.data.status === "success") {
     showAlert("success", res.data.data.content);
-    console.log(res.data.data.content);
   }
 };
 

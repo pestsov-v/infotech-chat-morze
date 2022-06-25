@@ -17,7 +17,7 @@ export default class MessageService {
 
   async getAllMessages() {
     const messages = await MessageModel.find()
-      .populate("sender")
+      .populate("recipient")
       .sort({ createdAt: -1 });
     if (!messages) return null;
     return messages;

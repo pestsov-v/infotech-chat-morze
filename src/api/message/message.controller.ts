@@ -4,16 +4,24 @@ import MessageException from "./message.exception";
 import MessageHelper from "./message.helper";
 import MessageResponser from "./message.responser";
 import MessageService from "./message.service";
+import UserService from "../user/user.service";
 
 const messageService = new MessageService();
 const messageHelper = new MessageHelper();
 const messageResponser = new MessageResponser();
 const messageException = new MessageException();
+const userService = new UserService();
 
 export default class MessageController {
   async sendMessage(req: Request, res: Response) {
     const { content, recipient } = req.body;
     const { user } = req.session;
+
+    const dBrecepient = await userService.findUser(recipient);
+
+    if (!dBrecepient) {
+      return res.status(statusCode.BAD_REQUEST).json({ status: "fail" });
+    }
 
     if (!user) {
       const exception = messageException.userNotFound();
@@ -25,7 +33,11 @@ export default class MessageController {
       return res.status(statusCode.CONFLiCT).json(exception);
     }
 
-    const encodeData = messageHelper.encodeData(user._id, content, recipient);
+    const encodeData = messageHelper.encodeData(
+      user._id,
+      content,
+      dBrecepient.id
+    );
     const message = await messageService.createMessage(encodeData);
     const data = messageResponser.encodeResponse(message);
 
@@ -61,7 +73,7 @@ export default class MessageController {
       const exception = messageException.messageNotFound();
       return res.status(statusCode.NOT_FOUND).json(exception);
     }
-    
+
     const data = messageResponser.deleteResponse();
     res.status(statusCode.OK).json(data);
   }

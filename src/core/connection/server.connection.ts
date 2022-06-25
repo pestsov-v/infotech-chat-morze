@@ -32,6 +32,7 @@ export default class Server {
     this.app.use(session.init());
     this.app.use(apiRouterPath.api, apiRouter);
     this.app.use(guiPath.home, guiRouter);
+    this.app.locals.moment = require("moment");
     this.httpServer();
     this.httpsServer();
   }

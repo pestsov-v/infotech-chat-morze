@@ -49,6 +49,7 @@
     "express-session": "^1.17.3",
     "inquirer": "^8.2.4",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.3",
     "mongodb-memory-server": "^8.6.0",
     "mongoose": "^6.3.8",
     "parcel-bundler": "^1.12.5",

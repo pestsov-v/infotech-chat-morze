@@ -11,8 +11,10 @@ const login = async (username, password) => {
       },
     });
 
-
     if (res.data.status === "success") {
+      window.setTimeout(() => {
+        location.assign("/message");
+      }, 500);
     }
   } catch (e) {
     console.log(e);

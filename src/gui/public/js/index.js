@@ -1,8 +1,11 @@
+import axios from "axios";
+import { showAlert } from "./alert";
 import login from "./auth/login";
 import logout from "./auth/logout";
 import signup from "./auth/signup";
-import message from "./message/message";
+import message, { decodeMessage } from "./message/message";
 
+const decodeBtn = document.querySelectorAll(".message--id");
 const loginForm = document.querySelector(".form--login");
 const signupForm = document.querySelector(".form--signup");
 const messageForm = document.querySelector(".form--message");
@@ -14,6 +17,15 @@ if (loginForm) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     login(username, password);
+  });
+}
+
+if (decodeBtn) {
+  decodeBtn.forEach((e) => {
+    e.addEventListener("click", async (e) => {
+      const elem = e.target.dataset.messageid;
+      await decodeMessage(elem);
+    });
   });
 }
 
@@ -36,9 +48,8 @@ if (signupForm) {
 if (messageForm) {
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const username = document.getElementById("username").value;
+    const recipient = document.getElementById("recipient").value;
     const content = document.getElementById("content").value;
-    message(username, content);
-    console.log(username, content);
+    message(recipient, content);
   });
 }
