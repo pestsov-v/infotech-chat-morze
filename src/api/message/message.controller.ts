@@ -77,8 +77,4 @@ export default class MessageController {
     const data = messageResponser.deleteResponse();
     res.status(statusCode.OK).json(data);
   }
-
-  getMessages() {}
-
-  getMessage(req: Request, res: Response) {}
 }

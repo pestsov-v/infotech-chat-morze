@@ -177,7 +177,7 @@ paths:
                 $ref: '#/components/schemas/middleware--restrict-to__response-403'
         
         404: 
-          description: User list is empty
+          description: User not found
           content:
             application/json:
               schema:
@@ -219,7 +219,7 @@ paths:
                 $ref: '#/components/schemas/middleware--restrict-to__response-403'
         
         404: 
-          description: User list is empty
+          description: User not found
           content:
             application/json:
               schema:
@@ -261,11 +261,139 @@ paths:
                 $ref: '#/components/schemas/middleware--restrict-to__response-403'
         
         404: 
-          description: User list is empty
+          description: User not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/exception--user-not-found__response-404'
+  
+  /message:
+    post:
+      security:
+          - bearerAuth: []
+      summary: Send message to recipient
+      tags:
+        - message
+      responses:
+        201: 
+          description: Send message success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route--post-message__response-200'
+        
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+              
+        404: 
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--user-not-found__response-404'
+    get:
+      security:
+        - bearerAuth: []
+      summary: Get list of all user messages
+      tags:
+        - message
+      responses:
+        201: 
+          description: Get list of all user messages success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route--get-message__response-200'
+        
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+  
+  /message/{messageId}:
+    delete:
+      security:
+        - bearerAuth: []
+      summary: Delete message by messageId
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: string
+          required: true
+          description: Message Id
+      tags:
+        - message
+      responses:
+        200:
+          description: Delete message by message id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route--delete-message__response-200'
+        
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+                
+        404: 
+          description: Message not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--message-not-found__response-404'
+  
+  /message/{messageId}/decode:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Decode message by messageId
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: string
+          required: true
+          description: Message Id
+      tags:
+        - message
+      responses:
+        200:
+          description: Decode message by message id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/route--decode-message__response-200'
+        
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+        
+        403:
+          description: User have not newby rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--restrict-to__response-403'
+                
+        404: 
+          description: Message not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--message-not-found__response-404'
 
 components:
   securitySchemes:
@@ -600,6 +728,127 @@ components:
             updatedAt: 
               type: string
               example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
+              
+    route--post-message__response-200:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            sender: 
+              type: string
+              example: 62aca542a16178c3fae7c456
+            recipient: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            content:
+              type: string
+              example: ".. &nsp -.-. --- -- .> &nsp .. -. ... .. -.. .>"
+            _id: 
+              type: string
+              example: 62b72514664984d360eba54a
+            createdAt: 
+              type: string
+              example: "2022-06-25T15:09:08.370Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-25T15:09:08.370Z"
+            _v:
+              type: number
+              example: 0
+            
+    route--get-message__response-200:
+      type: array
+      items: 
+        type: object
+        properties:
+          status: 
+            type: string
+            example: success
+          amount: 
+            type: number
+            example: 1
+          data:
+            type: object
+            properties:
+              sender: 
+                type: string
+                example: 62aca542a16178c3fae7c456
+              recipient: 
+                type: string
+                example: 61cb77aa567dc378ee45db47
+              content:
+                type: string
+                example: ".. &nsp -.-. --- -- .> &nsp .. -. ... .. -.. .>"
+              _id: 
+                type: string
+                example: 62b72514664984d360eba54a
+              createdAt: 
+                type: string
+                example: "2022-06-25T15:09:08.370Z"
+              updatedAt: 
+                type: string
+                example: "2022-06-25T15:09:08.370Z"
+              _v:
+                type: number
+                example: 0
+                
+    exception--message-not-found__response-404:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: Message not found
+          
+    route--delete-message__response-200:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        message:
+          type: string
+          example: Message remove success
+        data: 
+          type: string
+          example: null
+          
+    route--decode-message__response-200:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            sender: 
+              type: string
+              example: 62aca542a16178c3fae7c456
+            recipient: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            content:
+              type: string
+              example: I came to take your soul
+            _id: 
+              type: string
+              example: 62b72514664984d360eba54a
+            createdAt: 
+              type: string
+              example: "2022-06-25T15:09:08.370Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-25T15:09:08.370Z"
             _v:
               type: number
               example: 0
