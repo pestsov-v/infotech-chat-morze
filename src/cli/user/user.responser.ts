@@ -13,8 +13,8 @@ export default class UserResponser {
   createUserDetails(data: any) {
     const response = `
 UserId: ${data.id}.
-Username: ${data.firstName} ${data.lastName}.
-User email: ${data.email}.
+User names: ${data.firstName} ${data.lastName}.
+Username: ${data.username}.
 User role: ${data.role}.
 User account created: ${data.createdAt}.`;
 

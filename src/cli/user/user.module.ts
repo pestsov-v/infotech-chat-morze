@@ -1,9 +1,10 @@
 import inquirer from "inquirer";
 
+import mainMenu from "../menu/menu.module";
+
 import UserCommander from "./user.commander";
 import UserForm from "./user.form";
-import IUser from "./interface/IUser.interface";
-import mainMenu from "../menu/menu.module";
+import userCommands from "./user.commands";
 
 const userCommander = new UserCommander();
 const userForm = new UserForm();
@@ -11,7 +12,7 @@ const userForm = new UserForm();
 export default class UserModule {
   interface() {
     inquirer.prompt(userForm.interfaceForm()).then(async (cmd) => {
-      if (cmd.IUser === IUser.listUsers) {
+      if (cmd.userCommands === userCommands.listUsers) {
         await userCommander.getUsers();
         console.log("");
         setTimeout(() => {
@@ -19,11 +20,11 @@ export default class UserModule {
         }, 50);
       }
 
-      if (cmd.IUser === IUser.moreUserInfo) {
-        await userCommander.getUsername();
+      if (cmd.userCommands === userCommands.moreUserInfo) {
+        userCommander.getUsername();
       }
 
-      if (cmd.IUser === IUser.backToMainMenu) {
+      if (cmd.userCommands === userCommands.backToMainMenu) {
         mainMenu();
       }
     });

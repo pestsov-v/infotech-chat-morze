@@ -35,6 +35,7 @@ export default class AuthController {
 
   async login(answers: any) {
     const user = await authService.findEmail(answers.email);
+
     if (!user) return USER_IS_NOT_EXISTS_MESSAGE();
 
     const correctPassword = await authHasher.confirmPassword(

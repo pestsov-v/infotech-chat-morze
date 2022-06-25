@@ -36,7 +36,4 @@ export default class UserCommander {
       }, 50);
     });
   }
-
-  async updateUser() {}
-  async deleteUser() {}
 }
