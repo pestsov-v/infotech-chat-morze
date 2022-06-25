@@ -1,4 +1,4 @@
-enum IUser {
+enum userCommands {
   listUsers = "List of all users",
   moreUserInfo = "Get more information about concreticate user",
   updateUserInfo = "Update concreticate user fields for username",
@@ -6,4 +6,4 @@ enum IUser {
   backToMainMenu = "Back to main menu",
 }
 
-export default IUser;
+export default userCommands;

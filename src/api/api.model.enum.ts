@@ -1,6 +1,5 @@
 enum model {
   user = "User",
-  chat = "Chat",
   message = "Message",
 }
 

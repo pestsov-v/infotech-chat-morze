@@ -1,7 +1,8 @@
-import { promisify } from "util";
+import { NextFunction, Request, Response } from "express";
+import util from "util";
 import jwt from "jsonwebtoken";
 import config from "config";
-import { NextFunction, Request, Response } from "express";
+
 import UserService from "../api/user/user.service";
 
 const userService = new UserService();
@@ -17,7 +18,7 @@ export default class GUIMiddleware {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         if (!req.session.jwt) return next();
-        const decoded = await promisify(jwt.verify)(
+        const decoded = await util.promisify(jwt.verify)(
           req.session.jwt,
           this.jwtSecret
         );

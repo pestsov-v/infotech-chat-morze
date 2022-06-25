@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import AuthController from "./auth.controller";
 import AuthForm from "./auth.form";
 import types from "./auth.types.enum";
-import mainMenu from "../menu/menu/main.menu";
+import mainMenu from "../menu/menu.module";
 
 import { USER_LOGIN_SUCCESS, USER_SIGNUP_SUCCESS } from "./auth.reponse";
 

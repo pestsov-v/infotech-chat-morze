@@ -39,21 +39,25 @@ export default class Server {
 
   private httpServer() {
     const httpServer = http.createServer(this.app);
-    httpServer.listen(this.httpPort, () => {
-      console.log(
-        color.green,
-        `Server success connection on http://localhost:${this.httpPort}`
-      );
-    });
+    httpServer.listen(this.httpPort, () => this.httpSuccess());
   }
 
   private httpsServer() {
     const httpsServer = https.createServer(httpsOptions, this.app);
-    httpsServer.listen(this.httpsPort, () => {
-      console.log(
-        color.green,
-        `Server success connection on https://localhost:${this.httpsPort}`
-      );
-    });
+    httpsServer.listen(this.httpsPort, () => this.httpsSuccess());
+  }
+
+  httpSuccess() {
+    console.log(
+      color.green,
+      `Server success connection on http://localhost:${this.httpPort}`
+    );
+  }
+
+  httpsSuccess() {
+    console.log(
+      color.green,
+      `Server success connection on https://localhost:${this.httpsPort}`
+    );
   }
 }

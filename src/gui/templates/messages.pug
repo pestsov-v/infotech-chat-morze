@@ -1,8 +1,8 @@
 extends partials/_base
 
 block content
-	h1 #{header}
-	main.main 
+	main.main
+		h1.heading-secondary.messages--header #{header}
 		each message in messages
 			.card
 				.card__header 

@@ -1,5 +1,5 @@
 import ora from "ora";
-import mainMenu from "../menu/menu/main.menu";
+import mainMenu from "../menu/menu.module";
 import { MESSAGE_LIST_EMPTY_MESSAGE } from "./message.exception";
 
 export default class MessageLoader {

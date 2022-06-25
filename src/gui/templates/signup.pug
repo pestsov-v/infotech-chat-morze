@@ -3,19 +3,19 @@ extends partials/_base
 block content  
 	main.main
 		.signup-form  
-			h2.heading-secondary.ma-bt-lg Signup
+			h2.heading-secondary.ma-bt-lg #{header}
 			form.form.form--signup
 				.form__group 
-					label.form__label(for='text') Username 
+					label.form__label(for='text') #{form.username}
 					input#username.form__input(type='text', placeholder='Username', required) 
 				.form__group 
-					label.form__label(for='text') First Name 
+					label.form__label(for='text') #{form.firstName}
 					input#firstName.form__input(type='text', placeholder='First Name', required) 
 				.form__group 
-					label.form__label(for='text') Last name 
+					label.form__label(for='text') #{form.lastName}
 					input#lastName.form__input(type='text', placeholder='Last Name', required) 
 				.form__group 
-					label.form__label(for='password') Password 
+					label.form__label(for='password') #{form.password}
 					input#password.form__input(type='password', placeholder='*******', required) 
 				.form__group 
-					button.btn.btn--green Signup  
+					button.btn.btn--green #{button.signup} 

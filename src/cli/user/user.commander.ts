@@ -5,7 +5,7 @@ import UserService from "../../api/user/user.service";
 import UserResponser from "./user.responser";
 import UserForm from "./user.form";
 import UserHelper from "./user.helper";
-import mainMenu from "../menu/menu/main.menu";
+import mainMenu from "../menu/menu.module";
 
 const userService = new UserService();
 const userResponser = new UserResponser();
@@ -36,7 +36,4 @@ export default class UserCommander {
       }, 50);
     });
   }
-
-  async updateUser() {}
-  async deleteUser() {}
 }

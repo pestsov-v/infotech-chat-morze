@@ -1,9 +1,5 @@
-import axios from "axios";
-import { showAlert } from "./alert";
-import login from "./auth/login";
-import logout from "./auth/logout";
-import signup from "./auth/signup";
-import message, { decodeMessage } from "./message/message";
+import { signup, login, logout } from "./auth";
+import { sendMessage, decodeMessage } from "./message";
 
 const decodeBtn = document.querySelectorAll(".message--id");
 const loginForm = document.querySelector(".form--login");
@@ -50,6 +46,6 @@ if (messageForm) {
     e.preventDefault();
     const recipient = document.getElementById("recipient").value;
     const content = document.getElementById("content").value;
-    message(recipient, content);
+    sendMessage(recipient, content);
   });
 }

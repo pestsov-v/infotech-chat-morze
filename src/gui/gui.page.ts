@@ -3,7 +3,6 @@ enum page {
   login = "login.pug",
   signup = "signup.pug",
   message = "message.pug",
-  users = "users.pug",
   messages = "messages.pug",
 }
 
