@@ -23,14 +23,155 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user--get-users__response-200'
+                $ref: '#/components/schemas/route--get-users__response-200'
 
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+        
+        403:
+          description: User have not admin rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--restrict-to__response-403'
+        
         404: 
           description: User list is empty
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user--get-users__response-404'
+                $ref: '#/components/schemas/exception--get-users__response-404'
+                
+  /user/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Get user by userId
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User id
+      tags:
+        - user
+      responses:
+        200:
+          description: Get user by user id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user--get-user__response-200'
+                
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+        
+        403:
+          description: User have not admin rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--restrict-to__response-403'
+        
+        404: 
+          description: User list is empty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--user-not-found__response-404'
+    
+    put:
+      security:
+        - bearerAuth: []
+      summary: Update user data by user id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User id
+      tags:
+        - user
+      responses:
+        200:
+          description: Update user data by user id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user--put-user__response-200'
+                
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+        
+        403:
+          description: User have not admin rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--restrict-to__response-403'
+        
+        404: 
+          description: User list is empty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--user-not-found__response-404'
+
+    delete:
+      security:
+        - bearerAuth: []
+      summary: Delete user by user id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: User id
+      tags:
+        - user
+      responses:
+        200:
+          description: Update user data by user id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user--delete-user__response-200'
+                
+        401:
+          description: User unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--protect__response-401'
+        
+        403:
+          description: User have not admin rules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/middleware--restrict-to__response-403'
+        
+        404: 
+          description: User list is empty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception--user-not-found__response-404'
 
 components:
   securitySchemes:
@@ -40,7 +181,7 @@ components:
       bearerFormat: JWT
       
   schemas:
-    user--get-users__response-200:
+    route--get-users__response-200:
       type: array
       items: 
         type: object
@@ -84,7 +225,28 @@ components:
               _v:
                 type: number
                 example: 0
-    user--get-users__response-404:
+
+    middleware--protect__response-401:
+      type: object
+      properties:
+        status:
+          type: string
+          example: fail
+        message: 
+          type: string
+          example: You are not authorized. Login to your account first
+
+    middleware--restrict-to__response-403:
+        type: object
+        properties:
+          status:
+            type: string
+            example: fail
+          message: 
+            type: string
+            example: You do not have sufficient rules to use this feature
+
+    exception--get-users__response-404:
       type: object
       properties:
         status: 
@@ -93,6 +255,137 @@ components:
         message:
           type: string
           example: "User list is empty"
+          
+    user--get-user__response-200:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        data: 
+          type: object
+          properties:
+            _id: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            firstName:
+              type: string
+              example: Vlad
+            lastName:
+              type: string
+              example: Pestsov
+            username: 
+              type: string
+              example: Ave
+            password: 
+              type: string
+              example: $2b$10$URXCCQ9cLM9XQli969yo8.tPZidZd0mUJU1f7kDkiD9ene22x73Ym
+            role: 
+              type: string
+              example: user
+            active: 
+              type: boolean
+              example: true
+            createdAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
+              
+    exception--user-not-found__response-404:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: User id not found
 
-        
-  
+
+    user--put-user__response-200:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        data: 
+          type: object
+          properties:
+            _id: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            firstName:
+              type: string
+              example: Sergei
+            lastName:
+              type: string
+              example: Mixeev
+            username: 
+              type: string
+              example: Validator
+            password: 
+              type: string
+              example: $2b$10$URXCCQ9cLM9XQli969yo8.tPZidZd0mUJU1f7kDkiD9ene22x73Ym
+            role: 
+              type: string
+              example: user
+            active: 
+              type: boolean
+              example: true
+            createdAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
+              
+    user--delete-user__response-200:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: success
+        message:
+          type: string
+          example: User has been deleted success
+        data: 
+          type: object
+          properties:
+            _id: 
+              type: string
+              example: 61cb77aa567dc378ee45db47
+            firstName:
+              type: string
+              example: Sergei
+            lastName:
+              type: string
+              example: Mixeev
+            username: 
+              type: string
+              example: Validator
+            password: 
+              type: string
+              example: $2b$10$URXCCQ9cLM9XQli969yo8.tPZidZd0mUJU1f7kDkiD9ene22x73Ym
+            role: 
+              type: string
+              example: user
+            active: 
+              type: boolean
+              example: true
+            createdAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            updatedAt: 
+              type: string
+              example: "2022-06-17T16:01:06.582Z"
+            _v:
+              type: number
+              example: 0
