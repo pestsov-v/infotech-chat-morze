@@ -6,7 +6,7 @@ export default class AuthService {
     return user;
   }
 
-  async findEmail(email: string) {
-    return await UserModel.findOne({ email });
+  async findUser(username: string) {
+    return await UserModel.findOne({ username });
   }
 }

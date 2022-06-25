@@ -1,4 +1,4 @@
-enum guiPath {
+enum guiRouterPath {
   home = "/",
   login = "/login",
   logout = "/logout",
@@ -7,4 +7,4 @@ enum guiPath {
   messages = "/messages",
 }
 
-export default guiPath;
+export default guiRouterPath;

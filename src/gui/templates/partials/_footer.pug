@@ -1,2 +1,9 @@
-footer.footer 
-    p.footer__copyright &copy Vladislav Pestsov
+footer.footer
+    ul.footer__nav 
+        li: a(href='/documentation') For Developers 
+        li: a(href='/login') for Administrator
+    ul.footer__nav 
+        p.footer__copyright &copy Vladislav Pestsov | 
+
+        p.footer__time= moment().format("YYYY")
+    

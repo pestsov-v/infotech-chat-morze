@@ -7,14 +7,16 @@ import config from "config";
 import color from "../enum/color.enum";
 
 import Session from "./session.connection";
+import Swagger from "./swagger.connection";
 import httpsOptions from "./https.connection";
 
 import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
-import guiPath from "../../gui/gui.router.path";
+import guiRouterPath from "../../gui/gui.router.path";
 import guiRouter from "../../gui/gui.router";
 
 const session = new Session();
+const swagger = new Swagger();
 
 export default class Server {
   private readonly app: Express;
@@ -31,7 +33,8 @@ export default class Server {
     this.app.use(express.json());
     this.app.use(session.init());
     this.app.use(apiRouterPath.api, apiRouter);
-    this.app.use(guiPath.home, guiRouter);
+    this.app.use(guiRouterPath.home, guiRouter);
+    this.app.use(swagger.path(), swagger.serve(), swagger.document());
     this.app.locals.moment = require("moment");
     this.httpServer();
     this.httpsServer();

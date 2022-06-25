@@ -7,15 +7,37 @@ import AuthResponse from "./auth.response";
 import AuthHasher from "./auth.hasher";
 import AuthCookier from "./auth.cookie";
 
+import UserService from "../user/user.service";
+import AuthException from "./auth.exception";
+
 const authService = new AuthService();
+const authException = new AuthException();
 const authTokenizer = new AuthTokenizer();
 const authResponse = new AuthResponse();
 const authHasher = new AuthHasher();
 const authCookier = new AuthCookier();
 
+const userService = new UserService();
+
 export default class AuthController {
   async signup(req: Request, res: Response) {
-    req.body.password = await authHasher.hashedPassword(req.body.password);
+    let { username, firstName, lastName, password } = req.body;
+
+    const dbUser = await userService.findUser(username);
+
+    if (dbUser) {
+      if (dbUser.username === username) {
+        const exception = authException.dublicateUsername();
+        return res.status(statusCode.BAD_REQUEST).json(exception);
+      }
+    }
+
+    if (!username || !firstName || !lastName || !password) {
+      const exception = authException.missRequiredFields();
+      return res.status(statusCode.BAD_REQUEST).json(exception);
+    }
+
+    password = await authHasher.hashedPassword(password);
     const newUser = await authService.createUser(req.body);
 
     const token = authTokenizer.signToken(newUser._id);
@@ -28,14 +50,21 @@ export default class AuthController {
   }
 
   async login(req: Request, res: Response) {
-    const user = await authService.findEmail(req.body.email);
-    if (!user) return "incorrect user";
+    const user = await authService.findUser(req.body.username);
+    if (!user) {
+      const exception = authException.incorrectUser();
+      return res.status(statusCode.NOT_FOUND).json(exception);
+    }
 
     const correctPassword = await authHasher.confirmPassword(
       req.body.password,
       user.password
     );
-    if (!correctPassword) return "incorrect password";
+
+    if (!correctPassword) {
+      const exception = authException.incorrectUser();
+      return res.status(statusCode.NOT_FOUND).json(exception);
+    }
 
     const token = authTokenizer.signToken(user._id);
     req.session.user = user;
