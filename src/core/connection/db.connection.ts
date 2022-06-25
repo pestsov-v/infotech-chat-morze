@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { MongooseError } from "mongoose";
 import config from "config";
 import color from "../enum/color.enum";
 
@@ -12,12 +12,16 @@ export default class Database {
   async connect() {
     await mongoose
       .connect(this.url)
-      .then(() => {
-        console.log(color.yellow, `Database success connection`);
-      })
-      .catch((e) => {
-        console.log("Database connection with error: ", e);
-        process.exit(1);
-      });
+      .then(() => this.success())
+      .catch((err: MongooseError) => this.fail(err));
+  }
+
+  success() {
+    console.log(color.yellow, `Database success connection`);
+  }
+
+  fail(err: MongooseError) {
+    console.log("Database connection with error: ", err);
+    process.exit(1);
   }
 }

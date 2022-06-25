@@ -1,5 +1,5 @@
-import mongoose, { mongo } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
+import mongoose from "mongoose";
 import UserModel from "../../api/user/user.model";
 
 export default class dbTester {
@@ -34,7 +34,7 @@ export default class dbTester {
   }
 
   async getNonExistentUser() {
-    return new mongoose.Types.ObjectId().toString()
+    return new mongoose.Types.ObjectId().toString();
   }
 
   async deleteUsers() {
