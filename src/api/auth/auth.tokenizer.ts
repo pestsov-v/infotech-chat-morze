@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { promisify } from "util";
 import config from "config";
 
 export default class AuthTokenizer {
@@ -18,6 +19,29 @@ export default class AuthTokenizer {
     });
 
     return token;
+  }
+
+  getToken(authorization: string | undefined, jwt: string) {
+    let token;
+
+    if (authorization && authorization.startsWith("Bearer")) {
+      token = authorization.split(" ")[1];
+    } else if (jwt) {
+      token = jwt;
+    }
+
+    if (token === "null") {
+      token = jwt;
+    }
+
+    return token;
+  }
+
+  async decodeId(token: string) {
+    // @ts-ignore
+    const decoded = await promisify(jwt.verify)(token, this.jwtSecret);
+    // @ts-ignore
+    return decoded.id;
   }
 
   getCookieExpires() {
