@@ -1,6 +1,6 @@
 import color from "../../core/enum/color.enum";
 import emodji from "../../core/enum/emodji.enum";
-import mainMenu from "../menu/menu/main.menu";
+import mainMenu from "../menu/menu.module";
 
 export const MESSAGE_LIST_EMPTY_MESSAGE = () => {
   console.log("");

@@ -2,10 +2,11 @@ import inquirer from "inquirer";
 import AuthController from "./auth.controller";
 import AuthForm from "./auth.form";
 import types from "./auth.types.enum";
-import mainMenu from "../menu/menu/main.menu";
+import Menu from "../menu/menu.module";
 
 import { USER_LOGIN_SUCCESS, USER_SIGNUP_SUCCESS } from "./auth.reponse";
 
+const menu = new Menu();
 const authForm = new AuthForm();
 const authController = new AuthController();
 
@@ -19,7 +20,7 @@ export default class AuthModule {
       const login = await authController.login(anws);
       if (!login) return this.inccorrectLogin();
       USER_LOGIN_SUCCESS();
-      mainMenu();
+      menu.mainInterface();
     });
   }
 

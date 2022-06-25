@@ -3,7 +3,7 @@ import inquirer from "inquirer";
 import UserCommander from "./user.commander";
 import UserForm from "./user.form";
 import IUser from "./interface/IUser.interface";
-import mainMenu from "../menu/menu/main.menu";
+import mainMenu from "../menu/menu.module";
 
 const userCommander = new UserCommander();
 const userForm = new UserForm();

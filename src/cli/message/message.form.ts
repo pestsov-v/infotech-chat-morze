@@ -1,9 +1,9 @@
 import CLITypes from "../cli.types";
 
-import messageName from "./interface/message.name";
-import messageCommands from "./interface/message.commands";
+import messageName from "./message.name";
+import messageCommands from "./message.commands";
 
-import { SELECT_COMMAND_MESSAGE } from "../menu/menu/menu.constants";
+import { SELECT_COMMAND_MESSAGE } from "../menu/menu.constants";
 
 import {
   ENTER_MESSAGE_MESSAGE,
@@ -20,8 +20,6 @@ export default class MessageForm {
         name: CLITypes.messageCommands,
         message: SELECT_COMMAND_MESSAGE,
         choices: [
-          messageCommands.sendMessage,
-          messageCommands.decodeMessage,
           messageCommands.listMessages,
           messageCommands.userMessages,
           messageCommands.backToMainMenu,
