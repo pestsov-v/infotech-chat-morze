@@ -1,7 +1,7 @@
 import axios from "axios";
-import { showAlert } from "../alert";
+import { showAlert } from "./alert";
 
-const message = async (recipient, content) => {
+export const sendMessage = async (recipient, content) => {
   try {
     const res = await axios({
       method: "POST",
@@ -33,5 +33,3 @@ export const decodeMessage = async (messageId) => {
     showAlert("success", res.data.data.content);
   }
 };
-
-export default message;
