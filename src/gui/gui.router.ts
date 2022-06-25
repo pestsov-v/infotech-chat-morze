@@ -4,9 +4,9 @@ import GUIMiddleware from "./gui.middleware";
 import guiPath from "./gui.router.path";
 
 const guiController = new GUIController();
-const guiRouter = Router();
-
 const guiMiddleware = new GUIMiddleware();
+
+const guiRouter = Router();
 const userLoggedIn = guiMiddleware.getLoggedIn();
 
 guiRouter.get(guiPath.home, userLoggedIn, guiController.getHomePage);

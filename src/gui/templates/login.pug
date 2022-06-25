@@ -3,13 +3,13 @@ extends partials/_base
 block content
     main.main
         .login-form
-            h2.heading-secondary.ma-bt-lg Login
+            h2.heading-secondary.ma-bt-lg #{header}
             form.form.form--login
                 .form__group
-                    label.form__label(for='text') Username
-                    input#username.form__input(type='text', placeholder='Ваш никнейм', required)
+                    label.form__label(for='text') #{form.username}
+                    input#username.form__input(type='text', placeholder='Username', required)
                 .form__group.ma-bt-md
-                    label.form__label(for='password') Пароль
+                    label.form__label(for='password') #{form.password}
                     input#password.form__input(type='password', placeholder='••••••••', required)
                 .form__group
-                    button.btn.btn--green Войти
+                    button.btn.btn--green #{button.login} 

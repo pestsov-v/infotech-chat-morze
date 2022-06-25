@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import statusCode from "../core/enum/statusCode.enum";
+import page from "./gui.page";
 import MessageService from "../api/message/message.service";
 
 import GUIBase from "./gui.base";
 import GUIPayloader from "./gui.payloader";
-import page from "./gui.page";
 
 const guiPayloader = new GUIPayloader();
 const messageService = new MessageService();
@@ -14,17 +14,18 @@ export default class GUIController extends GUIBase {
     super();
   }
 
-  getHomePage = super.renderPage(page.home);
-  getLoginPage = super.renderPage(page.login);
-  getSignupPage = super.renderPage(page.signup);
-  getMessagePage = super.renderPage(page.message);
+  getHomePage = super.renderPage(page.home, guiPayloader.home());
+  getLoginPage = super.renderPage(page.login, guiPayloader.login());
+  getSignupPage = super.renderPage(page.signup, guiPayloader.signup());
+  getMessagePage = super.renderPage(page.message, guiPayloader.message());
 
   async getMessagesPage(req: Request, res: Response) {
     const messages = await messageService.getAllMessages();
+    const staticPayload = guiPayloader.messages();
 
     res.status(statusCode.OK).render(page.messages, {
-      title: "Сообщения",
-      header: "Мои сообщения",
+      title: staticPayload.title,
+      header: staticPayload.header,
       messages: messages,
     });
   }

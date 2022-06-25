@@ -93,3 +93,8 @@
   padding: 1rem;
   color: var(--bronze-green)
 }
+
+.messages--header { 
+  margin-left: 1.5rem;
+  color: var(--green);
+}

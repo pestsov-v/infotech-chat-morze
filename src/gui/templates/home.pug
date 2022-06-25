@@ -2,11 +2,10 @@ extends partials/_base
 
 block content 	
 	main.main
-		h2 Main Page
-		h3 Chat can only be used by authorized users
-		h4 if you want to chat, please login or register
+		h2 #{header}
+		h3 #{text}
 		form.form.form--home
 			.form__group
-				button.btn.btn--green Login
+				button.btn.btn--green #{button.login}
 			.form__group
-				button.btn.btn--green Signup
+				button.btn.btn--green #{button.signup}

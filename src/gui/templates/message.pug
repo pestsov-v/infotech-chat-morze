@@ -3,13 +3,13 @@ extends partials/_base
 block content 
 	main.main
 		.message-form 
-			h2.heading-secondary.ma-ba-lg Send Message 
+			h2.heading-secondary.ma-ba-lg #{header} 
 			form.form.form--message
 				form__group 
-					label.form__label(for='userSearch') User: 
-					input#recipient.form__input(type="text", placeholder='Input suer first name, last name or username')
+					label.form__label(for='userSearch') #{form.recipient} 
+					input#recipient.form__input(type="text", placeholder='Input recipient username')
 				form__group 
-					label.form__label(for='sendMessage') Message: 
+					label.form__label(for='sendMessage') #{form.message} 
 					input#content.form__input(type="text", placeholder='Message...')
 				.form__group 
-					button.btn.btn--green Send Message
+					button.btn.btn--green #{button.sendMessage}
