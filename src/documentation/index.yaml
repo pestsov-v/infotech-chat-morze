@@ -1,0 +1,98 @@
+openapi: 3.0.1
+info:
+  title: Infotech Morze Chat
+  description: Application for sending and receiving messages in Morse language. Each user can send a message by specifying a recipient. This message will be transformed into Morse code and the user will receive an encrypted message.
+  contact:
+    email: pestsov.js@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/api
+  - url: https://localhost:3002/api
+  
+paths: 
+  /user:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Get List of all users
+      tags:
+        - user
+      responses:
+        200: 
+          description: Get list of all users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user--get-users__response-200'
+
+        404: 
+          description: User list is empty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user--get-users__response-404'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+  schemas:
+    user--get-users__response-200:
+      type: array
+      items: 
+        type: object
+        properties:
+          status: 
+            type: string
+            example: success
+          amount: 
+            type: number
+            example: 1
+          data: 
+            type: object
+            properties:
+              _id: 
+                type: string
+                example: 61cb77aa567dc378ee45db47
+              firstName:
+                type: string
+                example: Vlad
+              lastName:
+                type: string
+                example: Pestsov
+              username: 
+                type: string
+                example: Ave
+              password: 
+                type: string
+                example: $2b$10$URXCCQ9cLM9XQli969yo8.tPZidZd0mUJU1f7kDkiD9ene22x73Ym
+              role: 
+                type: string
+                example: user
+              active: 
+                type: boolean
+                example: true
+              createdAt: 
+                type: string
+                example: "2022-06-17T16:01:06.582Z"
+              updatedAt: 
+                type: string
+                example: "2022-06-17T16:01:06.582Z"
+              _v:
+                type: number
+                example: 0
+    user--get-users__response-404:
+      type: object
+      properties:
+        status: 
+          type: string
+          example: fail
+        message:
+          type: string
+          example: "User list is empty"
+
+        
+  
