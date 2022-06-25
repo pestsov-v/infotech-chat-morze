@@ -13,6 +13,11 @@ const chatException = new ChatException();
 
 export default class ChatController {
   async createChat(req: Request, res: Response) {
+    if (!req.session.user) {
+      const exception = chatException.userNotAuth();
+      return res.status(statusCode.FORBIDDEN).json(exception);
+    }
+
     if (!req.body.user) {
       const data = chatException.userNotFound();
       return res.status(statusCode.BAD_REQUEST).json(data);
@@ -27,7 +32,6 @@ export default class ChatController {
 
   async getUserChats(req: Request, res: Response) {
     const chats = await chatService.getUserChats(req.session.user._id);
-
     const data = chatResponse.createObjs(chats);
     res.status(statusCode.OK).json(data);
   }

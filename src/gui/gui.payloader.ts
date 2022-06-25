@@ -5,10 +5,12 @@ const messageService = new MessageService();
 export default class GUIPayloader {
   async messagesPayload() {
     const messages = await messageService.getAllMessages();
-    return {
-      title: "Сообщения",
-      header: "Мои сообщения",
+    const payload = {
+      title: "Messages",
+      header: "My messages",
       messages: messages,
     };
+
+    return payload;
   }
 }

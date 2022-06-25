@@ -2,11 +2,17 @@ extends partials/_base
 
 block content
 	h1 #{header}
-	.card 
+	main.main 
 		each message in messages
-			h3.message--sender Sender 
-				span= message.sender.username
-			h3.message--content Message	
-				span= message.content
-			
-			button.btn.btn-green.btn--small Decode message
+			.card
+				.card__header 
+					.card__data
+						h3.message--sender Sender 
+							span.message--sender__span= message.recipient.username
+						h3.message--createdAt= moment(message.createdAt).fromNow()
+
+				.card__footer 
+					.card__data
+						h3.message--content Message	
+						h4.message--content__span= message.content
+						button.btn.btn-green.btn--small.message--id(data-messageid= message.id) Decode message

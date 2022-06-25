@@ -1,18 +1,37 @@
-const { default: axios } = require("axios");
+import axios from "axios";
+import { showAlert } from "../alert";
 
-const message = async (username, content) => {
+const message = async (recipient, content) => {
+  try {
+    const res = await axios({
+      method: "POST",
+      url: "api/message/",
+      data: {
+        recipient,
+        content,
+      },
+    });
+
+    if (res.data.status === "success") {
+      console.log(res.data);
+      showAlert("success", "Message send success");
+    }
+  } catch (e) {
+    if (e.response.data.status === "fail") {
+      showAlert("error", "User not found");
+    }
+  }
+};
+
+export const decodeMessage = async (messageId) => {
   const res = await axios({
-    method: "POST",
-    url: "api/message/",
-    data: {
-      username,
-      content,
-    },
+    method: "GET",
+    url: `api/message/${messageId}/decode`,
   });
 
-  console.log(res.data);
-
-  if (res.data) location.reload(true);
+  if (res.data.status === "success") {
+    showAlert("success", res.data.data.content);
+  }
 };
 
 export default message;

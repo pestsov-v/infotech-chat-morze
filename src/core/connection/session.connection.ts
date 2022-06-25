@@ -14,6 +14,4 @@ export default class Session {
       cookie: { maxAge: 100 * 60 * 1000 },
     });
   }
-
-  
 }

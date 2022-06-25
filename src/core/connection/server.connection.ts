@@ -3,10 +3,11 @@ import path from "path";
 import http from "http";
 import https from "https";
 import config from "config";
+
 import color from "../enum/color.enum";
 
 import Session from "./session.connection";
-import httpsOptions from "./http.connection";
+import httpsOptions from "./https.connection";
 
 import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
@@ -31,6 +32,7 @@ export default class Server {
     this.app.use(session.init());
     this.app.use(apiRouterPath.api, apiRouter);
     this.app.use(guiPath.home, guiRouter);
+    this.app.locals.moment = require("moment");
     this.httpServer();
     this.httpsServer();
   }
