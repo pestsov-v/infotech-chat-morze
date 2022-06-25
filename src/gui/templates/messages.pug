@@ -15,4 +15,7 @@ block content
 					.card__data
 						h3.message--content Message	
 						h4.message--content__span= message.content
+
+					- if (user.role === 'newby') 
+
 						button.btn.btn-green.btn--small.message--id(data-messageid= message.id) Decode message

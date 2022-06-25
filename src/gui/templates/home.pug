@@ -2,10 +2,9 @@ extends partials/_base
 
 block content 	
 	main.main
-		h2 #{header}
-		h3 #{text}
 		form.form.form--home
-			.form__group
-				button.btn.btn--green #{button.login}
-			.form__group
-				button.btn.btn--green #{button.signup}
+			h2.home--header #{header}
+			h3.home--text #{text}
+			.form--button__group
+				a.btn.btn--green.btn__group(href="/login") #{button.login}
+				a.btn.btn--green.btn__group(href="/signup") #{button.signup}
