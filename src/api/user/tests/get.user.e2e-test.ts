@@ -94,7 +94,7 @@ describe("GET ONE USER ROUTE: /api/user/:id", () => {
       const response = await supertest(server).get(`/api/user/${userId}`);
       expect(response.body).toEqual({
         status: status.fail,
-        message: USER_NOT_FOUND_MESSAGE(userId),
+        message: USER_NOT_FOUND_MESSAGE(),
       });
     });
 

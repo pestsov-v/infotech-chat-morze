@@ -28,7 +28,9 @@ export default class MessageController {
     const { content, recipient } = req.body;
     const { user } = req.session;
 
-    const dBrecepient: IUserResponse = await userService.findUser(recipient);
+    const dBrecepient: IUserResponse | null = await userService.findUser(
+      recipient
+    );
 
     if (!dBrecepient) {
       const exception: IExceptionDto = messageException.recepientNotFound();
@@ -61,6 +63,7 @@ export default class MessageController {
     }
 
     const data: IEncodeResponse = messageResponser.encodeResponse(message);
+    console.log(data);
     res.status(statusCode.CREATED).json(data);
   }
 
