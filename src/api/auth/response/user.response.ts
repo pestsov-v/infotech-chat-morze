@@ -5,7 +5,7 @@ export default interface IUserResponse {
   firstName: string;
   lastName: string;
   username: string;
-  password: string | undefined;
+  password: string;
   active: boolean;
   role: role;
   createdAt: Date;

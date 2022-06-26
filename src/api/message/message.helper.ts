@@ -1,12 +1,17 @@
 import MessageDecoder from "./message.decoder";
+import IEncodeMorzeResponse from "./response/enodeMorze.response";
 
 const messageDecoder = new MessageDecoder();
 
 export default class MessageHelper {
-  encodeData(sender: string, content: string, recipient: string) {
-    const morzeContent = messageDecoder.encode(content);
+  encodeData(
+    sender: string,
+    content: string,
+    recipient: string
+  ): IEncodeMorzeResponse {
+    const morzeContent: string = messageDecoder.encode(content);
 
-    const encodeMorze = {
+    const encodeMorze: IEncodeMorzeResponse = {
       sender: sender,
       content: morzeContent,
       recipient: recipient,
@@ -15,7 +20,7 @@ export default class MessageHelper {
     return encodeMorze;
   }
 
-  decodeData(content: string) {
+  decodeData(content: string): string {
     const decodeMorze = messageDecoder.decode(content);
     return decodeMorze;
   }

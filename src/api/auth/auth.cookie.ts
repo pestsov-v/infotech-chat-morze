@@ -5,7 +5,7 @@ const authTokenizer = new AuthTokenizer();
 
 export default class AuthCookier {
   createCookie(token: string, req: Request, res: Response): void {
-    const cookieExpires = authTokenizer.getCookieExpires();
+    const cookieExpires: Date = authTokenizer.getCookieExpires();
 
     res.cookie("jwt", token, {
       expires: cookieExpires,

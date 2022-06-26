@@ -1,7 +1,12 @@
+import ICreateMessageDto from "./dto/createMessage.dto";
+import IDecodeMessageDto from "./dto/decodeMessage.dto";
 import MessageModel from "./message.model";
+import IMessageResponse from "./response/message.response";
 
 export default class MessageService {
-  async createMessage(body: any) {
+  async createMessage(
+    body: ICreateMessageDto
+  ): Promise<IMessageResponse | null> {
     const message = await MessageModel.create(body);
     if (!message) return null;
     return message;
@@ -11,6 +16,7 @@ export default class MessageService {
     const messages = await MessageModel.find({ sender: sender }).populate(
       "sender"
     );
+    console.log(messages);
     if (!messages) return null;
     return messages;
   }
@@ -23,7 +29,7 @@ export default class MessageService {
     return messages;
   }
 
-  async getMessage(id: string) {
+  async getMessage(id: string): Promise<IDecodeMessageDto | null> {
     const message = await MessageModel.findById(id)
       .populate("sender")
       .sort({ createdAt: -1 });
@@ -32,7 +38,7 @@ export default class MessageService {
     return message;
   }
 
-  async removeMessage(id: string) {
+  async removeMessage(id: string): Promise<IMessageResponse | null> {
     const message = await MessageModel.findByIdAndRemove(id);
     if (!message) return null;
     return message;

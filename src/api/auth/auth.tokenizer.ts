@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { promisify } from "util";
 import config from "config";
 
 export default class AuthTokenizer {
@@ -13,7 +12,7 @@ export default class AuthTokenizer {
     this.jwtCookieExpiresIn = config.get<number>("JWT_COOKIE_EXPIRES_IN");
   }
 
-  signToken(id: string) {
+  signToken(id: string): string {
     const token = jwt.sign({ id }, this.jwtSecret, {
       expiresIn: this.jwtExpiresIn,
     });
@@ -21,7 +20,7 @@ export default class AuthTokenizer {
     return token;
   }
 
-  getToken(authorization: string | undefined, jwt: string) {
+  getToken(authorization: string | undefined, jwt: string): string | undefined {
     let token;
 
     if (authorization && authorization.startsWith("Bearer")) {
@@ -37,14 +36,12 @@ export default class AuthTokenizer {
     return token;
   }
 
-  async decodeId(token: string) {
-    // @ts-ignore
-    const decoded = await promisify(jwt.verify)(token, this.jwtSecret);
-    // @ts-ignore
+  async decodeId(token: string): Promise<string> {
+    const decoded = jwt.verify(token, this.jwtSecret);
     return decoded.id;
   }
 
-  getCookieExpires() {
+  getCookieExpires(): Date {
     const expires = new Date(
       Date.now() + this.jwtCookieExpiresIn * 24 * 60 * 60 * 1000
     );

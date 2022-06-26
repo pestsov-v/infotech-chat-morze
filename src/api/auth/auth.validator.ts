@@ -1,5 +1,8 @@
+import IUserDto from "./dto/createUser.dto";
+import IUserResponse from "./response/user.response";
+
 export default class AuthValidator {
-  signupCLIDataValidate(answers: any) {
+  signupCLIDataValidate(answers: IUserDto): IUserResponse | {} {
     const { firstName, lastName, username, password } = answers;
     const cliFirstName = this.cliNameValidate(firstName);
     const cliLastName = this.cliNameValidate(lastName);

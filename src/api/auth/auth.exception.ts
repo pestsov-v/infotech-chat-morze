@@ -8,45 +8,45 @@ import {
   UNAUTHORIZED_MESSAGE,
 } from "./constants/auth.constants";
 
-import IException from "./dto/exception.dto";
+import IExceptionDto from "../../core/interfaces/exception.dto";
 
 export default class AuthException {
-  haveNotRules(): IException {
+  haveNotRules(): IExceptionDto {
     return {
       status: status.fail,
       message: HAVE_NOT_RULES_MESSAGE,
     };
   }
 
-  unauthorized(): IException {
+  unauthorized(): IExceptionDto {
     return {
       status: status.fail,
       message: UNAUTHORIZED_MESSAGE,
     };
   }
 
-  tokenNotExists(): IException {
+  tokenNotExists(): IExceptionDto {
     return {
       status: status.fail,
       message: TOKEN_NOT_EXISTS_MESSAGE,
     };
   }
 
-  dublicateUsername(): IException {
+  dublicateUsername(): IExceptionDto {
     return {
       status: status.fail,
       message: DUBLICATE_USERNAME_MESSAGE,
     };
   }
 
-  missRequiredFields(): IException {
+  missRequiredFields(): IExceptionDto {
     return {
       status: status.fail,
       message: MISS_REQUIRED_FIELDS_MESSAGE,
     };
   }
 
-  incorrectUser(): IException {
+  incorrectUser(): IExceptionDto {
     return {
       status: status.fail,
       message: INCORRECT_USER_MESSAGE,
