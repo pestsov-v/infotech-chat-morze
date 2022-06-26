@@ -1,4 +1,4 @@
-import IExceptionDto from "../../../core/interfaces/exception.dto";
+import IExceptionDto from "../../../core/dto/exception.dto";
 
 export default interface IMessageException {
   userNotFound(): IExceptionDto;

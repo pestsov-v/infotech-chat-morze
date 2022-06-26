@@ -1,10 +1,11 @@
+import IGuiPayloader from "./gui.payloader.interface";
 import homeResponse from "./response/home.response";
 import loginResponse from "./response/login.response";
 import messageResponse from "./response/message.response";
 import messagesResponse from "./response/messages.response";
 import signupResponse from "./response/signup.response";
 
-export default class GUIPayloader {
+export default class GUIPayloader implements IGuiPayloader {
   home(): homeResponse {
     return {
       title: "Home",

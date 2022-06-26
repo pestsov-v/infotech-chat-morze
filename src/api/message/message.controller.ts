@@ -7,9 +7,9 @@ import MessageResponser from "./message.responser";
 import MessageService from "./message.service";
 import UserService from "../user/user.service";
 
-import ISessionDto from "../../core/interfaces/session.dto";
+import ISessionDto from "../../core/dto/session.dto";
 import IUserResponse from "../user/response/user.response";
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IEncodeDataResponse from "./response/encodeData.response";
 import IMessageResponse from "./response/message.response";
 import IEncodeResponse from "./response/encode.response";

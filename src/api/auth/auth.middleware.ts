@@ -5,8 +5,8 @@ import AuthException from "./auth.exception";
 import UserService from "../user/user.service";
 import statusCode from "../../core/enum/statusCode.enum";
 
-import ISessionDto from "../../core/interfaces/session.dto";
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import ISessionDto from "../../core/dto/session.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IUserResponse from "../user/response/user.response";
 
 const authTokenizer = new AuthTokenizer();

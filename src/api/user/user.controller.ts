@@ -5,7 +5,7 @@ import UserResponse from "./user.responser";
 import UserService from "./user.service";
 
 import IUserResponse from "./response/user.response";
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IGetUsersResponse from "./response/getUsers.response";
 import IGetUserResponse from "./response/getUser.response";
 import IModifyUserResponse from "./response/modifyUser.response";

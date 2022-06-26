@@ -8,7 +8,7 @@ import {
   UNAUTHORIZED_MESSAGE,
 } from "./constants/auth.constants";
 
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IAuthException from "./interface/auth.exception.inetrface";
 
 export default class AuthException implements IAuthException {

@@ -5,7 +5,7 @@ import MessageService from "../api/message/message.service";
 
 import GUIBase from "./gui.base";
 import GUIPayloader from "./gui.payloader";
-import ISessionDto from "../core/interfaces/session.dto";
+import ISessionDto from "../core/dto/session.dto";
 
 const guiPayloader = new GUIPayloader();
 const messageService = new MessageService();
