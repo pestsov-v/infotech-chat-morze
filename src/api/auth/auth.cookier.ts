@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AuthTokenizer from "./auth.tokenizer";
-import IAuthCookier from "./interfaces/auth.cookier.interface";
+import IAuthCookier from "./interface/auth.cookier.interface";
 
 const authTokenizer = new AuthTokenizer();
 

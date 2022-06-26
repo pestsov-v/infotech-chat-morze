@@ -7,10 +7,11 @@ import IEncodeResponse from "./response/encode.response";
 
 import { MESSAGE_DELETE_SUCCESS_MESSAGE } from "./message.constants";
 import IDeleteDataResponse from "./response/deleteData.response";
+import IMessageResponser from "./interface/message.responser.interface";
 
 const morzeHelper = new MessageHelper();
 
-export default class MessageResponser {
+export default class MessageResponser implements IMessageResponser {
   encodeResponse(message: IEncodeMessageDto): IEncodeResponse {
     return {
       status: status.success,

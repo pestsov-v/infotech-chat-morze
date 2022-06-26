@@ -1,6 +1,6 @@
 import IUserDto from "./dto/createUser.dto";
 import IUserResponse from "../user/response/user.response";
-import IAuthValidator from "./interfaces/auth.validator.interface";
+import IAuthValidator from "./interface/auth.validator.interface";
 
 export default class AuthValidator implements IAuthValidator {
   signupCLIDataValidate(answers: IUserDto): IUserResponse | {} {

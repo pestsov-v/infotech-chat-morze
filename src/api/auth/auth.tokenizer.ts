@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import config from "config";
-import IAuthTokenizer from "./interfaces/auth.tokenizer.interface";
+import IAuthTokenizer from "./interface/auth.tokenizer.interface";
 
 export default class AuthTokenizer implements IAuthTokenizer {
   private readonly jwtSecret: string;

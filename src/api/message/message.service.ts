@@ -1,11 +1,12 @@
 import IUserResponse from "../user/response/user.response";
 import ICreateMessageDto from "./dto/createMessage.dto";
 import IDecodeMessageDto from "./dto/decodeMessage.dto";
+import IMessageService from "./interface/message.service.interface";
 import MessageModel from "./message.model";
 import IMessageResponse from "./response/message.response";
 import getMessagesType from "./type/getMessages.type";
 
-export default class MessageService {
+export default class MessageService implements IMessageService {
   async createMessage(
     body: ICreateMessageDto
   ): Promise<IMessageResponse | null> {
