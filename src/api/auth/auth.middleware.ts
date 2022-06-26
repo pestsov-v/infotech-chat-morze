@@ -7,7 +7,7 @@ import statusCode from "../../core/enum/statusCode.enum";
 
 import ISessionDto from "../../core/interfaces/session.dto";
 import IExceptionDto from "../../core/interfaces/exception.dto";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
 
 const authTokenizer = new AuthTokenizer();
 const authException = new AuthException();

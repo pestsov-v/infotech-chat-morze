@@ -1,6 +1,6 @@
 import IUserResponse from "../../user/response/user.response";
 
-export default interface IDecodeMessageDto {
+export default interface IGetUserMessagesResponse {
   _id: string;
   sender: IUserResponse;
   recipient: string;

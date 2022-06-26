@@ -1,4 +1,5 @@
-import IUserResponse from "../../api/auth/response/user.response";
+import { JwtPayload } from "jsonwebtoken";
+import IUserResponse from "../../api/user/response/user.response";
 
 export default interface ISessionDto {
   user: IUserResponse;

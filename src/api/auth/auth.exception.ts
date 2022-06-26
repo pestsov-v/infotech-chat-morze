@@ -9,8 +9,9 @@ import {
 } from "./constants/auth.constants";
 
 import IExceptionDto from "../../core/interfaces/exception.dto";
+import IAuthException from "./interface/auth.exception.inetrface";
 
-export default class AuthException {
+export default class AuthException implements IAuthException {
   haveNotRules(): IExceptionDto {
     return {
       status: status.fail,

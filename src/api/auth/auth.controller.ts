@@ -3,15 +3,15 @@ import statusCode from "../../core/enum/statusCode.enum";
 
 import AuthService from "./auth.service";
 import AuthTokenizer from "./auth.tokenizer";
-import AuthResponse from "./auth.response";
+import AuthResponse from "./auth.responser";
 import AuthHasher from "./auth.hasher";
-import AuthCookier from "./auth.cookie";
+import AuthCookier from "./auth.cookier";
 
 import UserService from "../user/user.service";
 import AuthException from "./auth.exception";
 
 import IExceptionDto from "../../core/interfaces/exception.dto";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";

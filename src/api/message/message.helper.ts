@@ -1,9 +1,10 @@
+import IMessageHelper from "./interface/message.helper.interface";
 import MessageDecoder from "./message.decoder";
 import IEncodeMorzeResponse from "./response/enodeMorze.response";
 
 const messageDecoder = new MessageDecoder();
 
-export default class MessageHelper {
+export default class MessageHelper implements IMessageHelper {
   encodeData(
     sender: string,
     content: string,

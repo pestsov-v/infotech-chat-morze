@@ -4,7 +4,7 @@ import UserModel from "../../api/user/user.model";
 
 export default class dbTester {
   async connect() {
-    const mongoServer = await MongoMemoryServer.create();
+    const mongoServer: MongoMemoryServer = await MongoMemoryServer.create();
     await mongoose.connect(mongoServer.getUri());
   }
 
@@ -42,7 +42,7 @@ export default class dbTester {
   }
 
   async payloadUser() {
-    const userId = new mongoose.Types.ObjectId().toString();
+    const userId: string = new mongoose.Types.ObjectId().toString();
     return {
       userId,
       firstName: "Sergei",

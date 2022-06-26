@@ -1,8 +1,9 @@
+import IMessageDecoder from "./interface/message.decoder.interface";
 import MessageDictionary from "./message.dictionary";
 
 const messageDictionary = new MessageDictionary();
 
-export default class MessageDecoder {
+export default class MessageDecoder implements IMessageDecoder {
   encode(text: string): string {
     const dictionary = messageDictionary.encode();
 

@@ -1,5 +1,5 @@
 import status from "../../../core/enum/status.enum";
-import IUserResponse from "../../auth/response/user.response";
+import IUserResponse from "../../user/response/user.response";
 
 export default interface IDecodeDataResponse {
   status: status;

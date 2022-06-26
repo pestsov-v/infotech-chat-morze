@@ -2,11 +2,12 @@ import status from "../../core/enum/status.enum";
 import ILoginObjResponse from "./response/loginObj.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
+import IAuthResponser from "./interface/auth.responser.interface";
 
 import { USER_LOGOUT_SUCCESS_MESSAGE } from "./constants/auth.constants";
 
-export default class AuthResponse {
+export default class AuthResponse implements IAuthResponser {
   signupObj(data: IUserResponse, token: string): ISignupObjResponse {
     return {
       status: status.success,

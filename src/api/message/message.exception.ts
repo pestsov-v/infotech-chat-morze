@@ -1,5 +1,6 @@
 import status from "../../core/enum/status.enum";
 import IExceptionDto from "../../core/interfaces/exception.dto";
+import IMessageException from "./interface/message.exception.interface";
 
 import {
   MESSAGE_NOT_CREATED_MESSAGE,
@@ -9,7 +10,7 @@ import {
   USER_NOT_AUTH_MESSAGE,
 } from "./message.constants";
 
-export default class MessageException {
+export default class MessageException implements IMessageException {
   userNotFound(): IExceptionDto {
     return {
       status: status.fail,
@@ -41,7 +42,7 @@ export default class MessageException {
   messageNotCreated(): IExceptionDto {
     return {
       status: status.fail,
-      message: MESSAGE_NOT_CREATED_MESSAGE
-    }
+      message: MESSAGE_NOT_CREATED_MESSAGE,
+    };
   }
 }
