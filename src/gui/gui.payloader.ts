@@ -1,5 +1,11 @@
+import homeResponse from "./response/home.response";
+import loginResponse from "./response/login.response";
+import messageResponse from "./response/message.response";
+import messagesResponse from "./response/messages.response";
+import signupResponse from "./response/signup.response";
+
 export default class GUIPayloader {
-  home() {
+  home(): homeResponse {
     return {
       title: "Home",
       header: "Main Page",
@@ -11,7 +17,7 @@ export default class GUIPayloader {
     };
   }
 
-  login() {
+  login(): loginResponse {
     return {
       title: "Login",
       header: "Login",
@@ -25,7 +31,7 @@ export default class GUIPayloader {
     };
   }
 
-  signup() {
+  signup(): signupResponse {
     return {
       title: "Sign up",
       header: "Sign up",
@@ -41,7 +47,7 @@ export default class GUIPayloader {
     };
   }
 
-  message() {
+  message(): messageResponse {
     return {
       title: "Send message",
       header: "Enter username of the recipient of the message",
@@ -55,7 +61,7 @@ export default class GUIPayloader {
     };
   }
 
-  messages() {
+  messages(): messagesResponse {
     return {
       title: "Messages",
       header: "My messages",
