@@ -1,6 +1,6 @@
 import AuthService from "../../api/auth/auth.service";
 import AuthTokenizer from "../../api/auth/auth.tokenizer";
-import AuthResponse from "../../api/auth/auth.response";
+import AuthResponse from "../../api/auth/auth.responser";
 import AuthHasher from "../../api/auth/auth.hasher";
 import AuthValidator from "../../api/auth/auth.validator";
 

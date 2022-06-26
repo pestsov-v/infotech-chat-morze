@@ -1,8 +1,9 @@
 import UserModel from "../user/user.model";
 import IUserDto from "./dto/createUser.dto";
 import IUserResponse from "../user/response/user.response";
+import IAuthService from "./interfaces/auth.service.interface";
 
-export default class AuthService {
+export default class AuthService implements IAuthService {
   async createUser(
     body: IUserDto,
     password: string

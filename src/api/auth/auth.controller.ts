@@ -3,9 +3,9 @@ import statusCode from "../../core/enum/statusCode.enum";
 
 import AuthService from "./auth.service";
 import AuthTokenizer from "./auth.tokenizer";
-import AuthResponse from "./auth.response";
+import AuthResponse from "./auth.responser";
 import AuthHasher from "./auth.hasher";
-import AuthCookier from "./auth.cookie";
+import AuthCookier from "./auth.cookier";
 
 import UserService from "../user/user.service";
 import AuthException from "./auth.exception";

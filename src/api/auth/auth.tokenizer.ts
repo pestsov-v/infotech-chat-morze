@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import config from "config";
+import IAuthTokenizer from "./interfaces/auth.tokenizer.interface";
 
-export default class AuthTokenizer {
+export default class AuthTokenizer implements IAuthTokenizer {
   private readonly jwtSecret: string;
   private readonly jwtExpiresIn: string;
   private readonly jwtCookieExpiresIn: number;
@@ -38,6 +39,7 @@ export default class AuthTokenizer {
 
   async decodeId(token: string): Promise<string> {
     const decoded = jwt.verify(token, this.jwtSecret);
+    // @ts-ignore
     return decoded.id;
   }
 

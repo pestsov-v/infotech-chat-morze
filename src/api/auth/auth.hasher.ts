@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import config from "config";
+import IAuthHesher from "./interfaces/auth.helper.interface";
 
-export default class AuthHasher {
+export default class AuthHasher implements IAuthHesher {
   saltNumber: number;
 
   constructor() {

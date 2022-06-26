@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import AuthTokenizer from "./auth.tokenizer";
+import IAuthCookier from "./interfaces/auth.cookier.interface";
 
 const authTokenizer = new AuthTokenizer();
 
-export default class AuthCookier {
+export default class AuthCookier implements IAuthCookier {
   createCookie(token: string, req: Request, res: Response): void {
     const cookieExpires: Date = authTokenizer.getCookieExpires();
 
