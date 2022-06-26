@@ -6,7 +6,7 @@ import {
   MISS_REQUIRED_FIELDS_MESSAGE,
   TOKEN_NOT_EXISTS_MESSAGE,
   UNAUTHORIZED_MESSAGE,
-} from "./constants/auth.constants";
+} from "./auth.constants";
 
 import IExceptionDto from "../../core/dto/exception.dto";
 import IAuthException from "./interface/auth.exception.inetrface";

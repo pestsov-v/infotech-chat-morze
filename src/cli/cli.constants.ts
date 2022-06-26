@@ -1,5 +1,5 @@
-import color from "../../../core/enum/color.enum";
-import emodji from "../../../core/enum/emodji.enum";
+import color from "../core/enum/color.enum";
+import emodji from "../core/enum/emodji.enum";
 
 export const USER_IS_NOT_EXISTS_MESSAGE = () => {
   console.log(color.red, `${emodji.crossMark} User email not found`);
