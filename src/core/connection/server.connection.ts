@@ -14,6 +14,7 @@ import apiRouterPath from "../../api/api.router.path";
 import apiRouter from "../../api/api.router";
 import guiRouterPath from "../../gui/gui.router.path";
 import guiRouter from "../../gui/gui.router";
+import emodji from "../enum/emodji.enum";
 
 const session = new Session();
 const swagger = new Swagger();
@@ -53,14 +54,14 @@ export default class Server {
   httpSuccess() {
     console.log(
       color.green,
-      `Server success connection on http://localhost:${this.httpPort}`
+      `${emodji.checkMark} Server success connection on http://localhost:${this.httpPort}`
     );
   }
 
   httpsSuccess() {
     console.log(
       color.green,
-      `Server success connection on https://localhost:${this.httpsPort}`
+      `${emodji.checkMark} Server success connection on https://localhost:${this.httpsPort}`
     );
   }
 }

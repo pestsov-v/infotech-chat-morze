@@ -1,6 +1,7 @@
 import mongoose, { MongooseError } from "mongoose";
 import config from "config";
 import color from "../enum/color.enum";
+import emodji from "../enum/emodji.enum";
 
 export default class Database {
   private readonly url = config.get<string>("URL");
@@ -17,11 +18,11 @@ export default class Database {
   }
 
   success() {
-    console.log(color.yellow, `Database success connection`);
+    console.log(color.yellow, `${emodji.checkMark} Database success connection`);
   }
 
   fail(err: MongooseError) {
-    console.log("Database connection with error: ", err);
+    console.log(`${emodji.crossMark} Database connection with error: `, err);
     process.exit(1);
   }
 }
