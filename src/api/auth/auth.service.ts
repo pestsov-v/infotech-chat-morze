@@ -1,6 +1,6 @@
 import UserModel from "../user/user.model";
 import IUserDto from "./dto/createUser.dto";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
 
 export default class AuthService {
   async createUser(

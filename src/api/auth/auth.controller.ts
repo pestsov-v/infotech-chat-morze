@@ -11,7 +11,7 @@ import UserService from "../user/user.service";
 import AuthException from "./auth.exception";
 
 import IExceptionDto from "../../core/interfaces/exception.dto";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";

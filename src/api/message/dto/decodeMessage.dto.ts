@@ -1,4 +1,4 @@
-import IUserResponse from "../../auth/response/user.response";
+import IUserResponse from "../../user/response/user.response";
 
 export default interface IDecodeMessageDto {
   _id: string;

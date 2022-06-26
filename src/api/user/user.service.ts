@@ -1,19 +1,24 @@
+import IUserDto from "../auth/dto/createUser.dto";
+import IUserResponse from "./response/user.response";
 import UserModel from "./user.model";
 
 export default class UserService {
-  async getUsers() {
+  async getUsers(): Promise<IUserResponse[] | null> {
     const users = await UserModel.find();
     if (!users) return null;
     return users;
   }
 
-  async getUser(id: string) {
+  async getUser(id: string): Promise<IUserResponse | null> {
     const user = await UserModel.findById(id);
     if (!user) return null;
     return user;
   }
 
-  async updateUser(id: string, body: any) {
+  async updateUser(
+    id: string,
+    body: Partial<IUserDto>
+  ): Promise<IUserResponse | null> {
     const updatedUser = await UserModel.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
@@ -23,9 +28,9 @@ export default class UserService {
     return updatedUser;
   }
 
-  async deleteUser(id: string) {
+  async deleteUser(id: string): Promise<IUserResponse | null> {
     const deletedUser = await UserModel.findByIdAndDelete(id);
-
+    console.log(deletedUser);
     if (!deletedUser) return null;
     return deletedUser;
   }

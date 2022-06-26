@@ -1,4 +1,4 @@
-import role from "../../user/enum/user.role.enum";
+import role from "../enum/user.role.enum";
 
 export default interface IUserResponse {
   _id: string;

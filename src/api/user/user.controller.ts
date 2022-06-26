@@ -4,12 +4,11 @@ import UserException from "./user.exception";
 import UserResponse from "./user.response";
 import UserService from "./user.service";
 
-import {
-  DELETE_SUCCES_MESSAGE,
-  UPDATE_SUCCES_MESSAGE,
-  USER_LIST_EMPTY_MESSAGE,
-  USER_NOT_FOUND_MESSAGE,
-} from "./user.constants";
+import IUserResponse from "./response/user.response";
+import IExceptionDto from "../../core/interfaces/exception.dto";
+import IGetUsersResponse from "./response/getUsers.response";
+import IGetUserResponse from "./response/getUser.response";
+import IModifyUserResponse from "./response/modifyUser.response";
 
 const userService = new UserService();
 const userResponse = new UserResponse();
@@ -17,14 +16,14 @@ const userException = new UserException();
 
 export default class UserController {
   async getUsers(req: Request, res: Response) {
-    const users = await userService.getUsers();
+    const users: IUserResponse[] | null = await userService.getUsers();
 
-    if (users === null) {
-      const data = userException.userListEmpty(USER_LIST_EMPTY_MESSAGE);
+    if (!users) {
+      const data: IExceptionDto = userException.userListEmpty();
       return res.status(statusCode.NOT_FOUND).json(data);
     }
 
-    const data = userResponse.createObjs(users);
+    const data: IGetUsersResponse = userResponse.getObjs(users);
 
     return res.status(statusCode.OK).json(data);
   }
@@ -32,13 +31,13 @@ export default class UserController {
   async getUser(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await userService.getUser(id);
-    if (user === null) {
-      const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
+    const user: IUserResponse | null = await userService.getUser(id);
+    if (!user) {
+      const data: IExceptionDto = userException.userNotFound();
       return res.status(statusCode.NOT_FOUND).json(data);
     }
 
-    const data = userResponse.createObj(user);
+    const data: IGetUserResponse = userResponse.createObj(user);
     return res.status(statusCode.OK).json(data);
   }
 
@@ -46,28 +45,26 @@ export default class UserController {
     const { id } = req.params;
     const { body } = req;
 
-    const user = await userService.updateUser(id, body);
-    if (user === null) {
-      const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
-      res.status(statusCode.NOT_FOUND).json(data);
+    const user: IUserResponse | null = await userService.updateUser(id, body);
+    if (!user) {
+      const data: IExceptionDto = userException.userNotFound();
+      return res.status(statusCode.NOT_FOUND).json(data);
     }
 
-    const data = userResponse.createModifyObj(user, UPDATE_SUCCES_MESSAGE);
-
+    const data: IModifyUserResponse = userResponse.updateObj(user);
     return res.status(statusCode.OK).json(data);
   }
 
   async deleteUser(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await userService.deleteUser(id);
-    if (user === null) {
-      const data = userException.userNotFound(USER_NOT_FOUND_MESSAGE(id));
-      res.status(statusCode.NOT_FOUND).json(data);
+    const user: IUserResponse | null = await userService.deleteUser(id);
+    if (!user) {
+      const data: IExceptionDto = userException.userNotFound();
+      return res.status(statusCode.NOT_FOUND).json(data);
     }
 
-    const data = userResponse.createModifyObj(user, DELETE_SUCCES_MESSAGE);
-
+    const data: IModifyUserResponse = userResponse.deleteObj(user);
     return res.status(statusCode.OK).json(data);
   }
 }

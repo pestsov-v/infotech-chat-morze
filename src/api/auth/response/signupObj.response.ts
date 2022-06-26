@@ -1,5 +1,5 @@
 import status from "../../../core/enum/status.enum";
-import ICreateUserResponse from "./user.response";
+import ICreateUserResponse from "../../user/response/user.response";
 
 export default interface ISignupObjResponse {
   status: status;

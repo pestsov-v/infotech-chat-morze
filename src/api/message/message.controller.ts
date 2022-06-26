@@ -8,7 +8,7 @@ import MessageService from "./message.service";
 import UserService from "../user/user.service";
 
 import ISessionDto from "../../core/interfaces/session.dto";
-import IUserResponse from "../auth/response/user.response";
+import IUserResponse from "../user/response/user.response";
 import IExceptionDto from "../../core/interfaces/exception.dto";
 import IEncodeDataResponse from "./response/encodeData.response";
 import IMessageResponse from "./response/message.response";

@@ -1,5 +1,5 @@
 import IUserDto from "./dto/createUser.dto";
-import IUserResponse from "./response/user.response";
+import IUserResponse from "../user/response/user.response";
 
 export default class AuthValidator {
   signupCLIDataValidate(answers: IUserDto): IUserResponse | {} {
