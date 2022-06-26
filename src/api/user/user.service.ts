@@ -1,8 +1,9 @@
 import IUserDto from "../auth/dto/createUser.dto";
+import IUserService from "./interface/user.service.interface";
 import IUserResponse from "./response/user.response";
 import UserModel from "./user.model";
 
-export default class UserService {
+export default class UserService implements IUserService {
   async getUsers(): Promise<IUserResponse[] | null> {
     const users = await UserModel.find();
     if (!users) return null;
@@ -35,7 +36,7 @@ export default class UserService {
     return deletedUser;
   }
 
-  async findUser(username: string) {
+  async findUser(username: string): Promise<IUserResponse | null> {
     const user = await UserModel.findOne({ username: username });
     if (!user) return null;
     return user;

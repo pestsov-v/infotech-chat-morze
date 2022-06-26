@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import statusCode from "../../core/enum/statusCode.enum";
 import UserException from "./user.exception";
-import UserResponse from "./user.response";
+import UserResponse from "./user.responser";
 import UserService from "./user.service";
 
 import IUserResponse from "./response/user.response";
