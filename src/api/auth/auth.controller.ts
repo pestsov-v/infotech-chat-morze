@@ -10,12 +10,12 @@ import AuthCookier from "./auth.cookier";
 import UserService from "../user/user.service";
 import AuthException from "./auth.exception";
 
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IUserResponse from "../user/response/user.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";
-import ISessionDto from "../../core/interfaces/session.dto";
+import ISessionDto from "../../core/dto/session.dto";
 
 import { DESTROY_SESSION_SUCCESS } from "./constants/auth.constants";
 

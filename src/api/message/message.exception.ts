@@ -1,5 +1,5 @@
 import status from "../../core/enum/status.enum";
-import IExceptionDto from "../../core/interfaces/exception.dto";
+import IExceptionDto from "../../core/dto/exception.dto";
 import IMessageException from "./interface/message.exception.interface";
 
 import {

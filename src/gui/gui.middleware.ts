@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import config from "config";
 
 import UserService from "../api/user/user.service";
-import ISessionDto from "../core/interfaces/session.dto";
+import ISessionDto from "../core/dto/session.dto";
 
 const userService = new UserService();
 
