@@ -5,7 +5,7 @@ import ILogoutObjResponse from "./response/logoutObj.response";
 import IUserResponse from "../user/response/user.response";
 import IAuthResponser from "./interface/auth.responser.interface";
 
-import { USER_LOGOUT_SUCCESS_MESSAGE } from "./constants/auth.constants";
+import { USER_LOGOUT_SUCCESS_MESSAGE } from "./auth.constants";
 
 export default class AuthResponse implements IAuthResponser {
   signupObj(data: IUserResponse, token: string): ISignupObjResponse {

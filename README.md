@@ -12,6 +12,7 @@
 		- [Допольнительные задачи](#допольнительные-задачи)
 	- [Стэк технологий](#стэк-технологий)
 	- [Архитектура](#архитектура)
+	- [Как читать код](#как-читать-код)
 	- [Applacation programming interface (API)](#applacation-programming-interface-api)
 	- [Command line interface (CLI)](#command-line-interface-cli)
 	- [Graphical user interface (GUI)](#graphical-user-interface-gui)
@@ -57,6 +58,12 @@
 | Документация | swagger / swagger-ui-express / yamljs | Подключение и описание Swagger документации |
 
 ## Архитектура
+
+Приложенение построено на архитектуре монолита. 
+
+## Как читать код
+
+
 
 ## Applacation programming interface (API)
 

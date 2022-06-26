@@ -1,5 +1,5 @@
-import color from "../../../core/enum/color.enum";
-import emodji from "../../../core/enum/emodji.enum";
+import color from "../../core/enum/color.enum";
+import emodji from "../../core/enum/emodji.enum";
 
 export const USER_LOGOUT_SUCCESS_MESSAGE = "User logout success";
 

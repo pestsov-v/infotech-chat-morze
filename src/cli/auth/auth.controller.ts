@@ -8,7 +8,7 @@ import {
   USER_IS_NOT_EXISTS_MESSAGE,
   USER_NOT_REGISTER_MESSAGE,
   USER_PASSWORD_NOT_MATCH_MESSAGE,
-} from "../../api/auth/constants/cli.constants";
+} from "../cli.constants";
 
 const authService = new AuthService();
 const authTokenizer = new AuthTokenizer();

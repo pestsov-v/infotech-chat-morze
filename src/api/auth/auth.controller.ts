@@ -17,7 +17,7 @@ import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";
 import ISessionDto from "../../core/dto/session.dto";
 
-import { DESTROY_SESSION_SUCCESS } from "./constants/auth.constants";
+import { DESTROY_SESSION_SUCCESS } from "./auth.constants";
 
 const authService = new AuthService();
 const authException = new AuthException();
