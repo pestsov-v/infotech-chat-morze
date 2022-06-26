@@ -1,3 +1,6 @@
+import color from "../../../core/enum/color.enum";
+import emodji from "../../../core/enum/emodji.enum";
+
 export const USER_LOGOUT_SUCCESS_MESSAGE = "User logout success";
 
 export const DUBLICATE_USERNAME_MESSAGE =
@@ -14,3 +17,10 @@ export const UNAUTHORIZED_MESSAGE =
 
 export const TOKEN_NOT_EXISTS_MESSAGE = "Your token is not exsists";
 export const INCORRECT_USER_MESSAGE = "Incorrect username or password";
+
+export const DESTROY_SESSION_SUCCESS = () => {
+  console.log(
+    color.green,
+    `${emodji.crossMark} You entered incorrect data for register`
+  );
+};

@@ -3,7 +3,7 @@ import MessageDictionary from "./message.dictionary";
 const messageDictionary = new MessageDictionary();
 
 export default class MessageDecoder {
-  encode(text: any) {
+  encode(text: string): string {
     const dictionary = messageDictionary.encode();
 
     let encodeTxt = text
@@ -15,7 +15,7 @@ export default class MessageDecoder {
     return encodeTxt;
   }
 
-  decode(text: any) {
+  decode(text: string): string {
     const dictionary = messageDictionary.decode();
 
     let decodeTxt = text

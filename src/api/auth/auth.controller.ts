@@ -10,11 +10,14 @@ import AuthCookier from "./auth.cookie";
 import UserService from "../user/user.service";
 import AuthException from "./auth.exception";
 
-import IException from "./dto/exception.dto";
+import IExceptionDto from "../../core/interfaces/exception.dto";
 import IUserResponse from "./response/user.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";
+import ISessionDto from "../../core/interfaces/session.dto";
+
+import { DESTROY_SESSION_SUCCESS } from "./constants/auth.constants";
 
 const authService = new AuthService();
 const authException = new AuthException();
@@ -27,45 +30,47 @@ const userService = new UserService();
 
 export default class AuthController {
   async signup(req: Request, res: Response) {
-    let { username, firstName, lastName, password } = req.body;
+    const { username, firstName, lastName, password } = req.body;
 
     const dbUser = await userService.findUser(username);
 
     if (dbUser) {
       if (dbUser.username === username) {
-        const exception: IException = authException.dublicateUsername();
+        const exception: IExceptionDto = authException.dublicateUsername();
         return res.status(statusCode.BAD_REQUEST).json(exception);
       }
     }
 
     if (!username || !firstName || !lastName || !password) {
-      const exception: IException = authException.missRequiredFields();
+      const exception: IExceptionDto = authException.missRequiredFields();
       return res.status(statusCode.BAD_REQUEST).json(exception);
     }
 
-    password = await authHasher.hashedPassword(password);
+    const hashedPassword = await authHasher.hashedPassword(password);
     const newUser: IUserResponse | null = await authService.createUser(
-      req.body
+      req.body,
+      hashedPassword
     );
 
     if (!newUser) {
-      const exception: IException = authException.dublicateUsername();
+      const exception: IExceptionDto = authException.dublicateUsername();
       return res.status(statusCode.BAD_REQUEST).json(exception);
     }
 
     const token: string = authTokenizer.signToken(newUser._id);
 
     authCookier.createCookie(token, req, res);
-    newUser.password = undefined;
 
     const data: ISignupObjResponse = authResponse.signupObj(newUser, token);
     res.status(statusCode.CREATED).json(data);
   }
 
-  async login(req: Request, res: Response) {
-    const user = await authService.findUser(req.body.username);
+  async login(req: Request & { session: ISessionDto }, res: Response) {
+    const user: IUserResponse | null = await authService.findUser(
+      req.body.username
+    );
     if (!user) {
-      const exception: IException = authException.incorrectUser();
+      const exception: IExceptionDto = authException.incorrectUser();
       return res.status(statusCode.NOT_FOUND).json(exception);
     }
 
@@ -75,7 +80,7 @@ export default class AuthController {
     );
 
     if (!correctPassword) {
-      const exception: IException = authException.incorrectUser();
+      const exception: IExceptionDto = authException.incorrectUser();
       return res.status(statusCode.NOT_FOUND).json(exception);
     }
 
@@ -94,7 +99,7 @@ export default class AuthController {
     authCookier.removeCookie(res);
     const data: ILogoutObjResponse = authResponse.logoutObj();
 
-    req.session.destroy();
+    req.session.destroy(() => DESTROY_SESSION_SUCCESS());
     res.status(statusCode.OK).json(data);
   }
 }

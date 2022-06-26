@@ -1,19 +1,25 @@
 import status from "../../core/enum/status.enum";
-import { MESSAGE_DELETE_SUCCESS_MESSAGE } from "./message.constants";
+import IDecodeMessageDto from "./dto/decodeMessage.dto";
+import IEncodeMessageDto from "./dto/encodeMessage.dto";
 import MessageHelper from "./message.helper";
+import IDecodeDataResponse from "./response/decodeData.response";
+import IEncodeResponse from "./response/encode.response";
+
+import { MESSAGE_DELETE_SUCCESS_MESSAGE } from "./message.constants";
+import IDeleteDataResponse from "./response/deleteData.response";
 
 const morzeHelper = new MessageHelper();
 
 export default class MessageResponser {
-  encodeResponse(message: any) {
+  encodeResponse(message: IEncodeMessageDto): IEncodeResponse {
     return {
       status: status.success,
       data: message,
     };
   }
 
-  decodeResponse(message: any) {
-    const morzeContent = morzeHelper.decodeData(message.content);
+  decodeResponse(message: IDecodeMessageDto): IDecodeDataResponse {
+    const morzeContent: string = morzeHelper.decodeData(message.content);
 
     return {
       status: status.success,
@@ -24,7 +30,7 @@ export default class MessageResponser {
     };
   }
 
-  deleteResponse() {
+  deleteResponse(): IDeleteDataResponse {
     return {
       status: status.success,
       message: MESSAGE_DELETE_SUCCESS_MESSAGE,

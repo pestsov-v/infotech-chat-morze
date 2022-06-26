@@ -1,6 +1,7 @@
 import status from "../../core/enum/status.enum";
 import ILoginObjResponse from "./response/loginObj.response";
 import ISignupObjResponse from "./response/signupObj.response";
+import ILogoutObjResponse from "./response/logoutObj.response";
 import IUserResponse from "./response/user.response";
 
 import { USER_LOGOUT_SUCCESS_MESSAGE } from "./constants/auth.constants";
@@ -22,7 +23,7 @@ export default class AuthResponse {
     };
   }
 
-  logoutObj() {
+  logoutObj(): ILogoutObjResponse {
     return {
       status: status.success,
       message: USER_LOGOUT_SUCCESS_MESSAGE,
