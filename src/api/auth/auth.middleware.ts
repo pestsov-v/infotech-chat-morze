@@ -17,7 +17,6 @@ export default class AuthMiddleware {
   async protect(req: Request, res: Response, next: NextFunction) {
     const token: string | undefined = authTokenizer.getToken(
       req.headers.authorization,
-      // @ts-ignore
       req.session.jwt
     );
 

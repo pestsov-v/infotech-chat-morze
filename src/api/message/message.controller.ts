@@ -63,7 +63,6 @@ export default class MessageController {
     }
 
     const data: IEncodeResponse = messageResponser.encodeResponse(message);
-    console.log(data);
     res.status(statusCode.CREATED).json(data);
   }
 

@@ -10,13 +10,20 @@ export default class MessageHelper implements IMessageHelper {
     content: string,
     recipient: string
   ): IEncodeMorzeResponse {
-    const morzeContent: string = messageDecoder.encode(content);
+    let morzeContent: string;
+    if (messageDecoder.checkMessage(content) === false) {
+      morzeContent = content;
+    } else {
+      morzeContent = messageDecoder.encode(content);
+    }
 
     const encodeMorze: IEncodeMorzeResponse = {
       sender: sender,
       content: morzeContent,
       recipient: recipient,
     };
+
+    console.log(encodeMorze);
 
     return encodeMorze;
   }
