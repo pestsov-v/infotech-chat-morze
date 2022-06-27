@@ -1,4 +1,8 @@
 export default class MessageDictionary {
+  english() {
+    return 'abcdefghijklmnopqrstuvwxyz123456789'
+  }
+
   encode() {
     return {
       a: ".-",
