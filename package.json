@@ -6,7 +6,8 @@
   "scripts": {
     "dev:server": "ts-node-dev --respawn --transpile-only src/app.ts",
     "watch:client": "parcel watch ./src/gui/public/js/index.js --out-dir ./src/gui/public/js --out-file bundle.js  --public-url .",
-    "build:client": "parcel build ./src/gui/public/js/index.js --out-dir ./src/gui/public/js --out-file bundle.js"
+    "build:client": "parcel build ./src/gui/public/js/index.js --out-dir ./src/gui/public/js --out-file bundle.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts && parcel watch ./src/gui/public/js/index.js --out-dir ./src/gui/public/js --out-file bundle.js  --public-url ."
   },
   "repository": {
     "type": "git",
