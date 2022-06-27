@@ -10,6 +10,8 @@ import {
   MESSAGE_LIST_EMPTY_MESSAGE,
   USER_NOT_EXISTS_MESSAGE,
 } from "./message.exception";
+import { USERNAME_NOT_FOUND } from "./message.constants";
+import getMessagesType from "../../api/message/type/getMessages.type";
 
 const messageService = new MessageService();
 const userService = new UserService();
@@ -17,21 +19,23 @@ const messageForm = new MessageForm();
 const messageLoader = new MessageLoader();
 
 export default class MessageCommander {
-  async listUserMessages() {
+  async listUserMessages(): Promise<void> {
     inquirer.prompt(messageForm.getUserMessageForm()).then(async (answer) => {
       const user = await userService.findUser(answer.username);
-      const messages = await messageService.getUserMessages(user.id);
+      if (!user) return USERNAME_NOT_FOUND();
+
+      const messages: getMessagesType = await messageService.getUserMessages(
+        user._id
+      );
       if (!messages) return USER_NOT_EXISTS_MESSAGE();
       if (messages.length === 0) return MESSAGE_LIST_EMPTY_MESSAGE();
 
       messageLoader.getUserMessages(messages);
-      console.log(messages);
     });
   }
 
-  async listAllMessages() {
-    const messages = await messageService.getAllMessages();
+  async listAllMessages(): Promise<void> {
+    const messages: getMessagesType = await messageService.getAllMessages();
     messageLoader.getAllMessages(messages);
-    console.log(messages);
   }
 }

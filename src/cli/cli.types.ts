@@ -1,6 +1,6 @@
 enum CLITypes {
   IAuth = "IAuth",
-  IUser = "IUser",
+  userCommands = "userCommands",
   messageCommands = "messageCommands",
 }
 

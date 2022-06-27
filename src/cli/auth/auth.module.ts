@@ -14,7 +14,7 @@ export default class AuthModule {
     this.authorizationUser();
   }
 
-  loginUser() {
+  loginUser(): void {
     inquirer.prompt(authForm.loginForm()).then(async (anws) => {
       const login = await authController.login(anws);
       if (!login) return this.inccorrectLogin();
@@ -23,7 +23,7 @@ export default class AuthModule {
     });
   }
 
-  signupUser() {
+  signupUser(): void {
     inquirer.prompt(authForm.signupForm()).then(async (anws) => {
       const signup = await authController.signup(anws);
       if (!signup) return this.incorrectSignup();
@@ -32,14 +32,14 @@ export default class AuthModule {
     });
   }
 
-  authorizationUser() {
+  authorizationUser(): void {
     inquirer.prompt(authForm.authorizationForm()).then((anws) => {
       if (anws.authorization === types.login) return this.loginUser();
       if (anws.authorization === types.signup) return this.signupUser();
     });
   }
 
-  inccorrectLogin() {
+  inccorrectLogin(): void {
     inquirer.prompt(authForm.incorrectLogin()).then((anws) => {
       if (anws.incorrectLogin === types.loginAgain) return this.loginUser();
       if (anws.incorrectLogin === types.signupNow) return this.signupUser();

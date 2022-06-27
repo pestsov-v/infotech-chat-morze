@@ -1,7 +1,8 @@
 enum userCommands {
   listUsers = "List of all users",
   moreUserInfo = "Get more information about concreticate user",
-  updateUserInfo = "Update concreticate user fields for username",
+  deactivatedUser = "Deactivated conrecticate user",
+  reactivatedUser = "Reactivated conrecticate user",
   deleteUserInfo = "Delete concreticate user for username",
   backToMainMenu = "Back to main menu",
 }

@@ -23,8 +23,6 @@ export default class MessageHelper implements IMessageHelper {
       recipient: recipient,
     };
 
-    console.log(encodeMorze);
-
     return encodeMorze;
   }
 
