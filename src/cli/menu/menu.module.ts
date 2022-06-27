@@ -44,7 +44,8 @@ ${emodji.knobs} Common functionality:
 ${emodji.smileWithGlases} Users funcionality: 
 ~ List of all users - get list with all users.
 ~ Get more information about concreticate user - get profile details information of concreticate users. 
-~ Update concreticate user fields for username - update some fields on concreticate user.
+~ Deactivated concreticate user - change fields "active" in user to "false".
+~ Reactivated concreticate user - change fields "active" in user to "true".
 ~ Delete concreticate user for username - input username user if you want remove the user account.
 
 ${emodji.email} Message funcionality:

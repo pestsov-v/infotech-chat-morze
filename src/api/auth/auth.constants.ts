@@ -18,9 +18,4 @@ export const UNAUTHORIZED_MESSAGE =
 export const TOKEN_NOT_EXISTS_MESSAGE = "Your token is not exsists";
 export const INCORRECT_USER_MESSAGE = "Incorrect username or password";
 
-export const DESTROY_SESSION_SUCCESS = () => {
-  console.log(
-    color.green,
-    `${emodji.crossMark} You entered incorrect data for register`
-  );
-};
+export const DESTROY_SESSION_SUCCESS = "Destroy session success";

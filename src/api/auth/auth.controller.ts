@@ -98,7 +98,7 @@ export default class AuthController {
     authCookier.removeCookie(res);
     const data: ILogoutObjResponse = authResponse.logoutObj();
 
-    req.session.destroy(() => DESTROY_SESSION_SUCCESS());
+    req.session.destroy(() => DESTROY_SESSION_SUCCESS);
     res.status(statusCode.OK).json(data);
   }
 }
