@@ -15,7 +15,7 @@ export default class MessageService implements IMessageService {
     return message;
   }
 
-  async getUserMessages(recipient: IUserResponse): Promise<getMessagesType> {
+  async getUserMessages(recipient: string): Promise<getMessagesType> {
     const messages: getMessagesType = await MessageModel.find({
       recipient: recipient,
     }).populate("sender");
@@ -25,7 +25,7 @@ export default class MessageService implements IMessageService {
 
   async getAllMessages(): Promise<getMessagesType> {
     const messages: getMessagesType = await MessageModel.find()
-      .populate("recipient")
+      .populate("sender")
       .sort({ createdAt: -1 });
     if (!messages) return null;
     return messages;

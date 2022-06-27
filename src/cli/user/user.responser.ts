@@ -20,4 +20,12 @@ User account created: ${data.createdAt}.`;
 
     return response;
   }
+
+  removeUser(username: string): string {
+    return `User with username ${username} has been removed`;
+  }
+
+  deactivatedUser(username: string): string {
+    return `User account with username ${username} has been deactivated`;
+  }
 }

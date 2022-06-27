@@ -1,21 +1,20 @@
-import IUserDto from "./dto/createUser.dto";
-import IUserResponse from "../user/response/user.response";
-import IAuthValidator from "./interface/auth.validator.interface";
+import IUserDto from "../../api/auth/dto/createUser.dto";
+import IAuthValidator from "../../api/auth/interface/auth.validator.interface";
 
 export default class AuthValidator implements IAuthValidator {
-  signupCLIDataValidate(answers: IUserDto): IUserResponse | {} {
+  signupCLIDataValidate(answers: IUserDto): IUserDto | null {
     const { firstName, lastName, username, password } = answers;
-    const cliFirstName = this.cliNameValidate(firstName);
-    const cliLastName = this.cliNameValidate(lastName);
-    const cliUsername = this.cliNameValidate(username);
+    const cliFirstName: string | boolean = this.cliNameValidate(firstName);
+    const cliLastName: string | boolean = this.cliNameValidate(lastName);
+    const cliUsername: string | boolean = this.cliNameValidate(username);
 
-    let data = {};
+    let data;
     if (
       typeof cliFirstName == "boolean" ||
       typeof cliLastName == "boolean" ||
       typeof cliUsername == "boolean"
     ) {
-      return (data = {});
+      return (data = null);
     }
 
     data = {
@@ -29,13 +28,13 @@ export default class AuthValidator implements IAuthValidator {
   }
 
   cliNameValidate(name: string): string | boolean {
-    const cliName =
+    const cliName: string | false =
       typeof name == "string" && name.trim().length > 0 ? name.trim() : false;
     return cliName;
   }
 
   cliEmailValidate(email: string): string | boolean {
-    const cliEmail =
+    const cliEmail: string | false =
       typeof email == "string" && email.trim().length > 0 && email.includes("@")
         ? email.trim()
         : false;

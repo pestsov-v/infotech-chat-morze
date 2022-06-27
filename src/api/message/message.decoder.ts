@@ -1,4 +1,3 @@
-import e from "express";
 import IMessageDecoder from "./interface/message.decoder.interface";
 import MessageDictionary from "./message.dictionary";
 
@@ -15,9 +14,9 @@ export default class MessageDecoder implements IMessageDecoder {
     let result;
     checkText.forEach((e) => {
       if (englishArray.includes(e)) {
-        result = true;
+        return (result = true);
       } else {
-        result = false;
+        return (result = false);
       }
     });
 

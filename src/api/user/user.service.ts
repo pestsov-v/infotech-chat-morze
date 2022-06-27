@@ -41,4 +41,34 @@ export default class UserService implements IUserService {
     if (!user) return null;
     return user;
   }
+
+  async removeUser(username: string): Promise<IUserResponse | null> {
+    const user = await UserModel.findOneAndDelete({ username: username });
+    if (!user) return null;
+    return user;
+  }
+
+  async deactivatedUser(username: string): Promise<IUserResponse | null> {
+    const user = await UserModel.findOneAndUpdate(
+      { username: username },
+      {
+        active: false,
+      }
+    );
+
+    if (!user) return null;
+    return user;
+  }
+
+  async reactivatedUser(username: string): Promise<IUserResponse | null> {
+    const user = await UserModel.findOneAndUpdate(
+      { username: username },
+      {
+        active: true,
+      }
+    );
+
+    if (!user) return null;
+    return user;
+  }
 }

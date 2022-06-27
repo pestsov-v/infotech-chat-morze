@@ -24,6 +24,18 @@ export default class UserModule {
         userCommander.getUsername();
       }
 
+      if (cmd.userCommands === userCommands.deleteUserInfo) {
+        userCommander.deleteUsername();
+      }
+
+      if (cmd.userCommands === userCommands.deactivatedUser) {
+        userCommander.deactivatedUsername();
+      }
+
+      if (cmd.userCommands === userCommands.reactivatedUser) {
+        userCommander.reactivatedUser();
+      }
+
       if (cmd.userCommands === userCommands.backToMainMenu) {
         mainMenu();
       }

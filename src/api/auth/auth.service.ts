@@ -13,6 +13,7 @@ export default class AuthService implements IAuthService {
       lastName: body.lastName,
       username: body.username,
       password: password,
+      role: "admin",
     });
     if (!user) return null;
     return user;

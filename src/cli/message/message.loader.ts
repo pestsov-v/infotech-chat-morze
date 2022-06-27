@@ -1,4 +1,6 @@
 import ora from "ora";
+import color from "../../core/enum/color.enum";
+import emodji from "../../core/enum/emodji.enum";
 import mainMenu from "../menu/menu.module";
 import { MESSAGE_LIST_EMPTY_MESSAGE } from "./message.exception";
 
@@ -37,8 +39,19 @@ export default class MessageLoader {
       spinner.succeed(`Messages get successfully`);
       setTimeout(() => {
         data.forEach((element: any) => {
-          const results = `Sender: ${element.sender.username}, messageId: ${element.id}, message content: ${element.content}`;
-          console.log(results);
+          console.log(
+            color.blue,
+            `${emodji.smileWithGlases} Sender: ${element.sender.username}`
+          );
+          console.log(
+            color.green,
+            `${emodji.greeenBook} Message id: ${element.id}`
+          );
+          console.log(
+            color.turquoise,
+            `${emodji.receipt} Message content: ${element.content}`
+          );
+          console.log("");
         });
         setTimeout(() => {
           mainMenu();
@@ -55,8 +68,19 @@ export default class MessageLoader {
       spinner.succeed(`Messages get successfully`);
       setTimeout(() => {
         data.forEach((element: any) => {
-          const results = `Sender: ${element.sender.username}, messageId: ${element.id}, message content: ${element.content}`;
-          console.log(results);
+          console.log(
+            color.blue,
+            `${emodji.smileWithGlases} Sender: ${element.sender.username}`
+          );
+          console.log(
+            color.green,
+            `${emodji.greeenBook} Message id: ${element.id}`
+          );
+          console.log(
+            color.turquoise,
+            `${emodji.receipt} Message content: ${element.content}`
+          );
+          console.log("");
         });
         setTimeout(() => {
           mainMenu();

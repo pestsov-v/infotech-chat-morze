@@ -15,3 +15,7 @@ export const USER_NOT_REGISTER_MESSAGE = () => {
     `${emodji.crossMark} You entered incorrect data for register`
   );
 };
+
+export const USER_NOT_CREATE_MESSAGE = () => {
+  console.log(color.red, `${emodji.crossMark} User not created`);
+};
