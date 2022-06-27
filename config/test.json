@@ -1,9 +1,0 @@
-{
-    "HTTP_PORT": 3003,
-    "URL": "mongodb://localhost:27017/infotech-chat-morze-tests",
-    "SALT": 10,
-    "JWT_SECRET": "testSecret",
-    "JWT_EXPRESS_IN": "90d",
-    "JWT_COOKIE_EXPIRES_IN": 60,
-    "MONGO_SESSION_SECRET": "mongo"
-} 
