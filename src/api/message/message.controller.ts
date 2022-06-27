@@ -24,7 +24,7 @@ const messageException = new MessageException();
 const userService = new UserService();
 
 export default class MessageController {
-  async sendMessage(req: Request & { session: ISessionDto }, res: Response) {
+  async sendMessage(req: Request, res: Response) {
     const { content, recipient } = req.body;
     const { user } = req.session;
 
@@ -67,7 +67,7 @@ export default class MessageController {
     res.status(statusCode.CREATED).json(data);
   }
 
-  async decodeMessage(req: Request & { session: ISessionDto }, res: Response) {
+  async decodeMessage(req: Request, res: Response) {
     if (!req.session.user) {
       const exception: IExceptionDto = messageException.userNotFound();
       return res.status(statusCode.FORBIDDEN).json(exception);
@@ -86,7 +86,7 @@ export default class MessageController {
     res.status(statusCode.OK).json(data);
   }
 
-  async deleteMessage(req: Request & { session: ISessionDto }, res: Response) {
+  async deleteMessage(req: Request, res: Response) {
     if (!req.session.user) {
       const exception: IExceptionDto = messageException.userNotFound();
       return res.status(statusCode.FORBIDDEN).json(exception);

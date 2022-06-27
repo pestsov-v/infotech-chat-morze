@@ -4543,7 +4543,30 @@ module.exports.default = axios;
 
 },{"./utils":"../../../../node_modules/axios/lib/utils.js","./helpers/bind":"../../../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../../../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../../../../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../../../../node_modules/axios/lib/defaults/index.js","./cancel/CanceledError":"../../../../node_modules/axios/lib/cancel/CanceledError.js","./cancel/CancelToken":"../../../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../../../node_modules/axios/lib/cancel/isCancel.js","./env/data":"../../../../node_modules/axios/lib/env/data.js","./helpers/toFormData":"../../../../node_modules/axios/lib/helpers/toFormData.js","../lib/core/AxiosError":"../../../../node_modules/axios/lib/core/AxiosError.js","./helpers/spread":"../../../../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../../../../node_modules/axios/lib/helpers/isAxiosError.js"}],"../../../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../../../node_modules/axios/lib/axios.js"}],"auth.js":[function(require,module,exports) {
+},{"./lib/axios":"../../../../node_modules/axios/lib/axios.js"}],"alert.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.showAlert = exports.hideAlert = void 0;
+
+var hideAlert = function hideAlert() {
+  var el = document.querySelector(".alert");
+  if (el) el.parentElement.removeChild(el);
+};
+
+exports.hideAlert = hideAlert;
+
+var showAlert = function showAlert(type, msg) {
+  hideAlert();
+  var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+  window.setTimeout(hideAlert, 5000);
+};
+
+exports.showAlert = showAlert;
+},{}],"auth.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4552,6 +4575,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.signup = exports.logout = exports.login = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _alert = require("./alert");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4587,9 +4612,10 @@ var signup = /*#__PURE__*/function () {
             res = _context.sent;
 
             if (res.data.status === "success") {
+              (0, _alert.showAlert)("success", "You successful signup. Let`s login");
               window.setTimeout(function () {
                 location.assign("/login");
-              }, 1000);
+              }, 1500);
             }
 
             _context.next = 10;
@@ -4598,7 +4624,7 @@ var signup = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
+            (0, _alert.showAlert)("error", _context.t0.response.data.message);
 
           case 10:
           case "end":
@@ -4637,6 +4663,7 @@ var login = /*#__PURE__*/function () {
             res = _context2.sent;
 
             if (res.data.status === "success") {
+              (0, _alert.showAlert)("success", "You successful login");
               window.setTimeout(function () {
                 location.assign("/message");
               }, 500);
@@ -4648,7 +4675,7 @@ var login = /*#__PURE__*/function () {
           case 7:
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
+            (0, _alert.showAlert)("error", _context2.t0.response.data.message);
 
           case 10:
           case "end":
@@ -4681,14 +4708,21 @@ var logout = /*#__PURE__*/function () {
 
           case 3:
             res = _context3.sent;
-            if (res.data.status === "success") location.reload(true);
+
+            if (res.data.status === "success") {
+              (0, _alert.showAlert)("success", "You successful logout");
+              window.setTimeout(function () {
+                location.assign("/login");
+              }, 500);
+            }
+
             _context3.next = 10;
             break;
 
           case 7:
             _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
-            console.log(_context3.t0);
+            (0, _alert.showAlert)("error", _context3.t0.response.data.message);
 
           case 10:
           case "end":
@@ -4704,30 +4738,7 @@ var logout = /*#__PURE__*/function () {
 }();
 
 exports.logout = logout;
-},{"axios":"../../../../node_modules/axios/index.js"}],"alert.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.showAlert = exports.hideAlert = void 0;
-
-var hideAlert = function hideAlert() {
-  var el = document.querySelector(".alert");
-  if (el) el.parentElement.removeChild(el);
-};
-
-exports.hideAlert = hideAlert;
-
-var showAlert = function showAlert(type, msg) {
-  hideAlert();
-  var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
-  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-  window.setTimeout(hideAlert, 5000);
-};
-
-exports.showAlert = showAlert;
-},{}],"message.js":[function(require,module,exports) {
+},{"axios":"../../../../node_modules/axios/index.js","./alert":"alert.js"}],"message.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4771,7 +4782,6 @@ var sendMessage = /*#__PURE__*/function () {
             res = _context.sent;
 
             if (res.data.status === "success") {
-              console.log(res.data);
               (0, _alert.showAlert)("success", "Message send success");
             }
 
@@ -4781,10 +4791,7 @@ var sendMessage = /*#__PURE__*/function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
-
-            if (_context.t0.response.data.status === "fail") {
-              (0, _alert.showAlert)("error", "User not found");
-            }
+            (0, _alert.showAlert)("error", _context.t0.response.data.message);
 
           case 10:
           case "end":
@@ -4808,25 +4815,34 @@ var decodeMessage = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            _context2.prev = 0;
+            _context2.next = 3;
             return (0, _axios.default)({
               method: "GET",
               url: "api/message/".concat(messageId, "/decode")
             });
 
-          case 2:
+          case 3:
             res = _context2.sent;
 
             if (res.data.status === "success") {
               (0, _alert.showAlert)("success", res.data.data.content);
             }
 
-          case 4:
+            _context2.next = 10;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            (0, _alert.showAlert)("error", _context2.t0.response.data.message);
+
+          case 10:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2);
+    }, _callee2, null, [[0, 7]]);
   }));
 
   return function decodeMessage(_x3) {
@@ -4944,7 +4960,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59947" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50179" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

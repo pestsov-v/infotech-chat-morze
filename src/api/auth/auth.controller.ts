@@ -15,7 +15,6 @@ import IUserResponse from "../user/response/user.response";
 import ISignupObjResponse from "./response/signupObj.response";
 import ILoginObjResponse from "./response/loginObj.response";
 import ILogoutObjResponse from "./response/logoutObj.response";
-import ISessionDto from "../../core/dto/session.dto";
 
 import { DESTROY_SESSION_SUCCESS } from "./auth.constants";
 
@@ -65,7 +64,7 @@ export default class AuthController {
     res.status(statusCode.CREATED).json(data);
   }
 
-  async login(req: Request & { session: ISessionDto }, res: Response) {
+  async login(req: Request, res: Response) {
     const user: IUserResponse | null = await authService.findUser(
       req.body.username
     );

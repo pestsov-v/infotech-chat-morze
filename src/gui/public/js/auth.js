@@ -1,4 +1,5 @@
 import axios from "axios";
+import { showAlert } from "./alert";
 
 export const signup = async (firstName, lastName, username, password) => {
   try {
@@ -14,12 +15,13 @@ export const signup = async (firstName, lastName, username, password) => {
     });
 
     if (res.data.status === "success") {
+      showAlert("success", "You successful signup. Let`s login");
       window.setTimeout(() => {
         location.assign("/login");
-      }, 1000);
+      }, 1500);
     }
   } catch (e) {
-    console.log(e);
+    showAlert("error", e.response.data.message);
   }
 };
 
@@ -35,12 +37,13 @@ export const login = async (username, password) => {
     });
 
     if (res.data.status === "success") {
+      showAlert("success", "You successful login");
       window.setTimeout(() => {
         location.assign("/message");
       }, 500);
     }
   } catch (e) {
-    console.log(e);
+    showAlert("error", e.response.data.message);
   }
 };
 
@@ -51,8 +54,13 @@ export const logout = async () => {
       url: "/api/auth/logout",
     });
 
-    if (res.data.status === "success") location.reload(true);
+    if (res.data.status === "success") {
+      showAlert("success", "You successful logout");
+      window.setTimeout(() => {
+        location.assign("/login");
+      }, 500);
+    }
   } catch (e) {
-    console.log(e);
+    showAlert("error", e.response.data.message);
   }
 };
