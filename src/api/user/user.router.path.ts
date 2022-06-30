@@ -1,6 +1,6 @@
 enum userPath {
-  users = "/user",
-  user = "/user/:id",
+  users = "/",
+  user = "/:id",
   deactivatedUser = "/:id/deactivated",
   reactivatedUser = "/:id/reactivated",
 }
