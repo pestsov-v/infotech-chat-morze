@@ -1,8 +1,11 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
 import IUserDto from "../auth/dto/createUser.dto";
 import IUserService from "./interface/user.service.interface";
 import IUserResponse from "./response/user.response";
 import UserModel from "./user.model";
 
+@injectable()
 export default class UserService implements IUserService {
   async getUsers(): Promise<IUserResponse[] | null> {
     const users = await UserModel.find();

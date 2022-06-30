@@ -30,22 +30,22 @@ export default class UserRouter extends BaseRouter {
       {
         path: userPath.users,
         method: method.GET,
-        func: this.userController.getUsers,
+        func: this.userController.getUsers.bind(userController),
       },
       {
         path: userPath.user,
         method: method.GET,
-        func: this.userController.getUser,
+        func: this.userController.getUser.bind(userController),
       },
       {
         path: userPath.user,
         method: method.POST,
-        func: this.userController.updateUser,
+        func: this.userController.updateUser.bind(userController),
       },
       {
         path: userPath.user,
         method: method.DELETE,
-        func: this.userController.deleteUser,
+        func: this.userController.deleteUser.bind(userController),
       },
     ]);
   }
