@@ -3,7 +3,7 @@ import { injectable } from "inversify";
 import IControllerRoute from "../interface/router.interface";
 
 @injectable()
-export default abstract class BaseController {
+export default abstract class BaseRouter {
   private readonly _router: express.Router;
 
   constructor() {
