@@ -14,11 +14,13 @@ import UserRouter from "../../api/user/user.router";
 import UserService from "../../api/user/user.service";
 import UserResponse from "../../api/user/user.responser";
 import UserException from "../../api/user/user.exception";
+import ApiRouter from "../../api/api.router";
 
 export default class Inversify {
   appBindings() {
     return new ContainerModule((bind: interfaces.Bind) => {
       bind<Server>(type.Server).to(Server);
+      bind<IUserRouter>(type.ApiRouter).to(ApiRouter);
 
       bind<IUserRouter>(type.UserRouter).to(UserRouter);
       bind<IUserService>(type.UserService).to(UserService);

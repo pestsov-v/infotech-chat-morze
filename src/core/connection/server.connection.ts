@@ -20,6 +20,7 @@ import { inject, injectable } from "inversify";
 import type from "../enum/type.enum";
 import UserController from "../../api/user/user.controller";
 import UserRouter from "../../api/user/user.router";
+import ApiRouter from "../../api/api.router";
 
 const session = new Session();
 const swagger = new Swagger();
@@ -31,8 +32,8 @@ export default class Server {
   private readonly httpsPort: number;
 
   constructor(
-    @inject(type.UserRouter)
-    private readonly userRouter: UserRouter
+    @inject(type.ApiRouter) private router: ApiRouter,
+    @inject(type.UserRouter) private userRouter: UserRouter
   ) {
     this.httpPort = config.get<number>("HTTP_PORT");
     this.httpsPort = config.get<number>("HTTPS_PORT");
@@ -50,7 +51,7 @@ export default class Server {
   }
 
   useRoutes(): void {
-    this.app.use(apiRouterPath.api, this.userRouter.router);
+    this.app.use(apiRouterPath.api, this.router.apiRouter);
   }
 
   init() {

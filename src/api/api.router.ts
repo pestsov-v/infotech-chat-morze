@@ -3,10 +3,16 @@ import apiRouterPath from "./api.router.path";
 import userRouter from "./user/user.router";
 import authRouter from "./auth/auth.router";
 import messageRouter from "./message/message.router";
+import { inject, injectable } from "inversify";
+import type from "../core/enum/type.enum";
+import UserRouter from "./user/user.router";
 
-const apiRouter = Router();
-apiRouter.use(apiRouterPath.user, userRouter);
-apiRouter.use(apiRouterPath.auth, authRouter);
-apiRouter.use(apiRouterPath.message, messageRouter);
+@injectable()
+export default class ApiRouter {
+  apiRouter: Router;
 
-export default apiRouter;
+  constructor(@inject(type.UserRouter) private userRouter: UserRouter) {
+    this.apiRouter = Router();
+    this.apiRouter.use(apiRouterPath.user, this.userRouter.router);
+  }
+}
