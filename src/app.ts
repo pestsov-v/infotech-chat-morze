@@ -1,11 +1,18 @@
+import type from "./core/enum/type.enum";
+
 import Database from "./core/connection/db.connection";
+import Inversify from "./core/connection/inversify.connection";
 import Server from "./core/connection/server.connection";
-import CLI from "./core/connection/cli.connection";
 
-new Server();
-new Database();
+const inversify = new Inversify();
 
-setTimeout(() => {
-  new CLI();
-}, 50);
- 
+async function bootstrap() {
+  const container = inversify.container();
+  const app = container.get<Server>(type.Server);
+  app.init();
+  new Database();
+
+  return { container, app };
+}
+
+bootstrap();
