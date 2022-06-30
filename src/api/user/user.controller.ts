@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { Request, Response } from "express";
 import statusCode from "../../core/enum/statusCode.enum";
 import UserException from "./user.exception";
@@ -9,12 +10,26 @@ import IExceptionDto from "../../core/dto/exception.dto";
 import IGetUsersResponse from "./response/getUsers.response";
 import IGetUserResponse from "./response/getUser.response";
 import IModifyUserResponse from "./response/modifyUser.response";
+import BaseController from "../../core/base/base.controller";
+import { injectable } from "inversify";
 
 const userService = new UserService();
 const userResponse = new UserResponse();
 const userException = new UserException();
 
-export default class UserController {
+@injectable()
+export default class UserController extends BaseController {
+  constructor() {
+    super();
+    this.bindRoutes([
+      {
+        path: "/user",
+        method: "post",
+        func: this.getUsers,
+      },
+    ]);
+  }
+
   async getUsers(req: Request, res: Response) {
     const users: IUserResponse[] | null = await userService.getUsers();
 
