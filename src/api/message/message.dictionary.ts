@@ -1,6 +1,11 @@
-export default class MessageDictionary {
+import "reflect-metadata";
+import { injectable } from "inversify";
+import IMessageDictionary from "./interface/message.dictionary.interface";
+
+@injectable()
+export default class MessageDictionary implements IMessageDictionary {
   english() {
-    return 'abcdefghijklmnopqrstuvwxyz123456789'
+    return "abcdefghijklmnopqrstuvwxyz123456789";
   }
 
   encode() {

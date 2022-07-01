@@ -17,7 +17,7 @@ import guiRouterPath from "../../gui/gui.router.path";
 import guiRouter from "../../gui/gui.router";
 import emodji from "../enum/emodji.enum";
 import { inject, injectable } from "inversify";
-import type from "../enum/type.enum";
+import TYPE from "../enum/type.enum";
 import UserController from "../../api/user/user.controller";
 import UserRouter from "../../api/user/user.router";
 import ApiRouter from "../../api/api.router";
@@ -32,8 +32,7 @@ export default class Server {
   private readonly httpsPort: number;
 
   constructor(
-    @inject(type.ApiRouter) private router: ApiRouter,
-    @inject(type.UserRouter) private userRouter: UserRouter
+    @inject(TYPE.ApiRouter) private router: ApiRouter,
   ) {
     this.httpPort = config.get<number>("HTTP_PORT");
     this.httpsPort = config.get<number>("HTTPS_PORT");

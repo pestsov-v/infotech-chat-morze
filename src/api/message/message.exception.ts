@@ -1,3 +1,6 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
+
 import status from "../../core/enum/status.enum";
 import IExceptionDto from "../../core/dto/exception.dto";
 import IMessageException from "./interface/message.exception.interface";
@@ -10,6 +13,7 @@ import {
   USER_NOT_AUTH_MESSAGE,
 } from "./message.constants";
 
+@injectable()
 export default class MessageException implements IMessageException {
   userNotFound(): IExceptionDto {
     return {

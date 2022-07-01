@@ -1,12 +1,20 @@
+import "reflect-metadata";
+import { inject, injectable } from "inversify";
+import TYPE from "../../core/enum/type.enum";
+
 import IMessageDecoder from "./interface/message.decoder.interface";
-import MessageDictionary from "./message.dictionary";
+import IMessageDictionary from "./interface/message.dictionary.interface";
 
-const messageDictionary = new MessageDictionary();
-
+@injectable()
 export default class MessageDecoder implements IMessageDecoder {
-  checkMessage(text: string) {
+  constructor(
+    @inject(TYPE.MessageDictionary)
+    private messageDictionary: IMessageDictionary
+  ) {}
+
+  checkMessage(text: string): any {
     let checkText = text.toLocaleLowerCase().split("");
-    let englishArray = messageDictionary
+    let englishArray = this.messageDictionary
       .english()
       .toLocaleLowerCase()
       .split("");
@@ -19,12 +27,11 @@ export default class MessageDecoder implements IMessageDecoder {
         return (result = false);
       }
     });
-
     return result;
   }
 
   encode(text: string): string {
-    const dictionary = messageDictionary.encode();
+    const dictionary = this.messageDictionary.encode();
 
     let encodeTxt = text
       .toLowerCase()
@@ -36,7 +43,7 @@ export default class MessageDecoder implements IMessageDecoder {
   }
 
   decode(text: string): string {
-    const dictionary = messageDictionary.decode();
+    const dictionary = this.messageDictionary.decode();
 
     let decodeTxt = text
       .split(" ")

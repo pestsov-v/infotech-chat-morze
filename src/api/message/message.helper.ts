@@ -1,20 +1,27 @@
+import "reflect-metadata";
+import { inject, injectable } from "inversify";
+import TYPE from "../../core/enum/type.enum";
+
 import IMessageHelper from "./interface/message.helper.interface";
-import MessageDecoder from "./message.decoder";
 import IEncodeMorzeResponse from "./response/enodeMorze.response";
+import IMessageDecoder from "./interface/message.decoder.interface";
 
-const messageDecoder = new MessageDecoder();
-
+@injectable()
 export default class MessageHelper implements IMessageHelper {
+  constructor(
+    @inject(TYPE.MessageDecoder) private messageDecoder: IMessageDecoder
+  ) {}
+
   encodeData(
     sender: string,
     content: string,
     recipient: string
   ): IEncodeMorzeResponse {
     let morzeContent: string;
-    if (messageDecoder.checkMessage(content) === false) {
+    if (this.messageDecoder.checkMessage(content) === false) {
       morzeContent = content;
     } else {
-      morzeContent = messageDecoder.encode(content);
+      morzeContent = this.messageDecoder.encode(content);
     }
 
     const encodeMorze: IEncodeMorzeResponse = {
@@ -27,7 +34,7 @@ export default class MessageHelper implements IMessageHelper {
   }
 
   decodeData(content: string): string {
-    const decodeMorze = messageDecoder.decode(content);
+    const decodeMorze = this.messageDecoder.decode(content);
     return decodeMorze;
   }
 }

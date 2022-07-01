@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
 import statusCode from "../../core/enum/statusCode.enum";
 import IExceptionDto from "../../core/dto/exception.dto";
-import type from "../../core/enum/type.enum";
+import TYPE from "../../core/enum/type.enum";
 
 import IUserResponse from "./response/user.response";
 import IGetUsersResponse from "./response/getUsers.response";
@@ -17,9 +17,9 @@ import IUserException from "./interface/user.exception.interface";
 @injectable()
 export default class UserController {
   constructor(
-    @inject(type.UserService) private userService: IUserService,
-    @inject(type.UserResponser) private userResponse: IUserResponser,
-    @inject(type.UserException) private userException: IUserException
+    @inject(TYPE.UserService) private userService: IUserService,
+    @inject(TYPE.UserResponser) private userResponse: IUserResponser,
+    @inject(TYPE.UserException) private userException: IUserException
   ) {}
 
   async getUsers(req: Request, res: Response) {
