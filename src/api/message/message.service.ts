@@ -1,4 +1,5 @@
-import IUserResponse from "../user/response/user.response";
+import "reflect-metadata";
+import { injectable } from "inversify";
 import ICreateMessageDto from "./dto/createMessage.dto";
 import IDecodeMessageDto from "./dto/decodeMessage.dto";
 import IMessageService from "./interface/message.service.interface";
@@ -6,6 +7,7 @@ import MessageModel from "./message.model";
 import IMessageResponse from "./response/message.response";
 import getMessagesType from "./type/getMessages.type";
 
+@injectable()
 export default class MessageService implements IMessageService {
   async createMessage(
     body: ICreateMessageDto

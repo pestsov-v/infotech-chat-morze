@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import BaseRouter from "../../core/base/base.controller";
 import method from "../../core/enum/method.enum";
-import type from "../../core/enum/type.enum";
+import TYPE from "../../core/enum/type.enum";
 
 import UserController from "./user.controller";
 import userPath from "./user.router.path";
@@ -23,7 +23,7 @@ import userPath from "./user.router.path";
 @injectable()
 export default class UserRouter extends BaseRouter {
   constructor(
-    @inject(type.UserController) private userController: UserController
+    @inject(TYPE.UserController) private userController: UserController
   ) {
     super();
     this.bindRoutes([

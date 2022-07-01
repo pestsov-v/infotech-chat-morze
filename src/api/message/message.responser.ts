@@ -1,17 +1,26 @@
+import "reflect-metadata";
+import { inject, injectable } from "inversify";
 import status from "../../core/enum/status.enum";
+import TYPE from "../../core/enum/type.enum";
+
+import IMessageResponser from "./interface/message.responser.interface";
+import IMessageHelper from "./interface/message.helper.interface";
+
 import IDecodeMessageDto from "./dto/decodeMessage.dto";
 import IEncodeMessageDto from "./dto/encodeMessage.dto";
-import MessageHelper from "./message.helper";
+
 import IDecodeDataResponse from "./response/decodeData.response";
 import IEncodeResponse from "./response/encode.response";
+import IDeleteDataResponse from "./response/deleteData.response";
 
 import { MESSAGE_DELETE_SUCCESS_MESSAGE } from "./message.constants";
-import IDeleteDataResponse from "./response/deleteData.response";
-import IMessageResponser from "./interface/message.responser.interface";
 
-const morzeHelper = new MessageHelper();
-
+@injectable()
 export default class MessageResponser implements IMessageResponser {
+  constructor(
+    @inject(TYPE.MessageHelper) private messageHelper: IMessageHelper
+  ) {}
+
   encodeResponse(message: IEncodeMessageDto): IEncodeResponse {
     return {
       status: status.success,
@@ -20,7 +29,7 @@ export default class MessageResponser implements IMessageResponser {
   }
 
   decodeResponse(message: IDecodeMessageDto): IDecodeDataResponse {
-    const morzeContent: string = morzeHelper.decodeData(message.content);
+    const morzeContent: string = this.messageHelper.decodeData(message.content);
 
     return {
       status: status.success,
