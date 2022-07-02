@@ -22,6 +22,7 @@ const authResponse = new AuthResponse();
 const authHasher = new AuthHasher();
 const authValidator = new AuthValidator();
 
+
 export default class AuthController {
   async signup(answers: IUserDto): Promise<ISignupObjResponse | void> {
     const userData: IUserDto | null =

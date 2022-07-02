@@ -1,3 +1,5 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
 import status from "../../core/enum/status.enum";
 import ILoginObjResponse from "./response/loginObj.response";
 import ISignupObjResponse from "./response/signupObj.response";
@@ -7,6 +9,7 @@ import IAuthResponser from "./interface/auth.responser.interface";
 
 import { USER_LOGOUT_SUCCESS_MESSAGE } from "./auth.constants";
 
+@injectable()
 export default class AuthResponse implements IAuthResponser {
   signupObj(data: IUserResponse, token: string): ISignupObjResponse {
     return {

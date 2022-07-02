@@ -1,4 +1,9 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
 import status from "../../core/enum/status.enum";
+import IExceptionDto from "../../core/dto/exception.dto";
+import IAuthException from "./interface/auth.exception.inetrface";
+
 import {
   DUBLICATE_USERNAME_MESSAGE,
   HAVE_NOT_RULES_MESSAGE,
@@ -8,9 +13,7 @@ import {
   UNAUTHORIZED_MESSAGE,
 } from "./auth.constants";
 
-import IExceptionDto from "../../core/dto/exception.dto";
-import IAuthException from "./interface/auth.exception.inetrface";
-
+@injectable()
 export default class AuthException implements IAuthException {
   haveNotRules(): IExceptionDto {
     return {

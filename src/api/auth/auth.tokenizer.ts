@@ -1,7 +1,10 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
 import jwt from "jsonwebtoken";
 import config from "config";
 import IAuthTokenizer from "./interface/auth.tokenizer.interface";
 
+@injectable()
 export default class AuthTokenizer implements IAuthTokenizer {
   private readonly jwtSecret: string;
   private readonly jwtExpiresIn: string;

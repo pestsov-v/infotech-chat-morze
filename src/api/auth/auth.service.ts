@@ -1,8 +1,11 @@
+import "reflect-metadata";
+import { injectable } from "inversify";
 import UserModel from "../user/user.model";
 import IUserDto from "./dto/createUser.dto";
 import IUserResponse from "../user/response/user.response";
 import IAuthService from "./interface/auth.service.interface";
 
+@injectable()
 export default class AuthService implements IAuthService {
   async createUser(
     body: IUserDto,
