@@ -18,6 +18,17 @@ import IMessageException from "../../api/message/interface/message.exception.int
 import IMessageDictionary from "../../api/message/interface/message.dictionary.interface";
 import IMessageController from "../../api/message/interface/message.conroller.interface";
 
+import IAuthRouter from "../../api/auth/interface/auth.router.interface";
+import IAuthValidator from "../../api/auth/interface/auth.validator.interface";
+import IAuthService from "../../api/auth/interface/auth.service.interface";
+import IAuthResponser from "../../api/auth/interface/auth.responser.interface";
+import IAuthMiddleware from "../../api/auth/interface/auth.middleware.interface";
+import IAuthHesher from "../../api/auth/interface/auth.hesher.interface";
+import IAuthException from "../../api/auth/interface/auth.exception.inetrface";
+import IAuthCookier from "../../api/auth/interface/auth.cookier.interface";
+import IAuthController from "../../api/auth/interface/auth.controller.interface";
+import IAuthTokenizer from "../../api/auth/interface/auth.tokenizer.interface";
+
 import UserController from "../../api/user/user.controller";
 import UserRouter from "../../api/user/user.router";
 import UserService from "../../api/user/user.service";
@@ -33,6 +44,17 @@ import MessageException from "../../api/message/message.exception";
 import MessageDictionary from "../../api/message/message.dictionary";
 import MessageController from "../../api/message/message.controller";
 import MessageRouter from "../../api/message/message.router";
+
+import AuthRouter from "../../api/auth/auth.router";
+import AuthController from "../../api/auth/auth.controller";
+import AuthCookier from "../../api/auth/auth.cookier";
+import AuthException from "../../api/auth/auth.exception";
+import AuthHasher from "../../api/auth/auth.hasher";
+import AuthMiddleware from "../../api/auth/auth.middleware";
+import AuthResponse from "../../api/auth/auth.responser";
+import AuthService from "../../api/auth/auth.service";
+import AuthTokenizer from "../../api/auth/auth.tokenizer";
+import AuthValidator from "../../cli/auth/auth.validator";
 
 export default class Inversify {
   appBindings() {
@@ -54,6 +76,17 @@ export default class Inversify {
       bind<IMessageException>(TYPE.MessageException).to(MessageException);
       bind<IMessageDictionary>(TYPE.MessageDictionary).to(MessageDictionary);
       bind<IMessageController>(TYPE.MessageController).to(MessageController);
+
+      bind<IAuthRouter>(TYPE.AuthRouter).to(AuthRouter);
+      bind<IAuthController>(TYPE.AuthController).to(AuthController);
+      bind<IAuthCookier>(TYPE.AuthCookier).to(AuthCookier);
+      bind<IAuthException>(TYPE.AuthException).to(AuthException);
+      bind<IAuthHesher>(TYPE.AuthHasher).to(AuthHasher);
+      bind<IAuthMiddleware>(TYPE.AuthMiddleware).to(AuthMiddleware);
+      bind<IAuthResponser>(TYPE.AuthResponser).to(AuthResponse);
+      bind<IAuthService>(TYPE.AuthService).to(AuthService);
+      bind<IAuthTokenizer>(TYPE.AuthTokenizer).to(AuthTokenizer);
+      bind<IAuthValidator>(TYPE.AuthValidator).to(AuthValidator);
     });
   }
 

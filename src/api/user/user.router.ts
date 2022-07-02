@@ -1,52 +1,48 @@
+import { Router } from "express";
 import { inject, injectable } from "inversify";
-import BaseRouter from "../../core/base/base.controller";
-import method from "../../core/enum/method.enum";
+import userPath from "./user.router.path";
 import TYPE from "../../core/enum/type.enum";
 
-import UserController from "./user.controller";
-import userPath from "./user.router.path";
-
-// const userRouter = Router();
-// const userConntroller = new UserController();
-// const authMiddleware = new AuthMiddleware();
-
-// const protect = authMiddleware.protect;
-// const onlyAdmin = authMiddleware.restrictTo("admin");
-
-// userRouter.use(protect);
-// userRouter.use(onlyAdmin);
-// userRouter.get(userPath.users, userConntroller.getUsers);
-// userRouter.get(userPath.user, userConntroller.getUser);
-// userRouter.put(userPath.user, userConntroller.updateUser);
-// userRouter.delete(userPath.user, userConntroller.deleteUser);
+import IUserController from "./interface/user.controller.interface";
+import IAuthMiddleware from "../auth/interface/auth.middleware.interface";
+import role from "./enum/user.role.enum";
 
 @injectable()
-export default class UserRouter extends BaseRouter {
+export default class UserRouter {
+  router: Router;
+
   constructor(
-    @inject(TYPE.UserController) private userController: UserController
+    @inject(TYPE.UserController) private userController: IUserController,
+    @inject(TYPE.AuthMiddleware) private authMiddleware: IAuthMiddleware
   ) {
-    super();
-    this.bindRoutes([
-      {
-        path: userPath.users,
-        method: method.GET,
-        func: this.userController.getUsers.bind(userController),
-      },
-      {
-        path: userPath.user,
-        method: method.GET,
-        func: this.userController.getUser.bind(userController),
-      },
-      {
-        path: userPath.user,
-        method: method.POST,
-        func: this.userController.updateUser.bind(userController),
-      },
-      {
-        path: userPath.user,
-        method: method.DELETE,
-        func: this.userController.deleteUser.bind(userController),
-      },
-    ]);
+    this.router = Router();
+
+    this.router.use(
+      userPath.users,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.authMiddleware.restrictTo(role.moderator, role.admin),
+      this.userController.getUsers.bind(userController)
+    );
+
+    this.router.use(
+      userPath.user,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.authMiddleware.restrictTo(role.moderator, role.admin),
+      this.userController.getUser.bind(userController)
+    );
+
+    this.router.use(
+      userPath.user,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.authMiddleware.restrictTo(role.admin),
+      this.userController.updateUser.bind(userController)
+    );
+
+    this.router.use(
+      userPath.user,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.authMiddleware.restrictTo(role.admin),
+      this.userController.deleteUser.bind(userController)
+    );
   }
 }

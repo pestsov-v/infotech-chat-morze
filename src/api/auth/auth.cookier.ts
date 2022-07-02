@@ -1,12 +1,19 @@
+import "reflect-metadata";
 import { Request, Response } from "express";
-import AuthTokenizer from "./auth.tokenizer";
+import { inject, injectable } from "inversify";
+import TYPE from "../../core/enum/type.enum";
+
 import IAuthCookier from "./interface/auth.cookier.interface";
+import IAuthTokenizer from "./interface/auth.tokenizer.interface";
 
-const authTokenizer = new AuthTokenizer();
-
+@injectable()
 export default class AuthCookier implements IAuthCookier {
+  constructor(
+    @inject(TYPE.AuthTokenizer) private authTokenizer: IAuthTokenizer
+  ) {}
+
   createCookie(token: string, req: Request, res: Response): void {
-    const cookieExpires: Date = authTokenizer.getCookieExpires();
+    const cookieExpires: Date = this.authTokenizer.getCookieExpires();
 
     res.cookie("jwt", token, {
       expires: cookieExpires,
