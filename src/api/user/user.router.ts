@@ -17,28 +17,28 @@ export default class UserRouter {
   ) {
     this.router = Router();
 
-    this.router.use(
+    this.router.get(
       userPath.users,
       this.authMiddleware.protect.bind(authMiddleware),
       this.authMiddleware.restrictTo(role.moderator, role.admin),
       this.userController.getUsers.bind(userController)
     );
 
-    this.router.use(
+    this.router.get(
       userPath.user,
       this.authMiddleware.protect.bind(authMiddleware),
       this.authMiddleware.restrictTo(role.moderator, role.admin),
       this.userController.getUser.bind(userController)
     );
 
-    this.router.use(
+    this.router.put(
       userPath.user,
       this.authMiddleware.protect.bind(authMiddleware),
       this.authMiddleware.restrictTo(role.admin),
       this.userController.updateUser.bind(userController)
     );
 
-    this.router.use(
+    this.router.delete(
       userPath.user,
       this.authMiddleware.protect.bind(authMiddleware),
       this.authMiddleware.restrictTo(role.admin),
