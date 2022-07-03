@@ -1,34 +1,38 @@
+import { Router } from "express";
 import { inject, injectable } from "inversify";
-import BaseRouter from "../../core/base/base.router";
-
-import method from "../../core/enum/method.enum";
 import TYPE from "../../core/enum/type.enum";
-import MessageController from "./message.controller";
-
 import messagePath from "./message.router.path";
 
+import IAuthMiddleware from "../auth/interface/auth.middleware.interface";
+import IMessageController from "./interface/message.conroller.interface";
+
 @injectable()
-export default class UserRouter extends BaseRouter {
+export default class MessageRouter {
+  router: Router;
+
   constructor(
-    @inject(TYPE.MessageController) private messageController: MessageController
+    @inject(TYPE.MessageController)
+    private messageController: IMessageController,
+    @inject(TYPE.AuthMiddleware) private authMiddleware: IAuthMiddleware
   ) {
-    super();
-    this.bindRoutes([
-      {
-        path: messagePath.messages,
-        method: method.POST,
-        func: this.messageController.sendMessage.bind(messageController),
-      },
-      {
-        path: messagePath.message,
-        method: method.DELETE,
-        func: this.messageController.deleteMessage.bind(messageController),
-      },
-      {
-        path: messagePath.decode,
-        method: method.GET,
-        func: this.messageController.decodeMessage.bind(messageController),
-      },
-    ]);
+    this.router = Router();
+
+    this.router.post(
+      messagePath.messages,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.messageController.sendMessage.bind(messageController)
+    );
+
+    this.router.delete(
+      messagePath.message,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.messageController.deleteMessage.bind(messageController)
+    );
+
+    this.router.get(
+      messagePath.decode,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.messageController.decodeMessage.bind(messageController)
+    );
   }
 }

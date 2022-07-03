@@ -1,34 +1,35 @@
+import { Router } from "express";
 import { inject, injectable } from "inversify";
-import BaseRouter from "../../core/base/base.router";
-import method from "../../core/enum/method.enum";
 import TYPE from "../../core/enum/type.enum";
 import authPath from "./auth.router.path";
 
 import IAuthController from "./interface/auth.controller.interface";
-import IAuthRouter from "./interface/auth.router.interface";
+import IAuthMiddleware from "./interface/auth.middleware.interface";
 
 @injectable()
-export default class AuthRouter extends BaseRouter implements IAuthRouter {
+export default class UserRouter {
+  router: Router;
+
   constructor(
-    @inject(TYPE.AuthController) private authController: IAuthController
+    @inject(TYPE.AuthController) private authController: IAuthController,
+    @inject(TYPE.AuthMiddleware) private authMiddleware: IAuthMiddleware
   ) {
-    super();
-    this.bindRoutes([
-      {
-        path: authPath.signup,
-        method: method.POST,
-        func: this.authController.signup.bind(authController),
-      },
-      {
-        path: authPath.login,
-        method: method.POST,
-        func: this.authController.login.bind(authController),
-      },
-      {
-        path: authPath.logout,
-        method: method.GET,
-        func: this.authController.logout.bind(authController),
-      },
-    ]);
+    this.router = Router();
+
+    this.router.post(
+      authPath.login,
+      this.authController.login.bind(authController)
+    );
+
+    this.router.post(
+      authPath.signup,
+      this.authController.signup.bind(authController)
+    );
+
+    this.router.get(
+      authPath.logout,
+      this.authMiddleware.protect.bind(authMiddleware),
+      this.authController.logout.bind(authController)
+    );
   }
 }
