@@ -2,10 +2,10 @@ import "reflect-metadata";
 import { injectable } from "inversify";
 import bcrypt from "bcrypt";
 import config from "config";
-import IAuthHesher from "./interface/auth.hesher.interface";
+import IAuthHasher from "./interface/auth.hesher.interface";
 
 @injectable()
-export default class AuthHasher implements IAuthHesher {
+export default class AuthHasher implements IAuthHasher {
   saltNumber: number;
 
   constructor() {

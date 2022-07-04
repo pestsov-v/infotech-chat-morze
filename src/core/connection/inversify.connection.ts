@@ -23,7 +23,7 @@ import IAuthValidator from "../../api/auth/interface/auth.validator.interface";
 import IAuthService from "../../api/auth/interface/auth.service.interface";
 import IAuthResponser from "../../api/auth/interface/auth.responser.interface";
 import IAuthMiddleware from "../../api/auth/interface/auth.middleware.interface";
-import IAuthHesher from "../../api/auth/interface/auth.hesher.interface";
+import IAuthHasher from "../../api/auth/interface/auth.hesher.interface";
 import IAuthException from "../../api/auth/interface/auth.exception.inetrface";
 import IAuthCookier from "../../api/auth/interface/auth.cookier.interface";
 import IAuthController from "../../api/auth/interface/auth.controller.interface";
@@ -55,6 +55,8 @@ import AuthResponse from "../../api/auth/auth.responser";
 import AuthService from "../../api/auth/auth.service";
 import AuthTokenizer from "../../api/auth/auth.tokenizer";
 import AuthValidator from "../../cli/auth/auth.validator";
+import IGUIMiddleware from "../../gui/interface/gui.middleware.interface";
+import GUIMiddleware from "../../gui/gui.middleware";
 
 export default class Inversify {
   appBindings() {
@@ -81,12 +83,14 @@ export default class Inversify {
       bind<IAuthController>(TYPE.AuthController).to(AuthController);
       bind<IAuthCookier>(TYPE.AuthCookier).to(AuthCookier);
       bind<IAuthException>(TYPE.AuthException).to(AuthException);
-      bind<IAuthHesher>(TYPE.AuthHasher).to(AuthHasher);
+      bind<IAuthHasher>(TYPE.AuthHasher).to(AuthHasher);
       bind<IAuthMiddleware>(TYPE.AuthMiddleware).to(AuthMiddleware);
       bind<IAuthResponser>(TYPE.AuthResponser).to(AuthResponse);
       bind<IAuthService>(TYPE.AuthService).to(AuthService);
       bind<IAuthTokenizer>(TYPE.AuthTokenizer).to(AuthTokenizer);
       bind<IAuthValidator>(TYPE.AuthValidator).to(AuthValidator);
+
+      bind<IGUIMiddleware>(TYPE.GUIMiddleware).to(GUIMiddleware);
     });
   }
 

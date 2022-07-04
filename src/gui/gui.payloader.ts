@@ -1,4 +1,4 @@
-import IGuiPayloader from "./gui.payloader.interface";
+import IGuiPayloader from "./interface/gui.payloader.interface";
 import homeResponse from "./response/home.response";
 import loginResponse from "./response/login.response";
 import messageResponse from "./response/message.response";

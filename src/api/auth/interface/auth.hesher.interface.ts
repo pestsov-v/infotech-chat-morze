@@ -1,4 +1,4 @@
-export default interface IAuthHesher {
+export default interface IAuthHasher {
   hashedPassword(userPassword: string): Promise<string>;
 
   confirmPassword(
