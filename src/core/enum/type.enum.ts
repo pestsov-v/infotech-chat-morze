@@ -27,6 +27,8 @@ const TYPE = {
   AuthMiddleware: Symbol.for("AuthMiddleware"),
   AuthController: Symbol.for("AuthController"),
   AuthValidator: Symbol.for("AuthValidator"),
+
+  GUIMiddleware: Symbol.for("GUIMiddlware"),
 };
 
 export default TYPE;
